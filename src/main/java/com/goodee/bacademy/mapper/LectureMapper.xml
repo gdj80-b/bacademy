@@ -1,3 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.goodee.bacademy.mapper.LectureMapper"></mapper>
+<mapper namespace="com.goodee.bacademy.mapper.LectureMapper">
+
+	<!-- 강의 등록 -->
+	<insert id="addLecture" parameterType="com.goodee.bacademy.vo.Lecture">
+		INSERT INTO lecture(
+			category,
+			lecture_name,
+			id,
+			room_num,
+			start_date,
+			end_date,
+			lecture_time,
+			lecture_day
+			lecture_price
+		) VALUES (
+			#{category},
+			#{lectureName},
+			#{id},
+			#{roomNum},
+			#{startDate},
+			#{endDate},
+			#{lectureTime},
+			#{lectureDay},
+			#{lecturePrice}
+		)
+	</insert>
+</mapper>
