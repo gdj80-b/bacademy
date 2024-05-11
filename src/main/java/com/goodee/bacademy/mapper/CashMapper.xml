@@ -1,3 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.goodee.bacademy.mapper.CashMapper"></mapper>
+<mapper namespace="com.goodee.bacademy.mapper.CashMapper">
+
+	<select id="getCashHistory" resultType="com.goodee.bacademy.vo.CashHistory">
+		SELECT ch.*,
+		(SELECT SUM(cash) FROM cash_history) balance, s.name
+		FROM cash_history ch
+		JOIN student s
+		ON ch.id = s.id
+		ORDER BY ch.create_date DESC;
+	</select>
+	
+	<select id="getRefundHistory" resultType="com.goodee.bacademy.vo.Refund">
+		SELECT r.*, s.name
+		FROM refund r
+		JOIN student s
+		ON r.id = s.id
+		ORDER BY r.accept_date DESC;
+	</select>
+
+</mapper>
