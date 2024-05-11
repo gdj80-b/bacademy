@@ -26,13 +26,26 @@
 					<td>${vo.request_date}</td>
 					<td>${vo.refund_cash}</td>
 					<td>${vo.state}</td>
-					<td></td>
+					<td>
+						<c:choose>
+							<c:when test="${vo.state eq '대기'}">
+								<form action="refundConfirm" method="post">
+									<input type="hidden" name="refund_no" value="${vo.refund_no}">
+									<input type="hidden" name="state" value="승인">
+									<input type="hidden" name="id" value="${vo.id}">
+									<input type="hidden" name="refund_cash" value="${vo.refund_cash}">
+									<button type="submit" class="btn btn-primary btn-sm">승인</button>
+								</form>
+							</c:when>
+							<c:otherwise>
+								<button type="submit" onclick="" class="btn btn-secondary btn-sm" disabled>완료</button>
+							</c:otherwise>
+						</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
-		<div>
-			<button onclick="" class="btn btn-primary btn-sm">승인</button>
-		</div>
+		<a href="cashHistory" class="btn btn-primary btn-sm">이전으로</a>
 	</div>
 </body>
 </html>
