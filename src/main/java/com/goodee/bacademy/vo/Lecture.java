@@ -1,6 +1,10 @@
 package com.goodee.bacademy.vo;
 
+import lombok.Data;
+
+@Data
 public class Lecture {
+	private int lectureNo;
 	private String category;
 	private String lectureName;
 	private String id;
@@ -10,4 +14,6 @@ public class Lecture {
 	private String lectureTime;
 	private String lectureDay;
 	private int lecturePrice;
+	private String updateDate;
+	private String createDate;
 }
