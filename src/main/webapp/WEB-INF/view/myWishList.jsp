@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-<title>Insert title here</title>
+<title>내 관심강의</title>
 </head>
 <body>
 
@@ -22,12 +22,12 @@
 		</tr>
 		<c:forEach var="vo" items="${myWishList}">
 			<tr>
-				<td>${vo.lecture_name}</td>
-				<td>${vo.lecture_price}원</td>
-				<td>${vo.room_num}</td>
-				<td>${vo.lecture_time}</td>
-				<td>${vo.lecture_day}</td>
-				<td>${vo.start_date} ~ ${vo.end_date}</td>
+				<td>${vo.lectureName}</td>
+				<td>${vo.lecturePrice}원</td>
+				<td>${vo.roomNum}</td>
+				<td>${vo.lectureTime}</td>
+				<td>${vo.lectureDay}</td>
+				<td>${vo.startDate} ~ ${vo.endDate}</td>
 			</tr>
 		</c:forEach>
 	</table>

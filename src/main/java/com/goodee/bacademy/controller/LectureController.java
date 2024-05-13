@@ -33,8 +33,8 @@ public class LectureController {
 	
 	//lectureOne.jsp
 	@GetMapping("/lectureOne")
-	public String lectureOne(Model model, @RequestParam int lectureNo) {
-		List<LectureVO> lectureOneList = lectureMapper.getLectureList();
+	public String lectureOne(Model model, @RequestParam(value="lectureNo") int lectureNo) {
+		List<LectureVO> lectureOneList = lectureMapper.getLectureOne(lectureNo);
 		model.addAttribute("lectureOneList", lectureOneList);
 		return "lectureOne";
 	}

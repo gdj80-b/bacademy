@@ -4,7 +4,14 @@
 	
 	<!-- 내가 찜한 강의 리스트 출력  -->
 	<select id="getMyWishList" resultType="com.goodee.bacademy.vo.WishListVO">
-		SELECT  b.lecture_no, b.lecture_name, b.lecture_price, b.room_num, b.lecture_time, b.lecture_day, b.start_date, b.end_date
+		SELECT  b.lecture_no AS lectureNo, 
+				b.lecture_name AS lectureName, 
+				b.lecture_price AS lecture_price, 
+				b.room_num AS roomNum,
+				b.lecture_time AS lectureTime, 
+				b.lecture_day AS lectureDay, 
+				b.start_date AS startDate, 
+				b.end_date AS endDate
 		FROM wishlist a
 			JOIN lecture b ON a.lecture_no = b.lecture_no
 		where a.id = 'student'
