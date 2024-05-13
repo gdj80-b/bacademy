@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>김형호</title>
 </head>
 <body>
 	<h1>강의등록</h1>

@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class LectureVO {
 	private int lectureNo;
-	private String category;
+	private int categoryNo;
 	private String lectureName;
 	private String id;
 	private int roomNum;
@@ -16,4 +16,8 @@ public class LectureVO {
 	private int lecturePrice;
 	private String updateDate;
 	private String createDate;
+	
+	private String category;	// 과목명을 가져오기 위해 추가
+	
+	private String name;		// 강사 이름을 가져오기 위해 추가
 }
