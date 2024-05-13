@@ -3,14 +3,14 @@
 <mapper namespace="com.goodee.bacademy.mapper.MemberInfoMapper">
 
 	<select id="getMyLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
-		SELECT lecture_no AS lectureNo, lecture_name AS lectureName
+		<!-- SELECT lecture_no AS lectureNo, lecture_name AS lectureName
 				, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
 			, CASE
 			 WHEN NOW() > end_date THEN '강의완료'
 			 WHEN NOW() < start_date THEN '강의대기'
 			ELSE '강의중' END AS 'lectureStatus'
 		FROM lecture
-		WHERE id = #{id};
+		WHERE id = #{id}; -->
 	</select>
 
 </mapper>

@@ -1,6 +1,8 @@
 package com.goodee.bacademy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,9 +51,15 @@ public class CashController {
 		// System.out.println("updateRefundAction id = " + id);
 		// System.out.println("updateRefundA=ction refund_cash = " + refund_cash);
 		
-		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
-		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
-		int insertCashResult = cashMapper.insertCashHistory(id, refund_cash);
+		Map<String, Object> refundMap = new HashMap<>();
+		refundMap.put("refund_no", refund_no);
+		refundMap.put("state", state);
+		refundMap.put("id", id);
+		refundMap.put("refund_cash", refund_cash);
+		
+		int updateRefundResult = cashMapper.updateRefundState(refundMap);
+		int updateStudentResult = cashMapper.updateStudentCash(refundMap);
+		int insertCashResult = cashMapper.insertCashHistory(refundMap);
 		
 		if (updateRefundResult == 1 && updateStudentResult == 1 && insertCashResult == 1) {
 			System.out.println("성공");
