@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +15,7 @@ import com.goodee.bacademy.mapper.CashMapper;
 import com.goodee.bacademy.vo.CashHistory;
 import com.goodee.bacademy.vo.Refund;
 
+@Transactional
 @Controller
 public class CashController {
 	
@@ -45,7 +47,7 @@ public class CashController {
 		// System.out.println("updateRefundAction refund_no = " + refund_no);
 		// System.out.println("updateRefundAction state = " + state);
 		// System.out.println("updateRefundAction id = " + id);
-		// System.out.println("updateRefundAction refund_cash = " + refund_cash);
+		// System.out.println("updateRefundA=ction refund_cash = " + refund_cash);
 		
 		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
 		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
