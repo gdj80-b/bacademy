@@ -4,17 +4,17 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.goodee.bacademy.vo.CashHistory;
-import com.goodee.bacademy.vo.Refund;
+import com.goodee.bacademy.vo.CashHistoryVO;
+import com.goodee.bacademy.vo.RefundVO;
 
 @Mapper
 public interface CashMapper {
 	
 	// 수납이력 조회
-	public List<CashHistory> getCashHistory();
+	public List<CashHistoryVO> getCashHistory();
 	
 	// 환불이력 조회
-	public List<Refund> getRefundHistory();
+	public List<RefundVO> getRefundHistory();
 	
 	// 환불상태 변경(대기 > 승인)
 	public int updateRefundState(int refund_no, String state);

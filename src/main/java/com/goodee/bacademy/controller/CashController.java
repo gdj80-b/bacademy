@@ -12,8 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.CashMapper;
-import com.goodee.bacademy.vo.CashHistory;
-import com.goodee.bacademy.vo.Refund;
+import com.goodee.bacademy.vo.CashHistoryVO;
+import com.goodee.bacademy.vo.RefundVO;
 
 @Transactional
 @Controller
@@ -25,7 +25,7 @@ public class CashController {
 	// 수납이력 조회
 	@GetMapping("/cashHistory")
 	public String getCashHistory(Model model) {
-		List<CashHistory> cashHistory = cashMapper.getCashHistory();
+		List<CashHistoryVO> cashHistory = cashMapper.getCashHistory();
 		model.addAttribute("cashHistory", cashHistory);
 		return "cashHistory";
 	}
@@ -33,7 +33,7 @@ public class CashController {
 	// 환불이력 조회
 	@GetMapping("/refundHistory")
 	public String getRefundHistory(Model model) {
-		List<Refund> refundHistory = cashMapper.getRefundHistory();
+		List<RefundVO> refundHistory = cashMapper.getRefundHistory();
 		model.addAttribute("refundHistory", refundHistory);
 		return "refundHistory";
 	}

@@ -3,7 +3,7 @@ package com.goodee.bacademy.vo;
 import lombok.Data;
 
 @Data
-public class WishList {
+public class WishListVO {
 	private String lecture_no;		// JOIN으로 강의 테이블에서 가져온 컬럼
 	private String lecture_name;	// JOIN으로 강의 테이블에서 가져온 컬럼
 	private String lecture_price;	// JOIN으로 강의 테이블에서 가져온 컬럼

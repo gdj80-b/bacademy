@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.bacademy.mapper.LectureMapper;
-import com.goodee.bacademy.vo.Lecture;
+import com.goodee.bacademy.vo.LectureVO;
 
 @Controller
 public class LectureController {
@@ -26,7 +26,7 @@ public class LectureController {
 	//lectureList.jsp
 	@GetMapping("/lectureList")
 	public String lectureList(Model model) {
-		List<Lecture> lectureList = lectureMapper.getLectureList();
+		List<LectureVO> lectureList = lectureMapper.getLectureList();
 		model.addAttribute("lectureList", lectureList);
 		return "lectureList";
 	}
@@ -34,7 +34,7 @@ public class LectureController {
 	//lectureOne.jsp
 	@GetMapping("/lectureOne")
 	public String lectureOne(Model model, @RequestParam int lectureNo) {
-		List<Lecture> lectureOneList = lectureMapper.getLectureList();
+		List<LectureVO> lectureOneList = lectureMapper.getLectureList();
 		model.addAttribute("lectureOneList", lectureOneList);
 		return "lectureOne";
 	}

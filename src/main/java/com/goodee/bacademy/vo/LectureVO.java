@@ -3,7 +3,7 @@ package com.goodee.bacademy.vo;
 import lombok.Data;
 
 @Data
-public class Lecture {
+public class LectureVO {
 	private int lectureNo;
 	private String category;
 	private String lectureName;

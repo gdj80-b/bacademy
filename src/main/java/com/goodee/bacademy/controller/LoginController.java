@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.bacademy.mapper.LoginMapper;
-import com.goodee.bacademy.vo.Member;
+import com.goodee.bacademy.vo.MemberVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -39,7 +39,7 @@ public class LoginController {
 		// requestParam 디버깅
 		log.debug(yellow + "[loginAction] requestParam - id : {}, pw : {}" + reset, id, pw);
 		// mapper 파라미터 세팅
-		Member member = new Member();
+		MemberVO member = new MemberVO();
 		member.setId(id);
 		member.setPw(pw);
 
