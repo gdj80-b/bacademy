@@ -16,4 +16,6 @@ public class LectureVO {
 	private int lecturePrice;
 	private String updateDate;
 	private String createDate;
+	// 강의상태 얻기 위한 임시 필드
+	private String lectureStatus;
 }

@@ -30,7 +30,7 @@ public class MemberJoinController {
 	private final String reset = "\u001B[0m";
 
 	@Autowired
-	MemberJoinMapper memberJoinMapper; // 사용할 mapper mean 의존성 주입받기
+	MemberJoinMapper memberJoinMapper; // 사용할 mapper bean 의존성 주입받기
 
 	@GetMapping("/memberJoinForm")
 	public String memberJoinForm() {
@@ -58,10 +58,12 @@ public class MemberJoinController {
 		int studentResult = memberJoinMapper.studentJoin(studentMap);
 		
 		if (memberResult != 1 || studentResult != 1) {
-			rattr.addFlashAttribute("joinMsg", "회원가입에 실패하였습니다.");
+			rattr.addFlashAttribute("msgType", "회원가입 실패 메시지");
+			rattr.addFlashAttribute("msg", "회원가입에 실패하였습니다.");
 			return "redirect:loginForm";
 		}
-		rattr.addFlashAttribute("joinMsg", "회원가입에 성공하였습니다.");
+		rattr.addFlashAttribute("msgType", "회원가입 성공 메시지");
+		rattr.addFlashAttribute("msg", "회원가입에 성공하였습니다.");
 		return "redirect:loginForm"; // 로그인 화면으로 redirect
 	}
 

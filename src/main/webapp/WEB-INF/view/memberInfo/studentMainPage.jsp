@@ -94,39 +94,17 @@ html, body {
     <div class="col-md-2">
       <jsp:include page="../include/sideBar.jsp"/>
     </div>
-    <div class="col-md-10">
-      <div id="container" class="container-position">
-        <div id="loginBox" class="box-position">
-          <div id="loginBoxTitle">Bacademy 로그인</div>
-          
-          <form method="post" action="/memberLogin">
-            <div id="inputBox">
-              <div class="input-form-box">
-              	<c:if test="${not empty findId}">
-              		<span>아이디</span>
-                	<input type="text" name="id" class="form-control" value=${findId}>
-              	</c:if>
-              	<c:if test="${empty findId}">
-              		<span>아이디</span>
-                	<input type="text" name="id" class="form-control">
-              	</c:if>
-              </div>
-              <div class="input-form-box">
-                <span>비밀번호</span>
-                <input type="password" name="pw" class="form-control">
-              </div>
-              <div class="button-login-box">
-                <input type="submit" class="btn btn-primary btn-xs" style="width:100%" value="로그인">
-              </div>
-              <div class="input-form-box div">
-              	<a href="/findIdForm">아이디 찾기</a>
-              	<a href="/findPwForm">비밀번호 찾기</a>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <section>
+    	<div class="col-md-5 area1">
+			area1
+			
+    	</div>
+    </section>
+    <section>
+    	<div class="col-md-5 area2">
+			area2
+    	</div>
+    </section>
   </div>
 </div>
 	<!-- 실패 메세지를 출력(modal) -->

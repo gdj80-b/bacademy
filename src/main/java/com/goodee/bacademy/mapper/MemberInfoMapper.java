@@ -1,5 +1,12 @@
 package com.goodee.bacademy.mapper;
 
-public interface MemberInfoMapper {
+import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
+import com.goodee.bacademy.vo.LectureVO;
+
+@Mapper
+public interface MemberInfoMapper {
+	List<LectureVO> getMyLectureList(String id);
 }
