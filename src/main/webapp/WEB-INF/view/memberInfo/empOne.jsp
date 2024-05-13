@@ -94,44 +94,53 @@ html, body {
     <div class="col-md-2">
       <jsp:include page="../include/sideBar.jsp"/>
     </div>
-    <div class="col-md-10">
-      <div id="container" class="container-position">
-        <div id="loginBox" class="box-position">
-          <div id="loginBoxTitle">Bacademy 로그인</div>
-          
-          <form method="post" action="/memberLogin">
-            <div id="inputBox">
-              <div class="input-form-box">
-              	<c:if test="${not empty findId}">
-              		<span>아이디</span>
-                	<input type="text" name="id" class="form-control" value=${findId}>
-              	</c:if>
-              	<c:if test="${empty findId}">
-              		<span>아이디</span>
-                	<input type="text" name="id" class="form-control">
-              	</c:if>
-              </div>
-              <div class="input-form-box">
-                <span>비밀번호</span>
-                <input type="password" name="pw" class="form-control">
-              </div>
-              <div class="button-login-box">
-                <input type="submit" class="btn btn-primary btn-xs" style="width:100%" value="로그인">
-              </div>
-              <div class="input-form-box div">
-              	<a href="/findIdForm">아이디 찾기</a>
-              	<a href="/findPwForm">비밀번호 찾기</a>
-              </div>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
+    <section>
+    	<div class="col-md-5 area1">
+			area1
+			
+    	</div>
+    	<div class="col-md-5 area1">
+			area1
+			
+    	</div>
+    </section>
+  </div>
+    <div class="row">
+    <div class="col-md-2"></div>
+    <section>
+    	<div class="col-md-10 area1">
+			area2
+			<div class="panel panel-default">
+			    <div class="panel-heading">강의 목록</div>
+			    <div class="panel-body">
+			       <table class="table table-bordered table-hover">
+			          <tr>
+			            <td>강의이름</td>
+			            <td>기간</td>
+			            <td>요일</td>
+			            <td>강의료</td>
+			            <td>상태</td>
+			          </tr>
+			          <c:forEach var="vo" items="${list}">
+			           <tr>
+			            <td><a href="lectureOne?idx=${vo.lectureNo}">${vo.lectureName}</a></td>
+			            <td>${vo.startDate} ~ ${vo.endDate}</td>
+			            <td>${vo.lectureDay}</td>
+			            <td>${vo.lecturePrice}</td>
+			            <td>${vo.lectureStatus}</td>
+			           </tr>
+			          </c:forEach>
+			       </table>    
+			    </div>
+			 	<div class="panel-footer">Bacademy</div>
+			 </div>	
+    	</div>
+    </section>
   </div>
 </div>
 	<!-- 실패 메세지를 출력(modal) -->
 	<div id="myMessage" class="modal fade" role="dialog" >
-	  <div class="modal-dialog">	
+	  <div class="modal-dialog">
 	    <!-- Modal content-->
 	    <div id="messageType" class="modal-content panel-info">
 	      <div class="modal-header panel-heading">
