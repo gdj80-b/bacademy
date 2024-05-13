@@ -3,7 +3,7 @@
 <mapper namespace="com.goodee.bacademy.mapper.LoginMapper">
 
 	<!-- 로그인 쿼리  -->
-	<select id="validateMember" parameterType="com.goodee.bacademy.vo.Member" resultType="java.util.Map">
+	<select id="validateMember" parameterType="com.goodee.bacademy.vo.MemberVO" resultType="java.util.Map">
 		SELECT a.id, a.pw, a.grade, b.name, b.my_cash as myCash 
 		FROM member a
 			join student b on a.id = b.id
