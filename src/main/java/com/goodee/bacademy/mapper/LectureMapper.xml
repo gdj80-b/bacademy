@@ -47,15 +47,21 @@
 	<!-- 강의 상세 조회 -->
 	<select id="getLectureOne" parameterType="int" resultType="com.goodee.bacademy.vo.LectureVO">
 		SELECT 
+			(SELECT c.category FROM lecture l LEFT JOIN category c
+			ON l.category_no = c.category_no
+			WHERE l.lecture_no = ${lectureNo}) category,
 			lecture_name lectureName,
-			id,
+			(SELECT DISTINCT t.name FROM lecture l LEFT JOIN teacher t 
+			ON l.id = t.id 
+			WHERE l.id = 
+			(SELECT DISTINCT m.id FROM member m LEFT JOIN lecture l ON m.id = l.id WHERE l.lecture_no = ${lectureNo})) name,
 			room_num roomNum,
 			start_date startDate,
 			end_date endDate,
 			lecture_time lectureTime,
 			lecture_day lectureDay,
-			lecture_price lecturePrice,
+			lecture_price lecturePrice
 		FROM lecture
-		WHERE lecture_no = #{lectureNo};
+		WHERE lecture_no = ${lectureNo};
 	</select>
 </mapper>

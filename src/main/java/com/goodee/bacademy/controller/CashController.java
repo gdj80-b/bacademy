@@ -1,6 +1,8 @@
 package com.goodee.bacademy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,18 +54,18 @@ public class CashController {
 			@RequestParam(name = "refund_no") int refund_no, 
 			@RequestParam(name = "state") String state, 
 			@RequestParam(name="id") String id, 
-			@RequestParam(name="refund_cash") int refund_cash,
-			RedirectAttributes rttr
+			@RequestParam(name="refund_cash") int refund_cash
 			) {
-		 System.out.println("--------------------------------------------------------------------------------");
-		 System.out.println("updateRefundAction refund_no = " + refund_no);
-		 System.out.println("updateRefundAction state = " + state);
-		 System.out.println("updateRefundAction id = " + id);
-		 System.out.println("updateRefundAction refund_cash = " + refund_cash);
 		
-		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
-		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
-		int insertCashResult = cashMapper.insertCashHistoryToRefund(id, refund_cash);
+		Map<String, Object> refundMap = new HashMap<>();
+		refundMap.put("refund_no", refund_no);
+		refundMap.put("state", state);
+		refundMap.put("id", id);
+		refundMap.put("refund_cash", refund_cash);
+		
+		int updateRefundResult = cashMapper.updateRefundState(refundMap);
+		int updateStudentResult = cashMapper.updateStudentCash(refundMap);
+		int insertCashResult = cashMapper.insertCashHistory(refundMap);
 		
 		if (updateRefundResult == 1 && updateStudentResult == 1 && insertCashResult == 1) {
 			System.out.println("성공");
@@ -72,24 +74,5 @@ public class CashController {
 			System.out.println("실패");
 			return "redirect:refundHistory";
 		}
-	}
-	
-	
-	@PostMapping("/cashCharge")
-	public String cashCharge(@RequestParam(name="id") String id,@RequestParam(name="price") String price) {
-		//log.debug(yellow + " id : {}, price : {}" + reset, id, price);
-		int insertCashResult = cashMapper.insertCashHistoryToCharge(id, price);
-		
-		if(insertCashResult==1) {
-			System.out.println("캐쉬충전성공");
-			return "redirect:myCashList";
-		} else {
-			System.out.println("캐쉬충전실패");
-			return "redirect:myCashList";
-		}
-	}
-	
-	
-	
-	
+	}	
 }

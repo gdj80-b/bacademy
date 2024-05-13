@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Insert title here</title>
+	<title>ê¹€í˜•í˜¸</title>
 	<style>
 		td{
 			text-align: center;
@@ -12,28 +12,26 @@
 	</style>
 </head>
 <body>
-	<h1>°­ÀÇ ¸ñ·Ï</h1>
+	<h1>ê°•ì˜ ëª©ë¡</h1>
 	<table border=1>
 		<tr>
-			<th>°­ÀÇ¸í</th>
-			<th>µî·ÏÀÚ</th>
-			<th>°­ÀÇ½Ç</th>
-			<th>½ÃÀÛÀÏ</th>
-			<th>Á¾·áÀÏ</th>
-			<th>°­ÀÇ½Ã°£</th>
-			<th>°­ÀÇÀÏ</th>
-			<th>°­ÀÇ·á</th>
-			<th>¼öÁ¤ÀÏ</th>
-			<th>µî·ÏÀÏ</th>
+			<th>ê°•ì˜ëª…</th>
+			<th>ì‹œì‘ì¼</th>
+			<th>ì¢…ë£Œì¼</th>
+			<th>ê°•ì˜ì‹œê°„</th>
+			<th>ê°•ì˜ì‹¤</th>
+			<th>ê°•ì˜ì¼</th>
+			<th>ê°•ì˜ë£Œ</th>
+			<th>ìˆ˜ì •ì¼</th>
+			<th>ë“±ë¡ì¼</th>
 		</tr>
 		<c:forEach var="vo" items="${lectureList}">
 			<tr>
-				<td>${vo.lectureName}</td>
-				<td>${vo.id}</td>
-				<td>${vo.roomNum}</td>
+				<td><a href="/lectureOne?lectureNo=${vo.lectureNo}">${vo.lectureName}</a></td>
 				<td>${vo.startDate}</td>
 				<td>${vo.endDate}</td>
 				<td>${vo.lectureTime}</td>
+				<td>${vo.roomNum}</td>
 				<td>${vo.lectureDay}</td>
 				<td>${vo.lecturePrice}</td>
 				<td>${vo.updateDate}</td>

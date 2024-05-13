@@ -30,7 +30,7 @@ public class MemberJoinController {
 	private final String reset = "\u001B[0m";
 
 	@Autowired
-	MemberJoinMapper memberJoinMapper; // 사용할 mapper mean 의존성 주입받기
+	MemberJoinMapper memberJoinMapper; // 사용할 mapper bean 의존성 주입받기
 
 	@GetMapping("/memberJoinForm")
 	public String memberJoinForm() {
@@ -58,10 +58,12 @@ public class MemberJoinController {
 		int studentResult = memberJoinMapper.studentJoin(studentMap);
 		
 		if (memberResult != 1 || studentResult != 1) {
-			rattr.addFlashAttribute("joinMsg", "회원가입에 실패하였습니다.");
+			rattr.addFlashAttribute("msgType", "회원가입 실패 메시지");
+			rattr.addFlashAttribute("msg", "회원가입에 실패하였습니다.");
 			return "redirect:loginForm";
 		}
-		rattr.addFlashAttribute("joinMsg", "회원가입에 성공하였습니다.");
+		rattr.addFlashAttribute("msgType", "회원가입 성공 메시지");
+		rattr.addFlashAttribute("msg", "회원가입에 성공하였습니다.");
 		return "redirect:loginForm"; // 로그인 화면으로 redirect
 	}
 
@@ -226,4 +228,50 @@ public class MemberJoinController {
 		rattr.addFlashAttribute("msg", "비밀번호 업데이트 성공"); // 성공 메세지와 함께 로그인 url로 redirect
 		return "redirect:/loginForm";
 	}	
+	
+	// 강사등록 페이지
+	@GetMapping("/addTeacherForm")
+	public String addTeacherForm() {
+		return "addTeacherForm";
+	}
+	
+	// 강사등록 액션
+	@PostMapping("/addTeacher")
+	public String addTeacherAction(@RequestParam Map<String, String> teacherInfo) {
+		
+		// 강사등록에서 넘어온 로그인 정보 저장
+		Map<String, String> insertMemberInfo = new HashMap<String, String>();
+		insertMemberInfo.put("id", teacherInfo.get("id"));
+		insertMemberInfo.put("id", teacherInfo.get("pw"));
+		insertMemberInfo.put("id", teacherInfo.get("phoneNum"));
+		insertMemberInfo.put("grade", "1");
+		insertMemberInfo.put("state", "재직");
+		
+		// 강사등록에서 넘어온 강사 개인정보 저장
+		Map<String, String> insertTeacherInfo = new HashMap<String, String>();
+		insertTeacherInfo.put("id", teacherInfo.get("id"));
+		insertTeacherInfo.put("name", teacherInfo.get("name"));
+		insertTeacherInfo.put("gender", teacherInfo.get("gender"));
+		insertTeacherInfo.put("birth", teacherInfo.get("birth"));
+		insertTeacherInfo.put("email", teacherInfo.get("email"));
+		insertTeacherInfo.put("profileImg", teacherInfo.get("profileImg"));
+		
+		// HashMap에 담긴 내용을 Mapper로 전달
+		int addMemberResult = memberJoinMapper.addMember(insertMemberInfo);
+		int addTeacherResult = memberJoinMapper.addTeacher(insertTeacherInfo);
+		
+		if (addMemberResult == 1 && addTeacherResult == 1) {
+			System.out.println("성공");
+			return "redirect:empList";
+		} else {
+			System.out.println("실패");
+			return "redirect:empList";
+		}
+	}
+	
+	// 강사탈퇴 액션
+	@PostMapping("/deleteTeacher")
+	public String deleteTeacherAction() {
+		return "redirect:empList";
+	}
 }
