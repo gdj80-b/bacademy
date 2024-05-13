@@ -20,6 +20,6 @@ public class StudentWishListController {
 	public String myWishList(Model model) {
 		List<WishList> list = mapper.getMyWishList();
 		model.addAttribute("myWishList", list);
-		return "/myWishList/myWishList";
+		return "myWishList";
 	}
 }
