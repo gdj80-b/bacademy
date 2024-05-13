@@ -3,7 +3,7 @@ package com.goodee.bacademy.vo;
 import lombok.Data;
 
 @Data
-public class CashHistory {
+public class CashHistoryVO {
 	private int cash_no;
 	private String id;
 	private int cash;

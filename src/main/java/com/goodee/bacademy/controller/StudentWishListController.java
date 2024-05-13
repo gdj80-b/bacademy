@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.goodee.bacademy.mapper.StudentWishListMapper;
-import com.goodee.bacademy.vo.WishList;
+import com.goodee.bacademy.vo.WishListVO;
 
 @Controller
 public class StudentWishListController {
@@ -18,7 +18,7 @@ public class StudentWishListController {
 	
 	@GetMapping("/myWishList")
 	public String myWishList(Model model) {
-		List<WishList> list = mapper.getMyWishList();
+		List<WishListVO> list = mapper.getMyWishList();
 		model.addAttribute("myWishList", list);
 		return "myWishList";
 	}

@@ -1,5 +1,5 @@
 package com.goodee.bacademy.vo;
 
-public class Application {
+public class ManagerVO {
 
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberJoinMapper;
-import com.goodee.bacademy.vo.Member;
+import com.goodee.bacademy.vo.MemberVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -69,7 +69,7 @@ public class MemberJoinController {
 	@GetMapping("/checkId")
 	public int memRegisterCheck(@RequestParam("id") String id) {
 
-		Member member = memberJoinMapper.checkId(id);
+		MemberVO member = memberJoinMapper.checkId(id);
 		if (member != null || id.isBlank()) {
 			return 0; // 이미 존재하는 회원, 입력불가
 		}
