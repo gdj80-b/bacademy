@@ -40,7 +40,9 @@ public class NoticeController {
 	// 공지사항 등록 액션
 	@PostMapping("/addNotice")
 	public String addNoticeAction(Notice vo) {
-
+		
+		System.out.println("vo:" + vo);
+		
 		String result = "";
 
 		int addRow = noticeMapper.addNotice(vo);

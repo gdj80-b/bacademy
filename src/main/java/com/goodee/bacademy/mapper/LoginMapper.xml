@@ -1,3 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.goodee.bacademy.mapper.LoginMapper"></mapper>
+<mapper namespace="com.goodee.bacademy.mapper.LoginMapper">
+
+	<!-- 로그인 쿼리  -->
+	<select id="validateMember" parameterType="com.goodee.bacademy.vo.MemberVO" resultType="java.util.Map">
+		SELECT a.id, a.pw, a.grade, b.name, b.my_cash as myCash 
+		FROM member a
+			join student b on a.id = b.id
+		<where>
+			a.id = #{id} AND a.pw = #{pw}
+		</where>
+	</select>
+	
+</mapper>

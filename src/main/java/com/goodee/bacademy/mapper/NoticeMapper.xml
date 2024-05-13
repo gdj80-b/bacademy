@@ -4,27 +4,21 @@
 <mapper namespace="com.goodee.bacademy.mapper.NoticeMapper">
 
 	<!-- 공지사항 조회 -->
-	<select id="getNotice"
-		resultType="com.goodee.bacademy.vo.Notice">
-		SELECT notice_no noticeNo, id, title, content, writer,
-		update_date updateDate, create_date createDate, count
-		FROM notice
+	<select id="getNotice" resultType="com.goodee.bacademy.vo.Notice">
+		SELECT * FROM notice
 		ORDER BY notice_no DESC
 	</select>
 
 	<!-- 공지사항 등록 -->
-	<insert id="addNotice"
-		parameterType="com.goodee.bacademy.vo.Notice">
-		INSERT INTO notice (id, title, content, writer,
-		update_date, create_date, count)
-		VALUES('admin', #{title}, #{content}, '학생지원팀', NOW(), NOW(), #{count})
+	<insert id="addNotice" parameterType="com.goodee.bacademy.vo.Notice">
+		INSERT INTO notice (id, title, content, writer, update_date, create_date , count)
+		VALUES (id, #{title}, #{content}, writer, NOW(), NOW(), count)
 	</insert>
 
 	<!-- 공지사항 상세보기 -->
 	<select id="getNoticeOne"
 		resultType="com.goodee.bacademy.vo.Notice" parameterType="Integer">
-		SELECT notice_no noticeNo, title, content, writer, update_date updateDate,
-		create_date createDate, count
+		SELECT notice_no noticeNo, title, content, writer, update_date updateDate, create_date createDate, count
 		FROM notice
 		WHERE notice_no = #{noticeNo}
 	</select>
