@@ -1,3 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.goodee.bacademy.mapper.LectureMapper"></mapper>
+<mapper namespace="com.goodee.bacademy.mapper.LectureMapper">
+
+	<!-- 강의 등록 -->
+	<insert id="addLecture" parameterType="com.goodee.bacademy.vo.Lecture">
+		INSERT INTO lecture(
+			category,
+			lecture_name,
+			id,
+			room_num,
+			start_date,
+			end_date,
+			lecture_time,
+			lecture_day
+			lecture_price
+		) VALUES (
+			#{category},
+			#{lectureName},
+			#{id},
+			#{roomNum},
+			#{startDate},
+			#{endDate},
+			#{lectureTime},
+			#{lectureDay},
+			#{lecturePrice}
+		)
+	</insert>
+	
+	<!-- 강의 목록 조회 -->
+	<select id="getLectureList" resultType="com.goodee.bacademy.vo.Lecture">
+		SELECT 
+			lecture_no lectureNo,
+			lecture_name lectureName,
+			id,
+			room_num roomNum,
+			start_date startDate,
+			end_date endDate,
+			lecture_time lectureTime,
+			lecture_day lectureDay,
+			lecture_price lecturePrice,
+			update_date updateDate,
+			create_date createDate
+		FROM lecture;
+	</select>
+	
+	<!-- 강의 상세 조회 -->
+	<select id="getLectureOne" parameterType="int" resultType="com.goodee.bacademy.vo.Lecture">
+		SELECT 
+			lecture_name lectureName,
+			id,
+			room_num roomNum,
+			start_date startDate,
+			end_date endDate,
+			lecture_time lectureTime,
+			lecture_day lectureDay,
+			lecture_price lecturePrice,
+		FROM lecture
+		WHERE lecture_no = #{lectureNo};
+	</select>
+</mapper>
