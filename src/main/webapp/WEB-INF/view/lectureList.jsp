@@ -13,7 +13,7 @@
 </head>
 <body>
 	<h1>강의 목록</h1>
-	<table>
+	<table border=1>
 		<tr>
 			<th>강의명</th>
 			<th>등록자</th>
