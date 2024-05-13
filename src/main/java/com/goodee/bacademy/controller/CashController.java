@@ -17,7 +17,7 @@ import com.goodee.bacademy.vo.RefundVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+
 @Transactional
 @Controller
 public class CashController {
@@ -49,13 +49,17 @@ public class CashController {
 	// 환불상태 승인
 	@PostMapping("/refundConfirm")
 	public String updateRefundAction(
-			@RequestParam int refund_no, @RequestParam String state, @RequestParam String id, @RequestParam int refund_cash,
+			@RequestParam(name = "refund_no") int refund_no, 
+			@RequestParam(name = "state") String state, 
+			@RequestParam(name="id") String id, 
+			@RequestParam(name="refund_cash") int refund_cash,
 			RedirectAttributes rttr
 			) {
-		// System.out.println("updateRefundAction refund_no = " + refund_no);
-		// System.out.println("updateRefundAction state = " + state);
-		// System.out.println("updateRefundAction id = " + id);
-		// System.out.println("updateRefundA=ction refund_cash = " + refund_cash);
+		 System.out.println("--------------------------------------------------------------------------------");
+		 System.out.println("updateRefundAction refund_no = " + refund_no);
+		 System.out.println("updateRefundAction state = " + state);
+		 System.out.println("updateRefundAction id = " + id);
+		 System.out.println("updateRefundAction refund_cash = " + refund_cash);
 		
 		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
 		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
