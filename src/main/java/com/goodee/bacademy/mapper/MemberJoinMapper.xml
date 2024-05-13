@@ -3,7 +3,7 @@
 <mapper namespace="com.goodee.bacademy.mapper.MemberJoinMapper">
 
 	<!-- 아이디 중복체크 -->
-	<select id="checkId" parameterType="String" resultType="com.goodee.bacademy.vo.Member">
+	<select id="checkId" parameterType="String" resultType="com.goodee.bacademy.vo.MemberVO">
 		select *
 		from member
 		where id = #{id}	

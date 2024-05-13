@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.LoginMapper;
 import com.goodee.bacademy.vo.MemberVO;
@@ -33,9 +34,11 @@ public class LoginController {
 	}
 
 	@PostMapping("/memberLogin")
-	public String loginAction(HttpSession session,
-			  			@RequestParam(name="id") String id,
-			  			@RequestParam(name="pw") String pw) throws UnsupportedEncodingException {
+	public String loginAction(HttpSession session
+			  			, @RequestParam(name="id") String id
+			  			, @RequestParam(name="pw") String pw
+			  			, RedirectAttributes rattr) throws UnsupportedEncodingException {
+		
 		// requestParam 디버깅
 		log.debug(yellow + "[loginAction] requestParam - id : {}, pw : {}" + reset, id, pw);
 		// mapper 파라미터 세팅
@@ -68,9 +71,8 @@ public class LoginController {
 			
 			return "redirect:/hello?msg=" + msg; // 사용자가 로그인 페이지의 URL을 유지하지 않도록 리다이렉트	
 		} else {
-		String msg = URLEncoder.encode("아이디 또는 비밀번호를 확인해주세요.", "UTF-8");
-		
-			return "redirect:/loginForm?msg="+ msg; // 로그인 실패 시 로그인 페이지로 이동
+			rattr.addFlashAttribute("loginError", "아이디 또는 비밀번호를 확인해주세요.");
+			return "redirect:/loginForm"; // 로그인 실패 시 로그인 페이지로 이동
 		}
 } 
 
