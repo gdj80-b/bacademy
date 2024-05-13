@@ -13,8 +13,8 @@
 			(SELECT SUM(cash) FROM cash_history) balance,
 			s.name
 		FROM cash_history ch
-		JOIN student s
-		ON ch.id = s.id
+			JOIN student s
+			ON ch.id = s.id
 		ORDER BY ch.create_date DESC;
 	</select>
 	
@@ -29,8 +29,8 @@
 			r.refund_cash,
 			s.name
 		FROM refund r
-		JOIN student s
-		ON r.id = s.id
+			JOIN student s
+			ON r.id = s.id
 		ORDER BY r.accept_date DESC;
 	</select>
 	
@@ -48,13 +48,42 @@
 		WHERE id = #{id}
 	</update>
 	
+	<!-- 캐시충전에 의한 수납이력 기록 sql문(mariadb) -->
+	<insert id="insertCashHistoryToCharge" parameterType="com.goodee.bacademy.vo.CashHistoryVO">
+		INSERT INTO cash_history (
+			id, cash, reason, create_date
+		) VALUE (
+			#{id}, #price}, '충전', now() 
+		)
+	</insert>
+	
 	<!-- 환불상태 변경(대기 > 승인)에 따른 수납이력 기록 sql문(mariadb) -->
-	<insert id="insertCashHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
+	<insert id="insertCashHistoryToRefund" parameterType="com.goodee.bacademy.vo.RefundVO">
 		INSERT INTO cash_history (
 			id, cash, reason, create_date
 		) VALUE (
 			#{id}, #{refund_cash}, '환불', now() 
 		)
 	</insert>
+
+	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
+		SELECT
+			r.refund_no,
+			r.id,
+			r.state,			
+			CASE 
+		        WHEN r.state = '대기' THEN r.request_date
+		        ELSE r.accept_date
+		    END AS request_date,			
+			r.refund_cash,
+			s.name
+		FROM refund r
+			JOIN student s
+			ON r.id = s.id			
+		WHERE r.id = #{id}
+		ORDER BY r.accept_date DESC;		
+	</select>
+
+	
 
 </mapper>

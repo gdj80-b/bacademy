@@ -6,5 +6,5 @@ import com.goodee.bacademy.vo.WishListVO;
 
 @Mapper
 public interface StudentWishListMapper {
-	public List<WishListVO> getMyWishList();
+	public List<WishListVO> getMyWishList(String id);
 }

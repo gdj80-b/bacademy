@@ -3,7 +3,7 @@
 <mapper namespace="com.goodee.bacademy.mapper.StudentWishListMapper">
 	
 	<!-- 내가 찜한 강의 리스트 출력  -->
-	<select id="getMyWishList" resultType="com.goodee.bacademy.vo.WishListVO">
+	<select id="getMyWishList" parameterType="com.goodee.bacademy.vo.WishListVO">
 		SELECT  b.lecture_no AS lectureNo, 
 				b.lecture_name AS lectureName, 
 				b.lecture_price AS lecture_price, 
@@ -14,7 +14,7 @@
 				b.end_date AS endDate
 		FROM wishlist a
 			JOIN lecture b ON a.lecture_no = b.lecture_no
-		where a.id = 'student'
+		WHERE a.id = #{id}
 		ORDER BY a.create_date;
 	</select>
 </mapper>

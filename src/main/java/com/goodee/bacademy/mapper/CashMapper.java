@@ -23,5 +23,11 @@ public interface CashMapper {
 	public int updateStudentCash(String id, int refund_cash);
 	
 	// 환불상태 변경(대기 > 승인)에 따른 수납이력 기록
-	public int insertCashHistory(String id, int refund_cash);
+	public int insertCashHistoryToRefund(String id, int refund_cash);
+	
+	// 학생 환불이력 조회
+	public List<RefundVO> getMyRefundHistory(String Id);
+	
+	// 학생 캐쉬 충전
+	public int insertCashHistoryToCharge(String id, String price);
 }

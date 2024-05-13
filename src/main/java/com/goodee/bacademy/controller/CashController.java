@@ -15,9 +15,15 @@ import com.goodee.bacademy.mapper.CashMapper;
 import com.goodee.bacademy.vo.CashHistoryVO;
 import com.goodee.bacademy.vo.RefundVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Transactional
 @Controller
 public class CashController {
+	
+	private final String yellow = "\u001B[33m";
+	private final String reset = "\u001B[0m";
 	
 	@Autowired
 	private CashMapper cashMapper;
@@ -38,6 +44,8 @@ public class CashController {
 		return "refundHistory";
 	}
 	
+	
+	
 	// 환불상태 승인
 	@PostMapping("/refundConfirm")
 	public String updateRefundAction(
@@ -51,7 +59,7 @@ public class CashController {
 		
 		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
 		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
-		int insertCashResult = cashMapper.insertCashHistory(id, refund_cash);
+		int insertCashResult = cashMapper.insertCashHistoryToRefund(id, refund_cash);
 		
 		if (updateRefundResult == 1 && updateStudentResult == 1 && insertCashResult == 1) {
 			System.out.println("성공");
@@ -61,4 +69,23 @@ public class CashController {
 			return "redirect:refundHistory";
 		}
 	}
+	
+	
+	@PostMapping("/cashCharge")
+	public String cashCharge(@RequestParam(name="id") String id,@RequestParam(name="price") String price) {
+		//log.debug(yellow + " id : {}, price : {}" + reset, id, price);
+		int insertCashResult = cashMapper.insertCashHistoryToCharge(id, price);
+		
+		if(insertCashResult==1) {
+			System.out.println("캐쉬충전성공");
+			return "redirect:myCashList";
+		} else {
+			System.out.println("캐쉬충전실패");
+			return "redirect:myCashList";
+		}
+	}
+	
+	
+	
+	
 }
