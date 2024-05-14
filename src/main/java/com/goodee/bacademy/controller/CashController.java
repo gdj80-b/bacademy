@@ -1,6 +1,8 @@
 package com.goodee.bacademy.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,9 +17,15 @@ import com.goodee.bacademy.mapper.CashMapper;
 import com.goodee.bacademy.vo.CashHistoryVO;
 import com.goodee.bacademy.vo.RefundVO;
 
+import lombok.extern.slf4j.Slf4j;
+
+
 @Transactional
 @Controller
 public class CashController {
+	
+	private final String yellow = "\u001B[33m";
+	private final String reset = "\u001B[0m";
 	
 	@Autowired
 	private CashMapper cashMapper;
@@ -38,20 +46,26 @@ public class CashController {
 		return "refundHistory";
 	}
 	
+	
+	
 	// 환불상태 승인
 	@PostMapping("/refundConfirm")
 	public String updateRefundAction(
-			@RequestParam int refund_no, @RequestParam String state, @RequestParam String id, @RequestParam int refund_cash,
-			RedirectAttributes rttr
+			@RequestParam(name = "refund_no") int refund_no, 
+			@RequestParam(name = "state") String state, 
+			@RequestParam(name="id") String id, 
+			@RequestParam(name="refund_cash") int refund_cash
 			) {
-		// System.out.println("updateRefundAction refund_no = " + refund_no);
-		// System.out.println("updateRefundAction state = " + state);
-		// System.out.println("updateRefundAction id = " + id);
-		// System.out.println("updateRefundA=ction refund_cash = " + refund_cash);
 		
-		int updateRefundResult = cashMapper.updateRefundState(refund_no, state);
-		int updateStudentResult = cashMapper.updateStudentCash(id, refund_cash);
-		int insertCashResult = cashMapper.insertCashHistory(id, refund_cash);
+		Map<String, Object> refundMap = new HashMap<>();
+		refundMap.put("refund_no", refund_no);
+		refundMap.put("state", state);
+		refundMap.put("id", id);
+		refundMap.put("refund_cash", refund_cash);
+		
+		int updateRefundResult = cashMapper.updateRefundState(refundMap);
+		int updateStudentResult = cashMapper.updateStudentCash(refundMap);
+		int insertCashResult = cashMapper.insertCashHistory(refundMap);
 		
 		if (updateRefundResult == 1 && updateStudentResult == 1 && insertCashResult == 1) {
 			System.out.println("성공");
@@ -60,5 +74,5 @@ public class CashController {
 			System.out.println("실패");
 			return "redirect:refundHistory";
 		}
-	}
+	}	
 }

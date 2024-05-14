@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	session.setAttribute("loginId", "student");
+%>
+<!-- session.invalidate(); // 세션 공간 초기화(포맷)	 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,6 +14,13 @@
 </head>
 <body class="container">
 	<h1> 내 캐쉬 내역</h1>
+	<br>
+	<form action="cashCharge" method="post">
+		<input type="hidden" name="id" value="student" >
+		<input type="number" name="price">
+		<button type="submit"> 충전하기 </button>
+	 </form>	 
+	<hr>
 	<table class="table table-bordered table-hover">
 		<tr>
 			<th>종류</th>
@@ -26,5 +37,6 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<a href="myCashRefundForm" class="btn btn-secondary">환불내역 보기</a>
 </body>
 </html>

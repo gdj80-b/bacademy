@@ -5,5 +5,5 @@ import org.apache.ibatis.annotations.Mapper;
 import com.goodee.bacademy.vo.PaymentVO;
 @Mapper
 public interface StudentPaymentMapper {
-	public List<PaymentVO> getMyCashList();
+	public List<PaymentVO> getMyCashList(String id);
 }

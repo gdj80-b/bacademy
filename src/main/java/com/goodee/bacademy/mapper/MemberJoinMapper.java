@@ -14,4 +14,10 @@ public interface MemberJoinMapper {
 	int modifyPw(Map<String, String> map);
 	int memberJoin(Map<String, String> map);
 	int studentJoin(Map<String, String> map);
+	
+	// 강사등록(로그인 관련 정보 입력)
+	public int addMember(Map<String, String> insertMemberInfo);
+	
+	// 강사등록(강사 개인정보 입력)
+	public int addTeacher(Map<String, String> insertTeacherInfo);
 }

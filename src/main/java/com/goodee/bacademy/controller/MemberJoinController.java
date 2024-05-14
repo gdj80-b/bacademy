@@ -2,6 +2,7 @@ package com.goodee.bacademy.controller;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberJoinMapper;
 import com.goodee.bacademy.vo.MemberVO;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -228,4 +231,63 @@ public class MemberJoinController {
 		rattr.addFlashAttribute("msg", "비밀번호 업데이트 성공"); // 성공 메세지와 함께 로그인 url로 redirect
 		return "redirect:/loginForm";
 	}	
+	
+	// 강사등록 페이지
+	@GetMapping("/addTeacherForm")
+	public String addTeacherForm() {
+		return "addTeacherForm";
+	}
+	
+	// 강사등록 액션
+	@Transactional
+	@PostMapping("/addTeacher")
+	public String addTeacherAction(@RequestParam("profileImg") MultipartFile file, @RequestParam Map<String, String> teacherInfo) {
+		
+		String birth = teacherInfo.get("birth-year") + "-" + teacherInfo.get("birth-month") + "-" + teacherInfo.get("birth-day");
+		String originalName = file.getOriginalFilename();
+		// String ext = originalName.substring(originalName.lastIndexOf("."));
+		// String txt = (UUID.randomUUID().toString()).replace("-", "");
+		String saveName = originalName; // (txt: 원본이름).(ext: 확장자)
+		
+		System.out.println("teacherInfo : " + teacherInfo);
+		System.out.println("birth : " + birth);
+		System.out.println("profileImg : " + saveName);
+		
+	    
+	    
+		// 강사등록에서 넘어온 로그인 정보 저장
+		Map<String, String> insertMemberInfo = new HashMap<String, String>();
+		insertMemberInfo.put("id", teacherInfo.get("id"));
+		insertMemberInfo.put("pw", teacherInfo.get("pw"));
+		insertMemberInfo.put("phoneNum", teacherInfo.get("phoneNum"));
+		insertMemberInfo.put("grade", "1");
+		insertMemberInfo.put("state", "재직");
+		
+		// 강사등록에서 넘어온 강사 개인정보 저장
+		Map<String, String> insertTeacherInfo = new HashMap<String, String>();
+		insertTeacherInfo.put("id", teacherInfo.get("id"));
+		insertTeacherInfo.put("name", teacherInfo.get("name"));
+		insertTeacherInfo.put("gender", teacherInfo.get("gender"));
+		insertTeacherInfo.put("birth", birth);
+		insertTeacherInfo.put("email", teacherInfo.get("email"));
+		insertTeacherInfo.put("profileImg", saveName);
+		
+		// HashMap에 담긴 내용을 Mapper로 전달
+		int addMemberResult = memberJoinMapper.addMember(insertMemberInfo);
+		int addTeacherResult = memberJoinMapper.addTeacher(insertTeacherInfo);
+		
+		if (addMemberResult == 1 && addTeacherResult == 1) {
+			System.out.println("성공");
+			return "redirect:empList";
+		} else {
+			System.out.println("실패");
+			return "redirect:empList";
+		}
+	}
+	
+	// 강사탈퇴 액션
+	@PostMapping("/deleteTeacher")
+	public String deleteTeacherAction() {
+		return "redirect:empList";
+	}
 }

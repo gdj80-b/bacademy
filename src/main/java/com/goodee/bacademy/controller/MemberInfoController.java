@@ -41,7 +41,11 @@ public class MemberInfoController {
 	
 	@GetMapping("/empOne/{id}")
 	public String getEmpOne(@PathVariable("id") String id) {
-		
 		return "memberinfo/empOne";
+	}
+	
+	@GetMapping("/empList")
+	public String getEmpList() {
+		return "empList";
 	}
 }
