@@ -19,10 +19,9 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class StudentPaymentController {
 
-	
+	// 조인환 - 내 캐쉬내역 조회
 	@Autowired
 	private StudentPaymentMapper StudentPaymentmapper;	
-	
 	@GetMapping("/myCashList")
 	public String myCashList(HttpSession session,Model model) {
 		Map<String, String> id = new HashMap<String, String>(); 
@@ -32,7 +31,7 @@ public class StudentPaymentController {
 		return "myCashList";
 	}
 	
-	
+	// 조인환 - 내 환불내역 조회
 	@Autowired
 	private CashMapper cashMapper;
 	@GetMapping("/myCashRefundForm")

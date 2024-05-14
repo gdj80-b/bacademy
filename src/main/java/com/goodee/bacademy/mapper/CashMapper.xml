@@ -66,6 +66,7 @@
 		)
 	</insert>
 
+	<!-- 조인환 : 학생 개인 환불내역 조회  -->
 	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
 		SELECT
 			r.refund_no,

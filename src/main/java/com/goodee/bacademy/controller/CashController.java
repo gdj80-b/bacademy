@@ -53,8 +53,8 @@ public class CashController {
 	public String updateRefundAction(
 			@RequestParam(name = "refund_no") int refund_no, 
 			@RequestParam(name = "state") String state, 
-			@RequestParam(name="id") String id, 
-			@RequestParam(name="refund_cash") int refund_cash
+			@RequestParam(name = "id") String id, 
+			@RequestParam(name = "refund_cash") int refund_cash
 			) {
 		
 		Map<String, Object> refundMap = new HashMap<>();
