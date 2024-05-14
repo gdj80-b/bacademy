@@ -44,16 +44,25 @@
 		values(#{id}, #{name}, #{gender}, #{birth}, #{email})
 	</insert>
 	
-	<!-- 강사 등록 -->
+	<!-- 정건희 : 강사 등록 -->
 	<insert id="addMember" parameterType="java.util.Map">
 		INSERT INTO member(id, pw, phone_num, grade, state)
 		VALUES(#{id}, #{pw}, #{phoneNum}, #{grade}, #{state})
 	</insert>
 	
-	<!-- 강사 등록 -->
+	<!-- 정건희 : 강사 등록 -->
 	<insert id="addTeacher" parameterType="java.util.Map">
 		INSERT INTO teacher(id, name, gender, birth, email, profile_img, update_date, create_date)
 		VALUES(#{id}, #{name}, #{gender}, #{birth}, #{email}, #{profileImg}, now(), now())
 	</insert>
+	
+	<!-- 정건희 : 강사 수정(재직 > 퇴직) -->
+	<update id="updateMember" parameterType="String">
+		UPDATE member SET state = '퇴직' WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteTeacher" parameterType="String">
+		DELETE FROM teacher WHERE id = #{id}
+	</delete>
 	
 </mapper>

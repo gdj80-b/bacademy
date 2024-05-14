@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberInfoMapper;
 import com.goodee.bacademy.vo.LectureVO;
+import com.goodee.bacademy.vo.TeacherVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -50,8 +51,11 @@ public class MemberInfoController {
 		return "memberInfo/empOne";
 	}
 	
+	// 정건희 : 직원 전체 조회
 	@GetMapping("/empList")
-	public String getEmpList() {
+	public String getEmpList(@RequestParam("currentPage") int currentPage, Model model) {
+		List<TeacherVO> teacherInfo = memberInfoMapper.getEmpList(currentPage);
+		model.addAttribute("teacherInfo", teacherInfo);
 		return "empList";
 	}
 }

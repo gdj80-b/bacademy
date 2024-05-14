@@ -232,13 +232,13 @@ public class MemberJoinController {
 		return "redirect:/loginForm";
 	}	
 	
-	// 강사등록 페이지
+	// 정건희 : 강사등록 페이지
 	@GetMapping("/addTeacherForm")
 	public String addTeacherForm() {
 		return "addTeacherForm";
 	}
 	
-	// 강사등록 액션
+	// 정건희 : 강사등록 액션
 	@Transactional
 	@PostMapping("/addTeacher")
 	public String addTeacherAction(@RequestParam("profileImg") MultipartFile file, @RequestParam Map<String, String> teacherInfo) {
@@ -252,8 +252,6 @@ public class MemberJoinController {
 		System.out.println("teacherInfo : " + teacherInfo);
 		System.out.println("birth : " + birth);
 		System.out.println("profileImg : " + saveName);
-		
-	    
 	    
 		// 강사등록에서 넘어온 로그인 정보 저장
 		Map<String, String> insertMemberInfo = new HashMap<String, String>();
@@ -285,9 +283,20 @@ public class MemberJoinController {
 		}
 	}
 	
-	// 강사탈퇴 액션
+	// 정건희 : 강사탈퇴 액션
+	@Transactional
 	@PostMapping("/deleteTeacher")
-	public String deleteTeacherAction() {
-		return "redirect:empList";
+	public String deleteTeacherAction(@RequestParam("id") String id) {
+		
+		int updateMemberResult = memberJoinMapper.updateMember(id);
+		int deleteTeacherResult = memberJoinMapper.deleteTeacher(id);
+		
+		if (updateMemberResult == 1 && deleteTeacherResult == 1) {
+			System.out.println("성공");
+			return "redirect:empList";
+		} else {
+			System.out.println("실패");
+			return "redirect:empList";
+		}
 	}
 }

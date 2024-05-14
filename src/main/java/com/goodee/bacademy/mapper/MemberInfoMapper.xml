@@ -20,6 +20,10 @@
 		WHERE b.id = #{id}
 	</select> 
 
+	<select id="getEmpList" parameterType="int">
+		SELECT
+		FROM
+	</select>
 
 </mapper>
 
