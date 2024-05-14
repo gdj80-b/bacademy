@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodee.bacademy.mapper.CommentMapper">
+	
+	<select id="commentCount" resultType="int">
+		select count(*) 
+		from comment
+	</select>
+	
+	<select id="commentList" resultType="com.goodee.bacademy.vo.CommentVO">
+		select * from comment
+	</select>
+	
+	<insert id="commentInsert" parameterType="com.goodee.bacademy.vo.CommentVO">
+		insert into comment(comment_no commentNo, board_no boardNo, id, content, update_date updateDate, create_date createDate)
+		values (#{commentNo}, #{boardNo}, #{id}, #{content}, NOW(), NOW())
+	</insert>
+	
+	
+	
+</mapper>

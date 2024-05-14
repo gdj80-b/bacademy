@@ -8,8 +8,6 @@ public class NoticeVO {
 	private String id;
 	private String title;
 	private String content;
-	private String writer;
 	private String updateDate;
 	private String createDate;
-	private int count;
 }

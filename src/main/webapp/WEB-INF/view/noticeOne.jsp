@@ -117,10 +117,6 @@
 							<td>${noticeOne.content}</td>
 						</tr>
 						<tr>
-							<td>작성자</td>
-							<td>${noticeOne.writer}</td>
-						</tr>
-						<tr>
 							<td>작성일</td>
 							<td>${noticeOne.createDate}</td>
 						</tr>

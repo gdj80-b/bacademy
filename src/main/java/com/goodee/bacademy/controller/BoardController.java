@@ -74,5 +74,4 @@ public class BoardController {
 			boardMapper.deleteBoard(boardNo); 		
 			return "redirect:boardList";
 		}	
-		
 }

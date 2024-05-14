@@ -7,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.NoticeMapper;
 import com.goodee.bacademy.vo.NoticeVO;
+import com.goodee.bacademy.vo.PagingVO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -24,9 +28,14 @@ public class NoticeController {
 
 	// 공지사항 조회
 	@GetMapping("/noticeList")
-	public String noticeList(Model model) {
+	public String noticeList(Model model, @ModelAttribute("paging") PagingVO paging) {
+		
+		int totalRow = noticeMapper.getTotalRow(paging);
+		
+		paging.setTotalRow(totalRow);
+		paging.pageSetting();
+		
 		List<NoticeVO> noticeList = noticeMapper.getNotice();
-		System.out.println("noticeList:" + noticeList);
 		model.addAttribute("noticeList", noticeList);
 		return "noticeList";
 	}
@@ -40,13 +49,10 @@ public class NoticeController {
 	// 공지사항 등록 액션
 	@PostMapping("/addNotice")
 	public String addNoticeAction(NoticeVO vo) {
-		
-		System.out.println("vo:" + vo);
-		
+
 		String result = "";
 
 		int addRow = noticeMapper.addNotice(vo);
-		System.out.println("addRow:" + addRow);
 
 		if (addRow == 1) {
 			result = "redirect:noticeList";
@@ -60,7 +66,6 @@ public class NoticeController {
 	@GetMapping("/noticeOne")
 	public String noticeDetail(@RequestParam("noticeNo") Integer noticeNo, Model model) {
 		NoticeVO noticeOne = noticeMapper.getNoticeOne(noticeNo);
-		System.out.println("noticeOne:" + noticeOne);
 		model.addAttribute("noticeOne", noticeOne);
 		return "noticeOne";
 	}
@@ -69,22 +74,21 @@ public class NoticeController {
 	@GetMapping("/modifyNoticeForm")
 	public String ModifynoticeForm(@RequestParam("noticeNo") Integer noticeNo, Model model) {
 		NoticeVO noticeVO = noticeMapper.getNoticeOne(noticeNo);
-		System.out.println("noticeVO:" + noticeVO);
 		model.addAttribute("noticeVO", noticeVO);
 		return "noticeOneModifyForm";
 	}
 
 	// 공지사항 수정
 	@PostMapping("/modifyNotice")
-	public String modifyNoticeAction(NoticeVO notice) { 
+	public String modifyNoticeAction(NoticeVO notice) {
 		noticeMapper.modifyNotice(notice);
 		return "redirect:noticeList";
 	}
 
 	// 공지사항 삭제
 	@GetMapping("/deleteNotice")
-	public String deleteNoticeAction (@RequestParam("noticeNo") Integer noticeNo) { 
-		noticeMapper.deleteNotice(noticeNo); //삭제		
+	public String deleteNoticeAction(@RequestParam("noticeNo") Integer noticeNo) {
+		noticeMapper.deleteNotice(noticeNo); // 삭제
 		return "redirect:noticeList";
-	}	
+	}
 }
