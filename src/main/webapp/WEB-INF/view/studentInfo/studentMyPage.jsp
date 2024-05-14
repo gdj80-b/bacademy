@@ -103,22 +103,35 @@ html, body {
       <jsp:include page="../include/studentSideBar.jsp"/>
     </div>
     <section>
+
     	<div class="col-md-10 area1">
 			<div class="panel panel-default">
-			    <div class="panel-heading">공지사항</div>
+			    <div class="panel-heading">내 정보</div>
 			    <div class="panel-body">
 			       <table class="table table-bordered table-hover">
-			          <tr>
-			            <td>?</td>
-			            <td>?</td>
-			          </tr>
-			           <tr>
-			          	<td></td>
-			            <td></td>			           
-			           </tr>			          
+					<tr>
+						<td>이름</td>
+						<td>${student.name}</td>
+					</tr>
+					<tr>
+						 <td>성별</td>
+						 <td>${student.gender}</td>
+					</tr>
+						<td>생년월일</td>
+						<td>${student.birth}</td>
+					</tr>
+					<tr>
+						<td>이메일</td>
+						<td>${student.email}</td>
+					</tr>
+					<tr>
+						<td>캐쉬</td>
+						<td>${student.myCash}</td>
+					</tr>			          
 			       </table>    
 			    </div>
 			 </div>	
+			
     	</div>
     </section>
   </div>
@@ -129,6 +142,13 @@ html, body {
 			<div class="panel panel-default">
 			    <div class="panel-heading flex-container">
 			    	<span>수강중인 강의 리스트</span>
+					<select  id="lectureStatusSelect" class="form-select form-select-sm" 
+							aria-label=".form-select-sm example" onchange="handleSelectChange(this.value)">
+					  <option selected>Open this select menu</option>
+					  <option value="수강대기">수강대기</option>
+					  <option value="수강중">수강중</option>
+					  <option value="수강완료">수강완료</option>
+					</select>
 			    </div>
 			    <div class="panel-body">
 			       <table class="table table-bordered table-hover">
@@ -141,7 +161,7 @@ html, body {
 			          </tr>
 			          <c:forEach var="lecture" items="${lectureList}">
 			           <tr>
-			            <td><a href="lectureOne?lectureNo=${lecture.lectureNo}">${lecture.lectureName}</a></td>
+			            <td><a href="lectureOne?idx=${lecture.lectureNo}">${lecture.lectureName}</a></td>
 			            <td>${lecture.startDate} ~ ${lecture.endDate}</td>
 			            <td>${lecture.lectureDay}</td>
 			            <td>${lecture.lecturePrice}</td>

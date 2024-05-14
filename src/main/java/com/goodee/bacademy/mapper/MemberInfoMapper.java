@@ -10,7 +10,7 @@ import com.goodee.bacademy.vo.LectureVO;
 @Mapper
 public interface MemberInfoMapper {
 	List<LectureVO> getMyLectureList(String id);
-	List<LectureVO> getCurrentLectureList(String id);
+	List<LectureVO> getCurrentLectureList(Map<String, String> lectureInfo);
 	Map<String, Object> getEmpOne(String id);
 	
 }
