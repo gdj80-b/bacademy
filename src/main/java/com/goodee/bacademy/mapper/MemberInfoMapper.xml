@@ -30,9 +30,9 @@
 			, c.lecture_day AS lectureDay
 			, c.lecture_price AS lecturePrice
 			, CASE
-				 WHEN NOW() &gt; c.end_date THEN '강의완료'
-				 WHEN NOW() &lt; c.start_date THEN '강의대기'
-				ELSE '강의중' END AS 'lectureStatus'  
+				 WHEN NOW() &gt; c.end_date THEN '수강완료'
+				 WHEN NOW() &lt; c.start_date THEN '수강대기'
+				ELSE '수강중' END AS 'lectureStatus'  
 		FROM student a
 			JOIN application b ON a.id = b.id
 			JOIN lecture c ON b.lecture_no = c.lecture_no

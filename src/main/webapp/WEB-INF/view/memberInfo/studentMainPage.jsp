@@ -92,6 +92,9 @@ html, body {
    align-items: center;
    justify-content: space-between;
 }
+.panel.panel-default {
+  text-align: center;
+}
 </style>
 </head>
 <body>
@@ -149,13 +152,43 @@ html, body {
 			           </tr>
 			          </c:forEach>
 			       </table>    
-			    </div>
+			    
+			    <nav aria-label="Page navigation example">
+				  <ul class="pagination justify-content-center">
+				  	<c:if test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
+				  	</c:if>
+				  	
+				  	<c:if test="${paging.lastPage == 1}">
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+				  	</c:if>
+				  	
+				  	<c:if test="${paging.currentPage == 1}">
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
+				  	</c:if>
+				  	
+				  	<c:if test="${paging.currentPage == paging.lastPage}">
+				  		<li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+				  	</c:if>
+				  </ul>
+				</nav>
+				</div>
 			 	<div class="panel-footer">Bacademy</div>
-			 </div>	
+			 </div>
+			 	
     	</div>
     </section>
   </div>
 </div>
+
 	<!-- 실패 메세지를 출력(modal) -->
 	<div id="myMessage" class="modal fade" role="dialog" >
 	  <div class="modal-dialog">	

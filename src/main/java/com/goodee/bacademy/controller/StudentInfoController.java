@@ -23,7 +23,7 @@ public class StudentInfoController {
 	private MemberInfoMapper memberInfoMapper; //  mapper bean 의존성 주입
 	
 	@GetMapping("/studentMyPage")
-	public String studentMainPage(@RequestParam(name="lectureStatus", defaultValue = "") String lectureStatus, HttpSession session, RedirectAttributes rattr, Model model) {
+	public String studentMainPage(@RequestParam(value = "lectureStatus", required = false) String lectureStatus, HttpSession session, RedirectAttributes rattr, Model model) {
 		// 세션 로그인 여부 확인
 		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");
 		if (loginInfo == null) {

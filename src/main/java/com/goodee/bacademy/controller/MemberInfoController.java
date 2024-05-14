@@ -9,11 +9,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.goodee.bacademy.mapper.LectureMapper;
 import com.goodee.bacademy.mapper.MemberInfoMapper;
 import com.goodee.bacademy.vo.LectureVO;
+import com.goodee.bacademy.vo.PagingVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -29,8 +32,11 @@ public class MemberInfoController {
 	@Autowired
 	private MemberInfoMapper memberInfoMapper; //  mapper bean 의존성 주입
 	
+	@Autowired
+	private LectureMapper lectureMapper;
+	
 	@GetMapping("/studentMainPage")
-	public String studentMainPage(@RequestParam(value = "lectureStatus", required = false) String lectureStatus, HttpSession session, RedirectAttributes rattr, Model model) {
+	public String studentMainPage(@ModelAttribute("paging") PagingVO paging,HttpSession session, RedirectAttributes rattr, Model model) {
 		// 세션 로그인 여부 확인
 		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");
 		if (loginInfo == null) {
@@ -38,15 +44,23 @@ public class MemberInfoController {
 			rattr.addFlashAttribute("msg", "로그인을 먼저 해주세요.");
 			return "redirect:/loginForm"; // 비로그인이면 로그인 url로 redirect
 		}
-		// studentMainPage에서 정렬기준 param
-		if (lectureStatus == null || lectureStatus.isBlank()) {
-			lectureStatus = "수강중";
+		// 첫 방문인지 체크해서 메시지 한 번만 표시
+		int visitCount = (int)session.getAttribute("visitCount");
+		if (visitCount  == 0) {
+			model.addAttribute("msgType", "로그인 성공 메시지");
+			model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+			visitCount++;
+			session.setAttribute("visitCount", visitCount);
 		}
-		loginInfo.put("lectureStatus", lectureStatus);
-		List<LectureVO> lectureList = memberInfoMapper.getCurrentLectureList(loginInfo);
+		
+		int totalRow = lectureMapper.getTotalRow(paging);
+		
+		paging.setTotalRow(totalRow);
+		paging.pageSetting();
+		
+		List<LectureVO> lectureList = lectureMapper.getLectureList(paging);
 		model.addAttribute("lectureList", lectureList);
-		model.addAttribute("msgType", "로그인 성공 메시지");
-		model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+
 		
 		return "memberInfo/studentMainPage"; // 학생전용 메인 페이지로 이동
 	}
@@ -60,8 +74,14 @@ public class MemberInfoController {
 			rattr.addFlashAttribute("msg", "로그인을 먼저 해주세요.");
 			return "redirect:/loginForm"; // 비로그인이면 로그인 url로 redirect
 		}
-		model.addAttribute("msgType", "로그인 성공 메시지");
-		model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+		// 첫 방문인지 체크해서 메시지 한 번만 표시
+		int visitCount = (int)session.getAttribute("visitCount");
+		if (visitCount  == 0) {
+			model.addAttribute("msgType", "로그인 성공 메시지");
+			model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+			visitCount++;
+			session.setAttribute("visitCount", visitCount);
+		}
 		
 		return "memberInfo/teacherMainPage"; // 학생전용 메인 페이지로 이동
 	}
@@ -75,8 +95,14 @@ public class MemberInfoController {
 			rattr.addFlashAttribute("msg", "로그인을 먼저 해주세요.");
 			return "redirect:/loginForm"; // 비로그인이면 로그인 url로 redirect
 		}
-		model.addAttribute("msgType", "로그인 성공 메시지");
-		model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+		// 첫 방문인지 체크해서 메시지 한 번만 표시
+		int visitCount = (int)session.getAttribute("visitCount");
+		if (visitCount  == 0) {
+			model.addAttribute("msgType", "로그인 성공 메시지");
+			model.addAttribute("msg", loginInfo.get("name") + "님, 환영합니다.");
+			visitCount++;
+			session.setAttribute("visitCount", visitCount);
+		}
 		
 		return "memberInfo/adminMainPage"; // 학생전용 메인 페이지로 이동
 	}

@@ -67,6 +67,7 @@ public class LoginController {
 			
 			//세션 정보 저장 (아이디, 이름, 권한, 캐쉬)
 			session.setAttribute("loginInfo", loginInfo);
+			session.setAttribute("visitCount", 0);
 			log.info(yellow + "세션 정보 저장 완료" + reset);
 			// 사용자의 권한에 따른 분기 및 로그인 페이지의 URL을 유지하지 않도록 리다이렉트
 			if (loginGrade == 1) {

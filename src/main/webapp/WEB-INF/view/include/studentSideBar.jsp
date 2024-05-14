@@ -27,36 +27,33 @@
         @media (max-width: 1350px) {
     	.sidenav {
         display: none; /* 화면 크기가 작아지면 해당 영역을 숨김 */
-    }
+    	}
 }
     </style>
 
 </head>
 <body>
-
-
-        <!-- 사이드바 -->
-
+	  <!-- 사이드바 -->
       <nav class="sidenav">
+	<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
+        <img src="https://github.com/mdo.png" alt="" width="180" height="180" class="rounded-circle me-2">
       </a>
+       <c:set var="loginInfo" value="${sessionScope.loginInfo}" />
+      <p class="mt-2"><string>${loginInfo['name']}<string></p>
+      <input type="button" class="btn btn-primary btn-sm mt-2" value="사진 수정" />
+    </div>
+		<ul class="nav nav-pills nav-stacked">
+          <li><a href="#">공지사항</a></li>
+          <li><a href="#">강의목록</a></li>
+          <li><a href="#">직원목록</a></li>
+        </ul>
         <ul class="nav nav-pills nav-stacked">
           <li><a href="#">공지사항</a></li>
           <li><a href="#">강의목록</a></li>
           <li><a href="#">직원목록</a></li>
         </ul>
       </nav>
-   
       <!-- 사이드바 끝 -->
- 
-    
-  
-      <!-- 본문 -->
-      <!-- 본문 끝 -->
-   
-	
-
 </body>
 </html>
