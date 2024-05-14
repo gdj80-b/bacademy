@@ -26,11 +26,19 @@
 			${id}, #{lectureNo}, now()
 		)		
 	</insert>
-	
+	<!-- 위시리스트 삭제 -->
 	<delete id ="wishListDelete" parameterType="java.util.Map">
 		DELETE FROM wishlist
 		WHERE id = #{id} AND lecture_no = #{lectureNo}
 	 
 	</delete>
+	<!-- 수강 신청 -->
+	<insert id ="addApplication"  parameterType="java.util.Map">
+		INSERT INTO application(
+			lecture_no, id, state, date
+		) VALUE (
+			#{lectureNo}, #{id}, '수강', now()
+		)
+	</insert>
 </mapper>
 
