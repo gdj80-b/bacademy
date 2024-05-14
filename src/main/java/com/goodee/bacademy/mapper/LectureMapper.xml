@@ -27,6 +27,11 @@
 		)
 	</insert>
 	
+	<!-- 강의 등록 유효성 체크 -->
+	<select id="addLectureConfirm" parameterType="com.goodee.bacademy.vo.LectureVO">
+	
+	</select>
+	
 	<!-- 강의 목록 전체 개수 출력 -->
 	<select id="getTotalRow" parameterType="com.goodee.bacademy.vo.PagingVO" resultType="int">
 		SELECT
@@ -60,22 +65,6 @@
 				) a
 			) b
 		WHERE rnum between ${firstRow} AND ${lastRow}
-		
-		<!-- 
-		SELECT 
-			lecture_no lectureNo,
-			lecture_name lectureName,
-			id,
-			room_num roomNum,
-			start_date startDate,
-			end_date endDate,
-			lecture_time lectureTime,
-			lecture_day lectureDay,
-			lecture_price lecturePrice,
-			update_date updateDate,
-			create_date createDate
-		FROM lecture
-		-->
 	</select>
 	
 	<!-- 강의 상세 조회 -->
@@ -127,4 +116,14 @@
 			lecture_no = ${lectureNo}
 	</delete>
 	
+	<!-- 강의 등록 유효성 검사-->
+	<select id="lectureConfirm" parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
+		SELECT
+			*
+		FROM
+			lecture
+		WHERE
+			lecture_day = #{lectureDay} AND 
+		
+	</select>
 </mapper>

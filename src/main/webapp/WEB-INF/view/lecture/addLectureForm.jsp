@@ -1,78 +1,130 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>강의 등록 폼</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript">
+		// 강의 등록 정보 유효성 검사
+		
+		function lectureConfirm(){
+			
+			var lectureDay = ${"#lectureDay"}.val();
+			var id = ${"#id"}.val();
+			var lectureTime = $("#lectureTime").val();
+			
+			$.ajax({
+				url : "${contextPath}/lectureConfirm",
+				type : "GET",
+				data : {
+					"lecutureDay" : lectureDay,
+					"id" : id,
+					"lectureTime" : lectureTime
+				}
+				success : function(result){
+					
+					// result = 1 : 등록 가능한 강의, 0 : 등록할 수 없는 강의
+					if(result == 1){
+						$("#confirmMessage").html("등록 가능한 강의입니다.");
+						$("#confirmType").attr("class","modal-content panel-success");
+					}else{
+						$("#confirmMessage").html("등록할 수 없는 강의입니다.");
+						$("#confirmType").attr("calss","modal-content panel-warning");
+					}
+					$("#myModal").modal("error");
+				},
+				error : function(){ alert("error"); }
+			});
+		}
+	</script>
 </head>
 <body>
-	<h1>강의 등록</h1>
-	<form action="/lecture/addLecture" method="post">
-		<div>	
-			과목 : 
-			<select name="categoryNo">
-				<option value="1">HTML/CSS</option>
-				<option value="2">JAVA</option>
-				<option value="3">Spring</option>
-				<option value="4">JavaScript</option>
-				<option value="5">React</option>
-				<option value="6">Node.js</option>
-			</select>
-		</div>
-		<div>
-			강의명 : 
-			<input type="text" name="lectureName" required="required">
-		</div>
-		<div>
-			강사 : 
-			<select name="id">
-				<option value="blue">송은택</option>
-				<option value="green">장동준</option>
-				<option value="navy">류성완</option>
-				<option value="orange">김태균</option>
-				<option value="purple">윤혜정</option>
-				<option value="red">박민아</option>
-				<option value="teacher">강사</option>
-				<option value="white">최유리</option>
-				<option value="yellow">김예리</option>
-			</select>
-		</div>
-		<div>
-			시작일 : 
-			<input type="date" name="startDate" required="required">
-		</div>
-		<div>
-			종료일 : 
-			<input type="date" name="endDate" required="required">
-		</div>
-		<div>
-			강의요일 : 
-			<input type="radio" name="lectureDay" value="월수" required="required"> 월수
-			<input type="radio" name="lectureDay" value="화목" required="required"> 화목
-			<input type="radio" name="lectureDay" value="금" required="required"> 금
-		</div>
-		<div>
-			강의시간 : 
-			<input type="radio" name="lectureTime" value="9시-17시" required="required"> 9시-17시
-			<input type="radio" name="lectureTime" value="9시-18시" required="required"> 9시-18시
-		</div>
-		<div>
-			강의실 : 
-			<select name="roomNum">
-				<option value="101">101</option>
-				<option value="102">102</option>
-				<option value="103">103</option>
-				<option value="104">104</option>
-				<option value="105">105</option>
-				<option value="106">106</option>
-				<option value="107">107</option>
-			</select>
-		</div>
-		<div>
-			강의료 : 
-			<input type="number" name="lecturePrice" required="required">원
-		</div>
-		<button type="submit">등록하기</button>
-	</form>
+	<div class="container">
+		<h1>강의 등록</h1>
+		<form action="/lecture/addLecture" method="post">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>과목</th>
+					<td>
+						<select name="categoryNo">
+							<option value="1">HTML/CSS</option>
+							<option value="2">JAVA</option>
+							<option value="3">Spring</option>
+							<option value="4">JavaScript</option>
+							<option value="5">React</option>
+							<option value="6">Node.js</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>강의명</th>
+					<td><input type="text" name="lectureName" required="required" size="50px"></td>
+				</tr>
+				<tr>
+					<th>강사</th>
+					<td>
+						<select name="id">
+							<option value="blue">송은택</option>
+							<option value="green">장동준</option>
+							<option value="navy">류성완</option>
+							<option value="orange">김태균</option>
+							<option value="purple">윤혜정</option>
+							<option value="red">박민아</option>
+							<option value="teacher">강사</option>
+							<option value="white">최유리</option>
+							<option value="yellow">김예리</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>시작일</th>
+					<td><input type="date" name="startDate" required="required"></td>
+				</tr>
+				<tr>
+					<th>종료일</th>
+					<td><input type="date" name="endDate" required="required"></td>
+				</tr>
+				<tr>
+					<th>강의요일</th>
+					<td>
+						<input type="radio" name="lectureDay" value="월수" required="required"> 월수
+						<input type="radio" name="lectureDay" value="화목" required="required"> 화목
+						<input type="radio" name="lectureDay" value="금" required="required"> 금
+					</td>
+				</tr>
+				<tr>
+					<th>강의시간</th>
+					<td>
+						<input type="radio" name="lectureTime" value="9시-17시" required="required"> 9시-17시
+						<input type="radio" name="lectureTime" value="9시-18시" required="required"> 9시-18시
+					</td>
+				</tr>
+				<tr>
+					<th>강의실</th>
+					<td>
+						<select name="roomNum">
+							<option value="101">101</option>
+							<option value="102">102</option>
+							<option value="103">103</option>
+							<option value="104">104</option>
+							<option value="105">105</option>
+							<option value="106">106</option>
+							<option value="107">107</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<th>강의료</th>
+					<td><input type="number" name="lecturePrice" required="required">원</td>
+				</tr>
+			</table>
+			<button type="button" class="btn btn-primary" onclick="lectureConfirm()">등록확인</button>
+			<button type="submit" class="btn btn-primary" disabled="disabled">등록하기</button>
+		</form>
+	</div>
 </body>
 </html>
