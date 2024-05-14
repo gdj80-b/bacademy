@@ -16,8 +16,8 @@
 	<h1> 내 캐쉬 내역</h1>
 	<br>
 	<form action="cashCharge" method="post">
-		<input type="hidden" name="id" value="student" >
-		<input type="number" name="price">
+		<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>" >
+		<input type="number" name="cash">
 		<button type="submit"> 충전하기 </button>
 	 </form>	 
 	<hr>

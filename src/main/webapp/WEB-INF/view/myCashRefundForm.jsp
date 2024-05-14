@@ -29,8 +29,8 @@
 		<c:forEach var="vo" items="${myRefundList}">
 			<tr>
 				<td>${vo.state}</td>
-				<td>${vo.refund_cash}</td>
-				<td>${vo.request_date}</td>
+				<td>${vo.refundCash}</td>
+				<td>${vo.requestDate}</td>
 			</tr>
 		</c:forEach>
 	</table>

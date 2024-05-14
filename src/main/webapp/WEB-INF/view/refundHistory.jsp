@@ -23,17 +23,17 @@
 				<tr>
 					<td>${vo.id}</td>
 					<td>${vo.name}</td>
-					<td>${vo.request_date}</td>
-					<td>${vo.refund_cash}</td>
+					<td>${vo.requestDate}</td>
+					<td>${vo.refundCash}</td>
 					<td>${vo.state}</td>
 					<td>
 						<c:choose>
 							<c:when test="${vo.state eq '대기'}">
 								<form action="refundConfirm" method="post">
-									<input type="hidden" name="refund_no" value="${vo.refund_no}">
+									<input type="hidden" name="refundNo" value="${vo.refundNo}">
 									<input type="hidden" name="state" value="승인">
 									<input type="hidden" name="id" value="${vo.id}">
-									<input type="hidden" name="refund_cash" value="${vo.refund_cash}">
+									<input type="hidden" name="cash" value="${vo.refundCash}">
 									<button type="submit" class="btn btn-primary btn-sm">승인</button>
 								</form>
 							</c:when>
