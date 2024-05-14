@@ -8,12 +8,50 @@
 <title>강사등록 페이지</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+	//프로필 이미지 미리보기
+	$(document).ready(function() {
+		$("#fileInput").change(function() {
+			var file = this.files[0];
+			if (file) {
+				var reader = new FileReader();
+	            reader.onload = function(event){
+	                var img = new Image();
+	                img.src = event.target.result;
+	                img.onload = function(){
+	                    var canvas = document.createElement('canvas');
+	                    var ctx = canvas.getContext('2d');
+	                    var MAX_WIDTH = 400; // 원하는 최대 너비
+	                    var MAX_HEIGHT = 300; // 원하는 최대 높이
+	                    var width = img.width;
+	                    var height = img.height;
+	                    if (width > height) {
+	                        if (width > MAX_WIDTH) {
+	                            height *= MAX_WIDTH / width;
+	                            width = MAX_WIDTH;
+	                        }
+	                    } else {
+	                        if (height > MAX_HEIGHT) {
+	                            width *= MAX_HEIGHT / height;
+	                            height = MAX_HEIGHT;
+	                        }
+	                    }
+	                    canvas.width = width;
+	                    canvas.height = height;
+	                    ctx.drawImage(img, 0, 0, width, height);
+	                    $('#preview').html('<img src="' + canvas.toDataURL('image/jpeg') + '">');
+	                }
+	            }
+				reader.readAsDataURL(file);
+			}
+		});
+	});
+
 	// 아이디 중복 확인 검사
 	function idCheck() {
 		var id = $("#id").val();
 		$.ajax({
 			url : "checkId",
-			type : "get",
+			type : "GET",
 			data : {"id" : id},
 			success : function(result) {
 				if (result == 1) {
@@ -22,13 +60,13 @@
 					alert("사용할 수 없는 아이디입니다.");
 				}
 			},
-			error : function() {
-				alert("error");
+			error : function(e) {
+				alert(e);
 			}
 		});
 	}
 
-	// 비밀번호 확인 검사
+	// 비밀번호 유효성(확인) 검사
 	function passwordCheck() {
 		var pw = $("#pw").val();
 		var pwCheck = $("#pwCheck").val();
@@ -37,36 +75,56 @@
 		} else {
 			$("#passMessage").html("비밀번호가 일치합니다.");
 			$("#password").val(pw);
-		}   	
+		}
 	}
-
+	
+	// 연락처 유효성 검사
+	function oninputPhone(target) {
+    	target.value = target.value
+       	.replace(/[^0-9]/g, '')
+       	.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/g, "$1-$2-$3");
+	}
+	
+	// 생년월일 셀렉트 박스
 	$(document).ready(function() {
-		// 연도 셀렉트 박스 생성
-		for (var i = 1940; i <= 2022; i++) {
+		for (var i = 1970; i <= 2005; i++) { // 년 
 			$('#birth-year').append($('<option>', {
 				value: i, text: i
 			}));
 		}
-
-		// 월 셀렉트 박스 생성
-		for (var i = 1; i <= 12; i++) {
+	
+		for (var i = 1; i <= 12; i++) { // 월
 			$('#birth-month').append($('<option>', {
 				value: i, text: i
 			}));
 		}
-
-		// 일 셀렉트 박스 생성
-		for (var i = 1; i <= 31; i++) {
+	
+		for (var i = 1; i <= 31; i++) { // 일
 			$('#birth-day').append($('<option>', {
 				value: i, text: i
 			}));
 		}
-
-		var formData = {
-			'birth-year': $('#birth-year').val(),
-			'birth-month': $('#birth-month').val(),
-			'birth-day': $('#birth-day').val()
-		};
+	});
+	
+	// 데이터 전송
+	$("#addTeacherForm").submit(function(e) {
+		e.preventDefault();
+		
+		var formData = new FormData(this);
+		
+		$.ajax({
+			url : "addTeacher",
+			type : "POST",
+			data : fromData,
+			processData : false,
+			contentType : false,
+			success : function(response) {
+				alert(response);
+			},
+			error : function(e) {
+				alert(e);
+			}
+		});
 	});
 </script>
 </head>
@@ -75,13 +133,14 @@
 		<div class="card">
 			<div class="card-header">강사등록</div>
 			<div class="card-body">
-				<form action="addTeacher" method="post" enctype="multipart/form-data">
+				<form id="addTeacherForm" name="addTeacherForm" action="addTeacher" method="post" enctype="multipart/form-data">
 					<input type="hidden" id="password" name="password" value=""/>
 					<table class="table table-bordered table-hover">
 						<tr>
 							<td>프로필이미지</td>
-							<!-- <td colspan="2"><input type="file" name="profileImg"></td> -->
-							<td colspan="2"><input type="text" name="profileImg"></td>
+							<td colspan="2">
+								<div id="preview"></div><input id="fileInput" type="file" name="profileImg">
+							</td>
 						</tr>
 						<tr>
 							<td>아이디</td>
@@ -131,7 +190,7 @@
 							<td colspan="3">
 								<div class="d-md-flex justify-content-md-end" style="text-align: left;">
 									<span id="passMessage" style="color: red;"></span>
-									<button type="button" class="btn btn-primary btn-sm">등록</button>
+									<button type="submit" class="btn btn-primary btn-sm">등록</button>
 								</div>
 							</td>
 						</tr>

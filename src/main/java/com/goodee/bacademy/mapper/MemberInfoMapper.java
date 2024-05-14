@@ -9,4 +9,5 @@ import com.goodee.bacademy.vo.LectureVO;
 @Mapper
 public interface MemberInfoMapper {
 	List<LectureVO> getMyLectureList(String id);
+	
 }

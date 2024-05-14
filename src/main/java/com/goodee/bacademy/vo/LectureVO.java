@@ -19,8 +19,6 @@ public class LectureVO {
 	
 	// 강의상태 얻기 위한 임시 필드
 	private String lectureStatus;
-	
 	private String category;	// 과목명을 가져오기 위해 추가
-	
 	private String name;		// 강사 이름을 가져오기 위해 추가
 }
