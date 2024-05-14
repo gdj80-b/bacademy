@@ -1,7 +1,7 @@
 # Bacadaemy
 
 팀장 : 차성호<br>
-팀원 : 조인환, 김형호, 김준엽, 정건희
+팀원 : 조인환, 김형호, 김준엽, 정건희<br>
 인터페이스 설계서 : https://docs.google.com/spreadsheets/d/1c8wwZwVRwGY_Ql0Iq-0nM-f9BU-05d81oV9nwgHebEE/edit#gid=246686010
 ## 개발환경
 
