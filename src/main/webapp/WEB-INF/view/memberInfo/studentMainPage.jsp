@@ -131,7 +131,7 @@ html, body {
     	<div class="col-md-10 area1">
 			<div class="panel panel-default">
 			    <div class="panel-heading flex-container">
-			    	<span>수강중인 강의 리스트</span>
+			    	<span>수강 가능한 강의 리스트</span>
 			    </div>
 			    <div class="panel-body">
 			       <table class="table table-bordered table-hover">

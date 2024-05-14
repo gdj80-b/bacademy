@@ -16,7 +16,7 @@
     	}
     });
     function handleSelectChange(selectedValue) {
-    	window.location.href = "/studentMainPage?lectureStatus="+selectedValue;
+    	window.location.href = "/studentMyPage?lectureStatus="+selectedValue;
     }
  </script>
 <style>
@@ -142,13 +142,16 @@ html, body {
 			<div class="panel panel-default">
 			    <div class="panel-heading flex-container">
 			    	<span>수강중인 강의 리스트</span>
+			    	<c:if test="${empty lectureStatus}">
 					<select  id="lectureStatusSelect" class="form-select form-select-sm" 
 							aria-label=".form-select-sm example" onchange="handleSelectChange(this.value)">
-					  <option selected>Open this select menu</option>
+					  <option value="1" >강의 상태</option>
+					  <option value="전체" >전체</option>
 					  <option value="수강대기">수강대기</option>
 					  <option value="수강중">수강중</option>
 					  <option value="수강완료">수강완료</option>
 					</select>
+					</c:if>
 			    </div>
 			    <div class="panel-body">
 			       <table class="table table-bordered table-hover">
