@@ -2,6 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.bacademy.mapper.MemberInfoMapper">
 
+<<<<<<< HEAD
+<!-- SELECT lecture_no AS lectureNo, lecture_name AS lectureName
+	, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
+	, CASE
+	WHEN NOW() > end_date THEN '강의완료'
+	WHEN NOW() < start_date THEN '강의대기'
+	ELSE '강의중' END AS 'lectureStatus'
+	FROM lecture
+
+	WHERE id = #{id};
+</select> -->
+=======
 	<select id="getMyLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
 		SELECT lecture_no AS lectureNo, lecture_name AS lectureName
 				, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
@@ -19,6 +31,7 @@
 			JOIN teacher b ON a.id = b.id
 		WHERE b.id = #{id}
 	</select> 
+>>>>>>> 7ad737a50bde359e9df82be36f3b9b5f6a4009e4
 
 </mapper>
 
