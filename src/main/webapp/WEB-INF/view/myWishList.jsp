@@ -14,7 +14,7 @@
 
 <div class="container">
 	<h1>내 관심강의</h1>
-	<form id="selectWish" action ="/wishListDelete" method="post">
+	<form id="selectWish" action ="#" method="post">
 	<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
 	<table class="table table-bordered table-hover table-striped">
 		<tr>
@@ -40,7 +40,9 @@
 			</tr>
 		</c:forEach>
 	</table>
-	<button type="submit">찜 취소</button>
+	<button type="button" onclick="submitForm('attend')">수강하기</button>
+	
+	<button type="button" onclick="submitForm('delete')">찜 삭제</button>	
 	</form>
 </div>
 <script>
@@ -60,6 +62,16 @@
 	        alert("하나 이상의 아이템을 선택하세요.");
 	        return false;
 	    }
+	    
+	     // 액션에 따라 폼의 액션을 설정
+	    if (action === 'attend') {
+	        form.action = '/addApplication'; // 수강하기 페이지로 이동
+	    } else if (action === 'delete') {
+	        form.action = '/wishListDelete'; // 찜 삭제 페이지로 이동
+	    }
+		 // 폼 제출
+	    form.submit();
+	    
 	}
 </script>
 

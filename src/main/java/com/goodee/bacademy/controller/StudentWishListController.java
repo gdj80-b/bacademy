@@ -90,6 +90,36 @@ public class StudentWishListController {
 			
 		}
 	
-	
-	
+	// 수강 등록
+		@Autowired
+		private StudentWishListMapper addApplicationMapper;
+		
+		@PostMapping("/addApplication")
+		public String addApplication(
+					@RequestParam(name="id") String id,
+					@RequestParam(name="lectureNo", required=false) String[] lectureNo
+				)
+		{	
+			Map<String,Object>wishMap = new HashMap<>();
+			System.out.println(id + "<-id");			
+			
+			if (lectureNo != null) {
+		        for (String no : lectureNo) {
+		            System.out.println(no + "<-lectureNo");
+		            wishMap.put("id", id);
+		            wishMap.put("lectureNo", no);
+		            System.out.println(wishMap);
+		            System.out.println(wishMap.get("lectureNo"));
+		            int deleteWishResult = deleteWishMapper.wishListDelete(wishMap);	// 찜 리스트에서 삭제
+		            int addApplicationResult = addApplicationMapper.addApplication(wishMap); // 수강신청 리스트에 추가
+		        }
+		        System.out.println("수강신청성공");
+		        return "redirect:/myWishList";
+		        
+		    } else {
+		        System.out.println("선택된 항목이 없습니다");
+		        return "redirect:/myWishList";
+		    }						
+			
+		}
 }
