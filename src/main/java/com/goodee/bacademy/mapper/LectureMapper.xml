@@ -84,4 +84,12 @@
 		WHERE
 			lecture_no = ${lectureNo}
 	</update>
+	
+	<!-- 강의 삭제 -->
+	<delete id="deleteLecture" parameterType="com.goodee.bacademy.vo.LectureVO">
+		DELETE FROM
+			lecture
+		WHERE
+			lecture_no = ${lectureNo}
+	</delete>
 </mapper>

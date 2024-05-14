@@ -82,4 +82,22 @@ public class LectureController {
 		}
 	}
 	
+	// deleteLectureAction
+	@GetMapping("/deleteLecture")
+	public String deleteLecture(LectureVO lecture) {
+		
+		int lectureNo = lecture.getLectureNo();
+		
+		int deleteLectureRow = lectureMapper.deleteLecture(lecture);
+		
+		if(deleteLectureRow == 1) {
+			System.out.println("강의 삭제 성공");
+			return "redirect:/lectureList";
+		}else {
+			System.out.println("강의 삭제 실패");
+			return "redirect:/lectureOne?lectureNo=" + lectureNo;
+		}
+		
+	}
+	
 }

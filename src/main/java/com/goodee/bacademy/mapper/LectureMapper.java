@@ -20,4 +20,7 @@ public interface LectureMapper {
 
 	// 강의 수정
 	public int modifyLecture(LectureVO lecture);
+	
+	// 강의 삭제
+	public int deleteLecture(LectureVO lecture);
 }
