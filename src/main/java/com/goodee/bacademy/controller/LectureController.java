@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.goodee.bacademy.mapper.LectureMapper;
 import com.goodee.bacademy.vo.LectureVO;
@@ -105,6 +106,22 @@ public class LectureController {
 			System.out.println("강의 삭제 실패");
 			return "redirect:/lectureOne?lectureNo=" + lectureNo;
 		}
+	}
+	
+	// addLectureConfirm
+	@ResponseBody // ajax에 data 전달하는 용도로 String 반환
+	@GetMapping("/lectureConfirm")
+	public int lectureConfirm(
+			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
+			@RequestParam("lectureDay") String lectureDay, @RequestParam("id") String id,
+			@RequestParam("lectureTime") String lectureTime
+			) {
+		
+		LectureVO lecture = lectureMapper.lectureConfirm(lectureDay, id, lectureTime);
+		if(lecture != null) {
+			return 0;	// 이미 존재하는 강의 정보, 등록 불가
+		}
+		return 1;	// 등록 가능한 강의
 	}
 	
 }

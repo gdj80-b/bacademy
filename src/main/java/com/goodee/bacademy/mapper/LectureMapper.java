@@ -27,4 +27,7 @@ public interface LectureMapper {
 	
 	// 총 강의 목록 개수
 	public int getTotalRow(PagingVO paging);
+	
+	// 강의 등록 유효성 체크
+	public LectureVO lectureConfirm(String lectureDay, String id, String lectureTime);
 }
