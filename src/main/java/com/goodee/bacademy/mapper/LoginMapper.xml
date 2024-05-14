@@ -4,12 +4,32 @@
 
 	<!-- 로그인 쿼리  -->
 	<select id="validateMember" parameterType="com.goodee.bacademy.vo.MemberVO" resultType="java.util.Map">
-		SELECT a.id, a.pw, a.grade, b.name, b.my_cash as myCash 
-		FROM member a
-			join student b on a.id = b.id
-		<where>
-			a.id = #{id} AND a.pw = #{pw}
-		</where>
+		SELECT   
+		    m.id,
+		    m.grade,
+		    CASE
+		        WHEN m.grade = 1 THEN s.name
+		        WHEN m.grade = 2 THEN t.name
+		        WHEN m.grade = 3 THEN mg.name
+		    END AS name,
+		    CASE
+		        WHEN m.grade = 1 THEN s.my_cash
+		        WHEN m.grade = 2 THEN 0
+		        WHEN m.grade = 3 THEN 0
+		    END AS cash
+			FROM
+			    member m
+			LEFT JOIN
+			    student s ON m.id = s.id AND m.grade = 1
+			LEFT JOIN
+			    teacher t ON m.id = t.id AND m.grade = 2
+			LEFT JOIN
+			    manager mg ON m.id = mg.id AND m.grade = 3    
+			WHERE
+			    m.id = #{id}
+			    AND m.pw = #{pw};
 	</select>
+	
+
 	
 </mapper>

@@ -11,6 +11,7 @@ import com.goodee.bacademy.vo.LectureVO;
 @Mapper
 public interface MemberInfoMapper {
 	List<LectureVO> getMyLectureList(String id);
+	List<LectureVO> getCurrentLectureList(String id);
 	Map<String, Object> getEmpOne(String id);
 	
 	// 정건희 : 직원 전체 조회

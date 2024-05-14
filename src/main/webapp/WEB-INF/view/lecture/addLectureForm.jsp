@@ -3,10 +3,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>김형호</title>
+	<title>강의 등록 폼</title>
 </head>
 <body>
-	<h1>강의등록</h1>
+	<h1>강의 등록</h1>
 	<form action="/lecture/addLecture" method="post">
 		<div>	
 			과목 : 

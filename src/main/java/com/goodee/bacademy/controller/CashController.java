@@ -68,39 +68,13 @@ public class CashController {
 		int insertCashResult = cashMapper.insertCashHistory(refundMap);
 		
 		if (updateRefundResult == 1 && updateStudentResult == 1 && insertCashResult == 1) {
-			System.out.println("환불 요청 승인 성공");
+			System.out.println("환불 요청 대기 -> 승인 성공");
 			return "redirect:refundHistory";
 		} else {
-			System.out.println("환불 요청 승인 실패");
+			System.out.println("환불 요청 대기 -> 승인 실패");
 			return "redirect:refundHistory";
 		}
 	}	
-	
-	
-	// 학생 캐쉬 충전
-	@PostMapping("/cashCharge")
-	public String cashCharge(
-				@RequestParam(name="id") String id,
-				@RequestParam(name="cash") String cash
-			) 
-	{
-		Map<String,Object>cashMap = new HashMap<>();
-		cashMap.put("id", id);
-		cashMap.put("cash", cash);
-		int insertCashResult = cashMapper.insertCashHistoryToCharge(cashMap);
-				
-		int updateStudentResult = cashMapper.updateStudentCash(cashMap);
-		
-		if(insertCashResult == 1 && updateStudentResult == 1) {
-			System.out.println("캐쉬충전성공");
-			return "redirect:myCashList";
-		} else {
-			System.out.println("캐쉬충전실패");
-			return "redirect:myCashList";
-		}
-	}
-	
-	
 	
 	
 	

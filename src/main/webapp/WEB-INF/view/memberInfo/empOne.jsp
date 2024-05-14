@@ -95,21 +95,39 @@ html, body {
       <jsp:include page="../include/sideBar.jsp"/>
     </div>
     <section>
-    	<div class="col-md-5 area1">
-			area1
-			
+    	<div class="col-md-5 area1">   <!--추후 이미지 연동 및 교체 -->
+    <div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
+      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
+        <img src="https://github.com/mdo.png" alt="" width="180" height="180" class="rounded-circle me-2">
+      </a>
+      <p class="mt-2"><string>${empInfo.name}<string></p>
+      <input type="button" class="btn btn-primary btn-sm mt-2" value="사진 수정" />
+    </div>
     	</div>
     	<div class="col-md-5 area1">
-			area1
+			<div class="panel panel-default">
+			    <div class="panel-heading">강사 정보</div>
+			    <div class="panel-body">
+			       <table class="table table-bordered table-hover">
+			          <tr>
+			            <td>이메일</td>
+			            <td>${empInfo.email}</td>
+			          </tr>
+			           <tr>
+			          	<td>연락처</td>
+			            <td>${empInfo.phoneNum}</td>
+			           </tr>			          
+			       </table>
+			    </div>
+			 </div>	
 			
     	</div>
     </section>
   </div>
-    <div class="row">
+   <div class="row">
     <div class="col-md-2"></div>
     <section>
     	<div class="col-md-10 area1">
-			area2
 			<div class="panel panel-default">
 			    <div class="panel-heading">강의 목록</div>
 			    <div class="panel-body">
@@ -121,13 +139,13 @@ html, body {
 			            <td>강의료</td>
 			            <td>상태</td>
 			          </tr>
-			          <c:forEach var="vo" items="${list}">
+			          <c:forEach var="lecture" items="${lectureList}">
 			           <tr>
-			            <td><a href="lectureOne?idx=${vo.lectureNo}">${vo.lectureName}</a></td>
-			            <td>${vo.startDate} ~ ${vo.endDate}</td>
-			            <td>${vo.lectureDay}</td>
-			            <td>${vo.lecturePrice}</td>
-			            <td>${vo.lectureStatus}</td>
+			            <td><a href="lectureOne?lectureNo=${lecture.lectureNo}">${lecture.lectureName}</a></td>
+			            <td>${lecture.startDate} ~ ${lecture.endDate}</td>
+			            <td>${lecture.lectureDay}</td>
+			            <td>${lecture.lecturePrice}</td>
+			            <td>${lecture.lectureStatus}</td>
 			           </tr>
 			          </c:forEach>
 			       </table>    

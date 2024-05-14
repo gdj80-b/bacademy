@@ -67,25 +67,6 @@
 		)
 	</insert>
 
-	<!-- 조인환 : 학생 개인 환불내역 조회  -->
-	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
-		SELECT
-			r.refund_no AS refundNo,
-			r.id,
-			r.state,			
-			CASE 
-		        WHEN r.state = '대기' THEN r.request_date
-		        ELSE r.accept_date
-		   END AS date,			
-			r.refund_cash AS refundCash,
-			s.name
-		FROM refund r
-			JOIN student s
-			ON r.id = s.id			
-		WHERE r.id = #{id}
-		ORDER BY date DESC;	
-	</select>
-
 	
 
 </mapper>

@@ -29,7 +29,6 @@ public interface CashMapper {
 	// 조인환 : 학생 캐쉬 충전
 	public int insertCashHistoryToCharge(Map<String,Object> cashMap);
 	
-	// 조인환 : 학생 환불이력 조회
-	public List<RefundVO> getMyRefundHistory(String Id);
+	
 	
 }

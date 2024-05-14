@@ -9,4 +9,5 @@ import com.goodee.bacademy.vo.MemberVO;
 @Mapper
 public interface LoginMapper {
 	Map<String, Object> validateMember(MemberVO member);
+	
 }

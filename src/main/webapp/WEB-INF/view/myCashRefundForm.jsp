@@ -13,9 +13,9 @@
 </head>
 <body class="container">
 	<h2> 환불하기</h2>
-	<form action="">
+	<form action="refundRequest" method="post">
 		<input type="hidden" name="id" value="student">
-		<input type="number" name="price">
+		<input type="number" name="refundCash">
 		<button type="submit"> 환불하기 </button>
 	 </form>
 	 <hr>
@@ -30,7 +30,7 @@
 			<tr>
 				<td>${vo.state}</td>
 				<td>${vo.refundCash}</td>
-				<td>${vo.requestDate}</td>
+				<td>${vo.date}</td>
 			</tr>
 		</c:forEach>
 	</table>
