@@ -1,5 +1,5 @@
 package com.goodee.bacademy.controller;
 
-public class BoardController {
+public class MemberCheckController {
 
 }

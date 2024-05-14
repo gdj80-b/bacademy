@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.goodee.bacademy.mapper.CashMapper">
+
+	<!-- 수납이력 조회 sql문(mariadb) -->
+	<select id="getCashHistory" resultType="com.goodee.bacademy.vo.CashHistoryVO">
+		SELECT
+			ch.cash_no,
+			ch.id,
+			ch.cash,
+			ch.reason,
+			date_format(ch.create_date, '%Y-%m-%d') create_date,
+			(SELECT SUM(cash) FROM cash_history) balance,
+			s.name
+		FROM cash_history ch
+			JOIN student s
+			ON ch.id = s.id
+		ORDER BY ch.create_date DESC;
+	</select>
+	
+	<!-- 환불이력 조회 sql문(mariadb) -->
+	<select id="getRefundHistory" resultType="com.goodee.bacademy.vo.RefundVO">
+		SELECT
+			r.refund_no,
+			r.id,
+			r.state,
+			date_format(r.request_date, '%Y-%m-%d') request_date,
+			date_format(r.accept_date, '%Y-%m-%d') accept_date,
+			r.refund_cash,
+			s.name
+		FROM refund r
+			JOIN student s
+			ON r.id = s.id
+		ORDER BY r.accept_date DESC;
+	</select>
+	
+	<!-- 환불상태 변경(대기 > 승인) sql문(mariadb) -->
+	<update id="updateRefundState" parameterType="java.util.Map">
+		UPDATE refund
+		SET state = #{state}
+		WHERE refund_no = #{refund_no}
+	</update>
+	
+	<!-- 환불상태 변경(대기 > 승인)에 따른 학생 캐쉬 변경 sql문(mariadb) -->
+	<update id="updateStudentCash" parameterType="java.util.Map">
+		UPDATE student
+		SET my_cash = my_cash + #{refund_cash}
+		WHERE id = #{id}
+	</update>
+	
+	<!-- 캐시충전에 의한 수납이력 기록 sql문(mariadb) -->
+	<insert id="insertCashHistoryToCharge" parameterType="com.goodee.bacademy.vo.CashHistoryVO">
+		INSERT INTO cash_history (
+			id, cash, reason, create_date
+		) VALUE (
+			#{id}, #price}, '충전', now() 
+		)
+	</insert>
+	
+	<!-- 환불상태 변경(대기 > 승인)에 따른 수납이력 기록 sql문(mariadb) -->
+	<insert id="insertCashHistory" parameterType="java.util.Map">
+		INSERT INTO cash_history (
+			id, cash, reason, create_date
+		) VALUE (
+			#{id}, #{refund_cash}, '환불', now() 
+		)
+	</insert>
+
+	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
+		SELECT
+			r.refund_no,
+			r.id,
+			r.state,			
+			CASE 
+		        WHEN r.state = '대기' THEN r.request_date
+		        ELSE r.accept_date
+		    END AS request_date,			
+			r.refund_cash,
+			s.name
+		FROM refund r
+			JOIN student s
+			ON r.id = s.id			
+		WHERE r.id = #{id}
+		ORDER BY r.accept_date DESC;		
+	</select>
+
+	
+
+</mapper>

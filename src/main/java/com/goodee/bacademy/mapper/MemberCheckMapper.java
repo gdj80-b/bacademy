@@ -1,5 +1,5 @@
 package com.goodee.bacademy.mapper;
 
-public interface BoardMapper {
+public interface MemberCheckMapper {
 
 }

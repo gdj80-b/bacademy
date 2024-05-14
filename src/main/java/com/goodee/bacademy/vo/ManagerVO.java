@@ -1,5 +1,5 @@
 package com.goodee.bacademy.vo;
 
-public class NoticeVO {
+public class ManagerVO {
 
 }
