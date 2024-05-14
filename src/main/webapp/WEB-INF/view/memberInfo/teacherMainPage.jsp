@@ -92,16 +92,58 @@ html, body {
 <div class="container-fluid container-padding">
   <div class="row">
     <div class="col-md-2">
-      <jsp:include page="../include/sideBar.jsp"/>
+      <jsp:include page="../include/teacherSideBar.jsp"/>
     </div>
     <section>
-    	<div class="col-md-5 area1">
-			area1
+
+    	<div class="col-md-10 area1">
+			<div class="panel panel-default">
+			    <div class="panel-heading">공지사항</div>
+			    <div class="panel-body">
+			       <table class="table table-bordered table-hover">
+			          <tr>
+			            <td>이메일</td>
+			            <td>연락처</td>
+			          </tr>
+			           <tr>
+			          	<td></td>
+			            <td></td>			           
+			           </tr>			          
+			       </table>    
+			    </div>
+			 </div>	
+			
     	</div>
     </section>
+  </div>
+    <div class="row">
+    <div class="col-md-2"></div>
     <section>
-    	<div class="col-md-5 area2">
-			area2
+    	<div class="col-md-10 area1">
+			<div class="panel panel-default">
+			    <div class="panel-heading">진행중인 강의 리스트</div>
+			    <div class="panel-body">
+			       <table class="table table-bordered table-hover">
+			          <tr>
+			            <td>강의이름</td>
+			            <td>기간</td>
+			            <td>요일</td>
+			            <td>강의료</td>
+			            <td>상태</td>
+			          </tr>
+<%-- 			          <c:forEach var="lecture" items="${lectureList}">
+			           <tr>
+			            <td><a href="lectureOne?idx=${lecture.lectureNo}">${lecture.lectureName}</a></td>
+			            <td>${lecture.startDate} ~ ${lecture.endDate}</td>
+			            <td>${lecture.lectureDay}</td>
+			            <td>${lecture.lecturePrice}</td>
+			            <td>${lecture.lectureStatus}</td>
+			           </tr>
+			          </c:forEach> --%>
+			       </table>    
+			    </div>
+			 	<div class="panel-footer">Bacademy</div>
+			 </div>	
     	</div>
     </section>
   </div>

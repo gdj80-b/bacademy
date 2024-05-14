@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.bacademy.mapper.StudentPaymentMapper">
+	
+	<!-- 조인환 : 학생 개인 캐쉬 내역 조회 -->
 	<select id="getMyCashList" resultType="com.goodee.bacademy.vo.PaymentVO">		
 		SELECT 
 		    application.state  state,
@@ -28,6 +30,34 @@
 		WHERE id = #{id}
 		ORDER BY date DESC;
 	</select>
+	
+	<!-- 조인환 : 학생 개인 환불내역 조회  -->
+	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
+		SELECT
+			r.refund_no AS refundNo,
+			r.id,
+			r.state,			
+			CASE 
+		        WHEN r.state = '대기' THEN r.request_date
+		        ELSE r.accept_date
+		   END AS date,			
+			r.refund_cash AS refundCash,
+			s.name
+		FROM refund r
+			JOIN student s
+			ON r.id = s.id			
+		WHERE r.id = #{id}
+		ORDER BY date DESC;	
+	</select>
+	
+	<!-- 조인환 : 학생 환불 요청 -->
+	<insert id="insertRefundRequest" parameterType="java.util.Map">
+		INSERT INTO refund (
+			id, state, refund_cash, request_date
+		) VALUE (
+			#{id}, '대기', #{refundCash}, now() 
+		)
+	</insert>
 	
 	
 	

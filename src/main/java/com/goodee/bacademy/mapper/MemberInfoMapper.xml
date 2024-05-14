@@ -3,8 +3,13 @@
 <mapper namespace="com.goodee.bacademy.mapper.MemberInfoMapper">
 
 	<select id="getMyLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
-		SELECT lecture_no AS lectureNo, lecture_name AS lectureName
-				, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
+		SELECT 
+			lecture_no AS lectureNo
+			, lecture_name AS lectureName
+			, start_date AS startDate
+			, end_date AS endDate
+			, lecture_day AS lectureDay
+			, lecture_price AS lecturePrice
 			, CASE
 			 WHEN NOW() &gt; end_date THEN '강의완료'
 			 WHEN NOW() &lt; start_date THEN '강의대기'
@@ -13,12 +18,32 @@
 		WHERE id = #{id};
 	</select>
 	
-	<select id="getEmpOne" parameterType = "String" resultType = "java.util.Map">
-		SELECT b.id, b.name, b.email, b.profile_img, a.phone_num
+	<select id="getCurrentLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
+		SELECT 
+			c.lecture_no AS lectureNo
+			, c.lecture_name AS lectureName
+			, c.start_date AS StartDate
+			, c.end_date AS endDate
+			, c.lecture_day AS lectureDay
+			, c.lecture_price AS lecturePrice
+			, CASE
+				 WHEN NOW() &gt; c.end_date THEN '강의완료'
+				 WHEN NOW() &lt; c.start_date THEN '강의대기'
+				ELSE '강의중' END AS 'lectureStatus'  
+		FROM student a
+			JOIN application b ON a.id = b.id
+			JOIN lecture c ON b.lecture_no = c.lecture_no
+		WHERE a.id = #{id} AND NOW() BETWEEN c.start_date AND c.end_date
+	</select>
+	
+	<select id="getEmpOne" parameterType ="String" resultType ="java.util.Map">
+		SELECT b.id, b.name, b.email, b.profile_img AS profileImg, a.phone_num AS phoneNum
 		FROM member a
 			JOIN teacher b ON a.id = b.id
 		WHERE b.id = #{id}
 	</select> 
+	
+	
 
 
 </mapper>
