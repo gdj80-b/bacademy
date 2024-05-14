@@ -11,7 +11,7 @@
 	
 	<insert id="addBoard" parameterType="com.goodee.bacademy.vo.BoardVO">
 		INSERT INTO board (id, lecture_no, category, title, content, update_date, create_date)
-		VALUES ('student', 1, #{category}, #{title}, #{content}, NOW(), NOW())
+		VALUES (#{id}, 1, #{category}, #{title}, #{content}, NOW(), NOW())
 	</insert>
 	
 	<select id="getBoardOne" resultType="com.goodee.bacademy.vo.BoardVO">

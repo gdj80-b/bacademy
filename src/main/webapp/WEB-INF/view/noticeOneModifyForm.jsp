@@ -124,10 +124,6 @@
 								</td>
 							</tr>
 							<tr>
-								<td>작성자</td>
-								<td><input type="text" class="form-control" value="${noticeVO.writer}" readonly="readonly"></td>
-							</tr>
-							<tr>
 								<td colspan="2" align="center">
 									<button type="submit" class="btn btn-primary btn-sm">수정</button>
 									<button type="reset" class="btn btn-warning btn-sm">취소</button>

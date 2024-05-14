@@ -110,6 +110,9 @@
 					<form action="addBoard" method="post">
 						<table class="table">
 							<tr>
+								<input type="hidden" name="id" value="aaa">							
+							</tr>
+							<tr>
 								<select name="category">
 									<option value="과제">과제</option>
 									<option value="질문">질문</option>

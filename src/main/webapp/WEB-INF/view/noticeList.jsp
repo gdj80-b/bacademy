@@ -111,17 +111,15 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>작성자</th>
 							<th>작성일</th>
-							<th>조회수</th>
+							<th>작성자</th>
 						</tr>
 						<c:forEach var="notice" items="${noticeList}">
 							<tr>
 								<td>${notice.noticeNo}</td>
 								<td><a href="/noticeOne?noticeNo=${notice.noticeNo}">${notice.title}</a></td>
-								<td>${notice.writer}</td>
 								<td>${notice.createDate}</td>
-								<td>${notice.count}</td>
+								<td>${notice.id}</td>
 							</tr>
 						</c:forEach>
 					</table>

@@ -109,6 +109,7 @@
 				<div class="panel-body">
 					<form action="addNotice" method="post">
 						<table class="table">
+							<input type="hidden" name="id" value="admin"/>
 							<tr>
 								<td>제목</td>
 								<td><input type="text" name="title" class="form-control" /></td>

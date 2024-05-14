@@ -9,10 +9,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.NoticeMapper;
 import com.goodee.bacademy.vo.NoticeVO;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -26,7 +28,6 @@ public class NoticeController {
 	@GetMapping("/noticeList")
 	public String noticeList(Model model) {
 		List<NoticeVO> noticeList = noticeMapper.getNotice();
-		System.out.println("noticeList:" + noticeList);
 		model.addAttribute("noticeList", noticeList);
 		return "noticeList";
 	}
@@ -40,13 +41,10 @@ public class NoticeController {
 	// 공지사항 등록 액션
 	@PostMapping("/addNotice")
 	public String addNoticeAction(NoticeVO vo) {
-		
-		System.out.println("vo:" + vo);
-		
+
 		String result = "";
 
 		int addRow = noticeMapper.addNotice(vo);
-		System.out.println("addRow:" + addRow);
 
 		if (addRow == 1) {
 			result = "redirect:noticeList";
@@ -76,15 +74,15 @@ public class NoticeController {
 
 	// 공지사항 수정
 	@PostMapping("/modifyNotice")
-	public String modifyNoticeAction(NoticeVO notice) { 
+	public String modifyNoticeAction(NoticeVO notice) {
 		noticeMapper.modifyNotice(notice);
 		return "redirect:noticeList";
 	}
 
 	// 공지사항 삭제
 	@GetMapping("/deleteNotice")
-	public String deleteNoticeAction (@RequestParam("noticeNo") Integer noticeNo) { 
-		noticeMapper.deleteNotice(noticeNo); //삭제		
+	public String deleteNoticeAction(@RequestParam("noticeNo") Integer noticeNo) {
+		noticeMapper.deleteNotice(noticeNo); // 삭제
 		return "redirect:noticeList";
-	}	
+	}
 }

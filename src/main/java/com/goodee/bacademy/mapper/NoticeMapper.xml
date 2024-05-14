@@ -5,20 +5,20 @@
 
 	<!-- 공지사항 조회 -->
 	<select id="getNotice" resultType="com.goodee.bacademy.vo.NoticeVO">
-		SELECT notice_no noticeNo, title, content, writer, create_Date createDate, count 
+		SELECT id, notice_no noticeNo, title, content, create_Date createDate
 		FROM notice
 		ORDER BY notice_no DESC
 	</select>
 
 	<!-- 공지사항 등록 -->
 	<insert id="addNotice" parameterType="com.goodee.bacademy.vo.NoticeVO">
-		INSERT INTO notice (id, title, content, writer, update_date, create_date, count)
-		VALUES ('admin', #{title}, #{content}, '학생지원팀', NOW(), NOW(), 0)
+		INSERT INTO notice (id, title, content, update_date, create_date)
+		VALUES (#{id}, #{title}, #{content}, NOW(), NOW())
 	</insert>
 
 	<!-- 공지사항 상세보기 -->
 	<select id="getNoticeOne" resultType="com.goodee.bacademy.vo.NoticeVO">
-		SELECT notice_no noticeNo, title, content, writer, create_date createDate 
+		SELECT notice_no noticeNo, title, content, create_date createDate 
 		from notice 
 		where notice_no = #{noticeNo}
 	</select>
