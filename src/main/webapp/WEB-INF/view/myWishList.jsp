@@ -14,6 +14,8 @@
 
 <div class="container">
 	<h1>내 관심강의</h1>
+	<form id="selectWish" action ="/wishListDelete" method="post">
+	<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
 	<table class="table table-bordered table-hover table-striped">
 		<tr>
 			<th>강의명</th>
@@ -21,7 +23,8 @@
 			<th>강의실</th>			
 			<th>강의시간</th>			
 			<th>요일</th>			
-			<th>기간</th>			
+			<th>기간</th>
+			<th>선택</th>			
 		</tr>
 		<c:forEach var="vo" items="${myWishList}">
 			<tr>
@@ -31,10 +34,35 @@
 				<td>${vo.lectureTime}</td>
 				<td>${vo.lectureDay}</td>
 				<td>${vo.startDate} ~ ${vo.endDate}</td>
+				<td>				
+					<input type="checkbox"	name="lectureNo[]"  value="${vo.lectureNo}">			
+				</td>
 			</tr>
 		</c:forEach>
 	</table>
+	<button type="submit">찜 취소</button>
+	</form>
 </div>
+<script>
+	function submitForm(action) {
+	    var form = document.getElementById("selectWish");
+	    var lectureNo = form.querySelectorAll('input[name="lectureNo[]"]:checked');
+	 
+	    
+	    // 선택된 체크박스의 값을 배열에 저장
+	    var selectedValues = [];
+	    for (var i = 0; i < lectureNo.length; i++) {
+	        selectedValues.push(lectureNo[i].value);
+	    }
+	
+	    // 선택된 값이 없는 경우에는 폼 제출을 막음
+	     if (selectedValues.length === 0) {
+	        alert("하나 이상의 아이템을 선택하세요.");
+	        return false;
+	    }
+	}
+</script>
+
 </body>
 </html>
 

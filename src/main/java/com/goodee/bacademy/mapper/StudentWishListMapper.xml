@@ -26,5 +26,11 @@
 			${id}, #{lectureNo}, now()
 		)		
 	</insert>
+	
+	<delete id ="wishListDelete" parameterType="java.util.Map">
+		DELETE FROM wishlist
+		WHERE id = #{id} AND lecture_no = #{lectureNo}
+	 
+	</delete>
 </mapper>
 

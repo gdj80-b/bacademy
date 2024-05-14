@@ -10,4 +10,7 @@ public interface StudentWishListMapper {
 	public List<WishListVO> getMyWishList(String id);
 	
 	public int addWishList(Map<String,Object> wishMap);
+	
+	
+	public int wishListDelete(Map<String,Object>wishMap);
 }
