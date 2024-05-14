@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,39 +26,42 @@
          margin-left: 250px;
         }
         @media (max-width: 1350px) {
-    	.sidenav {
-        display: none; /* 화면 크기가 작아지면 해당 영역을 숨김 */
-    }
+	    	.sidenav {
+	        	display: none; /* 화면 크기가 작아지면 해당 영역을 숨김 */
+	    	}
+		}
+		.info {
+			display: flex; 
+			justify-content: center;
+			flex-direction: column; 
+			align-items: center;
+			text-align :center;
+		}
     </style>
 
 </head>
 <body>
-
-
-        <!-- 사이드바 -->
-
-      <nav class="sidenav">
-      <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-        <ul class="nav nav-pills nav-stacked">
-          <li><a href="#">공지사항</a></li>
-          <li><a href="#">강의목록</a></li>
-          <li><a href="#">직원목록</a></li>
-          <li><a href="#">학생목록</a></li>
-          <li><a href="#">수납관리</a></li>
-        </ul>
-      </nav>
-   
-      <!-- 사이드바 끝 -->
- 
-    
-  
-      <!-- 본문 -->
-      <!-- 본문 끝 -->
-   
-	
-
+	 <!-- 사이드바 -->
+	<nav class="sidenav">
+		<div class="info">
+			<c:set var="loginInfo" value="${sessionScope.loginInfo}" />
+			<h2 class="mt-2"><string>'${loginInfo['name']}'님<string></h2>
+			<h5>(학생)</h5>
+			<h5>현재 캐쉬 : <fmt:formatNumber type="number" value="${loginInfo['cash']}" pattern="#,###"/> 원</h5>
+			<ul class="nav nav-pills nav-stacked">
+	          <li><a href="studentMyPage">내 정보</a></li>
+	          <li><a href="#">내 캐쉬</a></li>
+	          <li><a href="#">관심강의</a></li>
+	        </ul>
+    	</div>
+    	<div class="info">
+	        <ul class="nav nav-pills nav-stacked">
+	          <li><a href="#">공지사항</a></li>
+	          <li><a href="#">강의목록</a></li>
+	          <li><a href="#">직원목록</a></li>
+	        </ul>
+    	</div>
+     </nav>
+     <!-- 사이드바 끝 -->
 </body>
 </html>
