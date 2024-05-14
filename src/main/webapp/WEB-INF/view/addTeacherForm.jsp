@@ -10,7 +10,7 @@
 <script type="text/javascript">
 	//프로필 이미지 미리보기
 	$(document).ready(function() {
-		$("#fileInput").change(function() {
+		$("#profileImg").change(function() {
 			var file = this.files[0];
 			if (file) {
 				var reader = new FileReader();
@@ -105,27 +105,6 @@
 			}));
 		}
 	});
-	
-	// 데이터 전송
-	$("#addTeacherForm").submit(function(e) {
-		e.preventDefault();
-		
-		var formData = new FormData(this);
-		
-		$.ajax({
-			url : "addTeacher",
-			type : "POST",
-			data : fromData,
-			processData : false,
-			contentType : false,
-			success : function(response) {
-				alert(response);
-			},
-			error : function(e) {
-				alert(e);
-			}
-		});
-	});
 </script>
 </head>
 <body>
@@ -139,7 +118,7 @@
 						<tr>
 							<td>프로필이미지</td>
 							<td colspan="2">
-								<div id="preview"></div><input id="fileInput" type="file" name="profileImg">
+								<div id="preview"></div><input id="profileImg" type="file" name="profileImg">
 							</td>
 						</tr>
 						<tr>
@@ -189,7 +168,7 @@
 						<tr>
 							<td colspan="3">
 								<div class="d-md-flex justify-content-md-end" style="text-align: left;">
-									<button type="submit" class="btn btn-primary btn-sm">등록</button>
+									<button type="submit" class="btn btn-primary btn-sm" onclick="imageUpload()">등록</button>
 								</div>
 							</td>
 						</tr>

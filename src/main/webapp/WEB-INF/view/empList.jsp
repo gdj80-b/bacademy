@@ -16,7 +16,7 @@
 						<div class="card-header">
 							<h5 class="card-title">강사</h5>
 						</div>
-						<img src="..." class="card-img-top" alt="...">
+						<img src="https://storage.googleapis.com/bacademy/${vo.profileImg}" class="card-img-top" alt="profile-img">
 						<div class="card-body">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">${vo.name}</li>
@@ -33,7 +33,7 @@
 						<div class="card-header">
 							<h5 class="card-title">관리자</h5>
 						</div>
-						<img src="..." class="card-img-top" alt="...">
+						<img src="https://storage.googleapis.com/bacademy/${vo.profileImg}" class="card-img-top" alt="profile-img">
 						<div class="card-body">
 							<ul class="list-group list-group-flush">
 								<li class="list-group-item">${vo.name}</li>

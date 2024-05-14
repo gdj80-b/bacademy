@@ -1,17 +1,18 @@
 package com.goodee.bacademy.controller;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.http.HttpHeaders;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,12 +21,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberJoinMapper;
 import com.goodee.bacademy.vo.MemberVO;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.BlobInfo;
+import com.google.cloud.storage.Storage;
+import com.google.cloud.storage.StorageOptions;
 
-import jakarta.servlet.http.HttpSession;
-import jakarta.servlet.http.Part;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Transactional
 @Controller
 public class MemberJoinController {
 
@@ -34,13 +39,14 @@ public class MemberJoinController {
 
 	@Autowired
 	MemberJoinMapper memberJoinMapper; // 사용할 mapper bean 의존성 주입받기
-
+	
+	// 차성호 : 회원가입 화면으로 이동
 	@GetMapping("/memberJoinForm")
 	public String memberJoinForm() {
-		return "memberJoin/joinForm"; // 회원가입 화면으로 이동
+		return "memberJoin/joinForm";
 	}
 	
-	@Transactional
+	// 차성호 : 회원가입
 	@PostMapping("/memberJoin")
 	public String memberJoinAction(@RequestParam Map<String, String> studntInfo, RedirectAttributes rattr) {
 		// mapper에 전달할 parameter 세팅
@@ -70,7 +76,8 @@ public class MemberJoinController {
 		return "redirect:loginForm"; // 로그인 화면으로 redirect
 	}
 
-	@ResponseBody // ajax에 data 전달하는 용도로 String 반환
+	// 차성호 : ajax에 data 전달하는 용도로 String 반환
+	@ResponseBody
 	@GetMapping("/checkId")
 	public int memRegisterCheck(@RequestParam("id") String id) {
 
@@ -81,42 +88,13 @@ public class MemberJoinController {
 		return 1; // 사용가능한 아이디 // 회원가입 처리
 	}
 
+	// 차성호 : 아이디 찾기 화면으로 이동
 	@GetMapping("/findIdForm")
 	public String findIdForm() {
-		return "memberJoin/findIdForm"; // 아이디 찾기 화면으로 이동
+		return "memberJoin/findIdForm";
 	}
 
-//	@PostMapping("/findId2") 
-//	public String findIdAction2(@RequestParam("name") String name
-//							, @RequestParam("phoneNum") String phoneNum
-//							, RedirectAttributes rattr) {
-//	    //requestParam 유효성 검사
-//		if (name == null || name.isBlank() || phoneNum == null || phoneNum.isBlank()) {
-//	        rattr.addFlashAttribute("msg", "이름과 전화번호를 모두 입력하세요.");
-//	        return "redirect:/findIdForm";
-//	    }
-//	    //requestParam 디버깅
-//	    log.debug(yellow + "[findIdAction] requestParam - name : {}, phoneNum : {}" + reset, name, phoneNum);
-//	    
-//	    //requestParam String -> Map 변환
-//	    Map<String, String> map = new HashMap<String, String>();
-//	    map.put("name", name);
-//	    map.put("phoneNum", phoneNum);
-//	    
-//	    // 입력정보와 일치하는 데이터 조회 및 검사
-//	    Map<String, String> findMap = memberJoinMapper.findId(map); 
-//		if (findMap == null) {
-//	        rattr.addFlashAttribute("msg", "일치하는 정보가 없습니다.");
-//	        return "redirect:/findIdForm"; // 아이디 존재하지 않으면 메시지와 함께 아이디찾기 화면으로 redirect
-//		}
-//		logMap(findMap);
-//		
-//	    // 찾은 아이디를 전달하기 위한 객체
-//	    String id = (String) findMap.get("id");
-//	    rattr.addFlashAttribute("findId", id); 
-//	    return "redirect:/loginForm"; // 아이디 찾으면 로그인 url로 redirect + 아이디입력란에 찾은 아이디값 표기해놓음
-//	}
-
+	// 차성호 : 아이디 찾기
 	@PostMapping("/findId")
 	public String findIdAction(@RequestParam Map<String, String> studentInfo, RedirectAttributes rattr) {
 
@@ -155,12 +133,13 @@ public class MemberJoinController {
 		return "redirect:/loginForm"; // 아이디 찾으면 로그인 url로 redirect + 아이디입력란에 찾은 아이디값 표기해놓음
 	}
 
+	// 차성호 : 비밀번호 찾기 화면
 	@GetMapping("/findPwForm")
 	public String findPwForm() {
-		return "memberJoin/findPwForm"; // 비밀번호 찾기 화면
+		return "memberJoin/findPwForm";
 	}
 
-	
+	// 차성호 : 비밀번호 찾기
 	@PostMapping("/findPw") 
 	public String findPwAction(@RequestParam Map<String, String> studentPwInfo, RedirectAttributes rattr) {
 		// requestParam 유효성 검사 
@@ -197,11 +176,13 @@ public class MemberJoinController {
 		return "redirect:/modifyPwForm"; // 비밀번호 찾으면 비밀번호 수정 url로 redirect (forward로 WEB-INF 안의 view를 response하는게 좋을수도)
 	}
 	
+	// 차성호 : 비밀번호 찾기 화면
 	@GetMapping("/modifyPwForm")
 	public String modifyPwForm() {
-		return "/memberJoin/modifyPwForm"; // 비밀번호 찾기 화면
+		return "/memberJoin/modifyPwForm";
 	}
 
+	// 차성호 : 비밀번호 수정
 	@PostMapping("/modifyPw")
 	public String modifyPwAction(@RequestParam Map<String, String> studentPwInfo, RedirectAttributes rattr) {
 		// requestParam 유효성 검사
@@ -238,21 +219,36 @@ public class MemberJoinController {
 		return "addTeacherForm";
 	}
 	
+	@Value("${spring.cloud.gcp.storage.credentials.location}")
+	private String keyFileName;
+	
+	@Value("${spring.cloud.gcp.storage.bucket}")
+	private String bucketName;
+	
 	// 정건희 : 강사등록 액션
-	@Transactional
+	// 구글 클라우드 프로필 이미지 업로드
 	@PostMapping("/addTeacher")
-	public String addTeacherAction(@RequestParam("profileImg") MultipartFile file, @RequestParam Map<String, String> teacherInfo) {
+	public String addTeacherAction(@RequestParam("profileImg") MultipartFile file, @RequestParam Map<String, String> teacherInfo) throws IOException {
 		
 		String birth = teacherInfo.get("birth-year") + "-" + teacherInfo.get("birth-month") + "-" + teacherInfo.get("birth-day");
-		String originalName = file.getOriginalFilename();
-		// String ext = originalName.substring(originalName.lastIndexOf("."));
-		// String txt = (UUID.randomUUID().toString()).replace("-", "");
-		String saveName = originalName; // (txt: 원본이름).(ext: 확장자)
+		String ext = file.getContentType();
+		String txt = (UUID.randomUUID().toString()).replace("-", "");
+		String saveName = txt + ext; // (txt: 원본이름).(ext: 확장자)
+		
+		// 구글 클라우드 이미지 업로드 코드		
+		InputStream keyFile = ResourceUtils.getURL(keyFileName).openStream();
+		Storage storage = StorageOptions.newBuilder()
+				.setCredentials(GoogleCredentials.fromStream(keyFile))
+				.build()
+				.getService();
+		
+		BlobInfo blobInfo = BlobInfo.newBuilder(bucketName, txt).setContentType(ext).build();
+		Blob blog = storage.create(blobInfo, file.getInputStream());
 		
 		System.out.println("teacherInfo : " + teacherInfo);
 		System.out.println("birth : " + birth);
 		System.out.println("profileImg : " + saveName);
-	    
+		
 		// 강사등록에서 넘어온 로그인 정보 저장
 		Map<String, String> insertMemberInfo = new HashMap<String, String>();
 		insertMemberInfo.put("id", teacherInfo.get("id"));
@@ -268,7 +264,7 @@ public class MemberJoinController {
 		insertTeacherInfo.put("gender", teacherInfo.get("gender"));
 		insertTeacherInfo.put("birth", birth);
 		insertTeacherInfo.put("email", teacherInfo.get("email"));
-		insertTeacherInfo.put("profileImg", saveName);
+		insertTeacherInfo.put("profileImg", txt);
 		
 		// HashMap에 담긴 내용을 Mapper로 전달
 		int addMemberResult = memberJoinMapper.addMember(insertMemberInfo);

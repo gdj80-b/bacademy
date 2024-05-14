@@ -82,9 +82,33 @@
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 		</dependency>
-  		
-	</dependencies>
+	
+		<!-- 구글 클라우드 -->
+		<dependency>
+    		<groupId>com.google.cloud</groupId>
+    		<artifactId>spring-cloud-gcp-starter</artifactId>
+		</dependency>
 
+		<dependency>
+    		<groupId>com.google.cloud</groupId>
+    		<artifactId>spring-cloud-gcp-starter-storage</artifactId>
+		</dependency>
+
+	</dependencies>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.cloud</groupId>
+				<artifactId>spring-cloud-gcp-dependencies</artifactId>
+				<version>5.2.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	
 	<build>
 		<plugins>
 			<plugin>
