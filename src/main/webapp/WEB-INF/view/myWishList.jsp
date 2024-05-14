@@ -67,7 +67,11 @@
 	    if (action === 'attend') {
 	        form.action = '/addApplication'; // 수강하기 페이지로 이동
 	    } else if (action === 'delete') {
-	        form.action = '/wishListDelete'; // 찜 삭제 페이지로 이동
+	    	if (confirm("정말로 삭제하시겠습니까?")) { // 삭제를 확인하는 다이얼로그 표시
+                form.action = '/wishListDelete'; // 찜 삭제 페이지로 이동
+                form.submit();
+                alert("삭제되었습니다."); // 삭제되었음을 알리는 알람 표시
+            }
 	    }
 		 // 폼 제출
 	    form.submit();
