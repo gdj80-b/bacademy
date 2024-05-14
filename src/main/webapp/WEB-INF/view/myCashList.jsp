@@ -21,7 +21,7 @@
 		<button type="submit"> 충전하기 </button>
 	 </form>	 
 	<hr>
-	<table class="table table-bordered table-hover">
+	<table class="table table-bordered table-hover table-striped">
 		<tr>
 			<th>종류</th>
 			<th>날짜</th>
