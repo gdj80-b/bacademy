@@ -24,7 +24,7 @@
 							</ul>
 						</div>
 						<div class="card-footer">
-							<a href="#" class="card-link">상세보기</a>
+							<a href="empOne?id=${vo.id}" class="card-link">상세보기</a>
 						</div>
 					</div>
 				</c:when>
@@ -41,7 +41,7 @@
 							</ul>
 						</div>
 						<div class="card-footer">
-							<a href="#" class="card-link">상세보기</a>
+							<a href="empOne?id=${vo.id}" class="card-link">상세보기</a>
 						</div>
 					</div>
 				</c:when>

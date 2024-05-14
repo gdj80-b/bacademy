@@ -77,28 +77,35 @@ public class MemberInfoController {
 		return "memberInfo/adminMainPage"; // 학생전용 메인 페이지로 이동
 	}
 	
-	@GetMapping("/empOne")//@RequestParam("id") String id
-	public String getEmpOne(Model model, RedirectAttributes rattr) {
-		String id = "blue"; // 임시 아이디 blue
-		if (id ==null || id.isBlank()) {
+	// 차성호, 정건희 : 직원 상세보기
+	// @RequestParam("id") String id
+	@GetMapping("/empOne")
+	public String getEmpOne(
+			@RequestParam(name = "id") String id,
+			Model model,
+			RedirectAttributes rattr
+			) {
+		// String id = "blue"; 임시 아이디 blue
+		if (id == null || id.isBlank()) {
 			rattr.addFlashAttribute("msgType","잘못된 접근");
 			rattr.addFlashAttribute("msg","ID 정보가 없습니다.");
 			return "redirect:/empList";
 		}
-		//
+		
 		List<LectureVO>	lectureList = memberInfoMapper.getMyLectureList(id);
-		Map<String, Object> empInfo = memberInfoMapper.getEmpOne(id);
+		Map<String, Object> empOneInfo = memberInfoMapper.getEmpOne(id);
+		
 		// mapperResult 디버깅
 		lectureList
 				.stream()
 				.forEach(value -> log.debug(yellow + "[getEmpOne] 강의명 : {}" + reset, value.getLectureName()));
-		empInfo
+		empOneInfo
 			.entrySet()
 			.stream()
 			.forEach(entry -> log.debug(yellow + "[getEmpOne] Key : {}, Value : {}" + reset, entry.getKey(), entry.getValue()));
-		//
+		
 		model.addAttribute("lectureList", lectureList);
-		model.addAttribute("empInfo", empInfo);
+		model.addAttribute("empOneInfo", empOneInfo);
 		return "memberInfo/empOne";
 	}
 	

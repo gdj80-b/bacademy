@@ -100,7 +100,7 @@ html, body {
       <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="https://github.com/mdo.png" alt="" width="180" height="180" class="rounded-circle me-2">
       </a>
-      <p class="mt-2"><string>${empInfo.name}<string></p>
+      <p class="mt-2"><string>${empOneInfo.name}<string></p>
       <input type="button" class="btn btn-primary btn-sm mt-2" value="사진 수정" />
     </div>
     	</div>
@@ -111,11 +111,11 @@ html, body {
 			       <table class="table table-bordered table-hover">
 			          <tr>
 			            <td>이메일</td>
-			            <td>${empInfo.email}</td>
+			            <td>${empOneInfo.email}</td>
 			          </tr>
 			           <tr>
 			          	<td>연락처</td>
-			            <td>${empInfo.phoneNum}</td>
+			            <td>${empOneInfo.phoneNum}</td>
 			           </tr>			          
 			       </table>
 			    </div>
