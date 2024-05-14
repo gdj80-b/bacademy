@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.goodee.bacademy.vo.NoticeVO;
+import com.goodee.bacademy.vo.PagingVO;
 
 @Mapper
 public interface NoticeMapper {
@@ -25,4 +26,6 @@ public interface NoticeMapper {
 	
 	// 공지사항 삭제
 	public void deleteNotice(Integer noticeNo);
+	
+	public int getTotalRow(PagingVO paging);
 }

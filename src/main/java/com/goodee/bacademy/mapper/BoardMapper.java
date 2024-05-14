@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.bacademy.vo.BoardVO;
+import com.goodee.bacademy.vo.CommentVO;
 import com.goodee.bacademy.vo.NoticeVO;
 
 @Mapper

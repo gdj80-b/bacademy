@@ -4,14 +4,14 @@
 	
 	<!-- 게시글 조회 -->
 	<select id="getBoard" resultType="com.goodee.bacademy.vo.BoardVO">
-		SELECT board_no boardNo, category, title, content, create_Date createDate 
+		SELECT board_no boardNo, category, title, create_date createDate
 		FROM board
 		ORDER BY board_no DESC
 	</select>
 	
 	<insert id="addBoard" parameterType="com.goodee.bacademy.vo.BoardVO">
-		INSERT INTO board (id, lecture_no, category, title, content, update_date, create_date)
-		VALUES (#{id}, 1, #{category}, #{title}, #{content}, NOW(), NOW())
+		INSERT INTO board (id, category, lecture_no lectureNo, title, content, update_date updateDate, create_date createDate)
+		VALUES (#{id}, #{category}, 1, #{title}, #{content}, NOW(), NOW())
 	</insert>
 	
 	<select id="getBoardOne" resultType="com.goodee.bacademy.vo.BoardVO">
@@ -29,5 +29,4 @@
 	<delete id="deleteBoard" parameterType="int">
      	delete from board where board_no = #{boardNo}
   	</delete>
-	
 </mapper>

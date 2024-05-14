@@ -111,19 +111,60 @@
 						<tr>
 							<th>번호</th>
 							<th>제목</th>
-							<th>작성일</th>
 							<th>작성자</th>
+							<th>작성일</th>
 						</tr>
 						<c:forEach var="notice" items="${noticeList}">
 							<tr>
 								<td>${notice.noticeNo}</td>
 								<td><a href="/noticeOne?noticeNo=${notice.noticeNo}">${notice.title}</a></td>
-								<td>${notice.createDate}</td>
 								<td>${notice.id}</td>
+								<td>${notice.createDate}</td>
 							</tr>
 						</c:forEach>
 					</table>
 					<a href="addNoticeForm" class="btn btn-primary btn-sm">글쓰기</a>
+					
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<c:if
+								test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=1">&laquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.lastPage}">&raquo;</a></li>
+							</c:if>
+
+							<c:if test="${paging.lastPage == 1}">
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+							</c:if>
+
+							<c:if test="${paging.currentPage == 1}">
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.lastPage}">&raquo;</a></li>
+							</c:if>
+
+							<c:if test="${paging.currentPage == paging.lastPage}">
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=1">&laquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/noticeList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+							</c:if>
+						</ul>
+					</nav>
 				</div>
 			</div>
 		</div>
