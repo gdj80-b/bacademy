@@ -20,9 +20,29 @@
 		WHERE b.id = #{id}
 	</select> 
 
-	<select id="getEmpList" parameterType="int">
+	<select id="getEmpList" parameterType="int" resultType="java.util.Map">
 		SELECT
-		FROM
+			CASE
+				WHEN mem.grade = 2 THEN t.id
+				WHEN mem.grade = 3 THEN m.id
+				END AS id,
+			grade,
+			CASE
+				WHEN mem.grade = 2 THEN t.name
+				WHEN mem.grade = 3 THEN m.name
+				END AS name,
+			CASE
+				WHEN mem.grade = 2 THEN t.email
+				WHEN mem.grade = 3 THEN m.email
+				END AS email,
+			CASE
+				WHEN mem.grade = 2 THEN t.profile_img
+				WHEN mem.grade = 3 THEN m.profile_img
+				END AS profileImg
+		FROM member mem
+			LEFT JOIN teacher t ON mem.id = t.id AND mem.grade = 2
+			LEFT JOIN manager m ON mem.id = m.id AND mem.grade = 3
+		WHERE mem.grade IN (2, 3)
 	</select>
 
 </mapper>

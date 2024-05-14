@@ -1,5 +1,6 @@
 package com.goodee.bacademy.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -7,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberInfoMapper;
 import com.goodee.bacademy.vo.LectureVO;
-import com.goodee.bacademy.vo.TeacherVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +52,10 @@ public class MemberInfoController {
 	
 	// 정건희 : 직원 전체 조회
 	@GetMapping("/empList")
-	public String getEmpList(@RequestParam("currentPage") int currentPage, Model model) {
-		List<TeacherVO> teacherInfo = memberInfoMapper.getEmpList(currentPage);
-		model.addAttribute("teacherInfo", teacherInfo);
+	public String getEmpList(
+		@RequestParam(name = "currentPage", value = "currentPage", defaultValue = "1") int currentPage, Model model) {
+		List<HashMap<String, Object>> empInfo = memberInfoMapper.getEmpList(currentPage);
+		model.addAttribute("empInfo", empInfo);
 		return "empList";
 	}
 }
