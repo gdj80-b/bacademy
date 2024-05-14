@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.bacademy.mapper.CashMapper">
 
-	<!-- 수납이력 조회 sql문(mariadb) -->
+	<!-- 정건희 : 수납이력 조회 sql문(mariadb) -->
 	<select id="getCashHistory" resultType="com.goodee.bacademy.vo.CashHistoryVO">
 		SELECT
 			ch.cash_no,
@@ -18,7 +18,7 @@
 		ORDER BY ch.create_date DESC;
 	</select>
 	
-	<!-- 환불이력 조회 sql문(mariadb) -->
+	<!-- 정건희 : 환불이력 조회 sql문(mariadb) -->
 	<select id="getRefundHistory" resultType="com.goodee.bacademy.vo.RefundVO">
 		SELECT
 			r.refund_no,
@@ -34,7 +34,7 @@
 		ORDER BY r.accept_date DESC;
 	</select>
 	
-	<!-- 환불상태 변경(대기 > 승인) sql문(mariadb) -->
+	<!-- 정건희 : 환불상태 변경(대기 > 승인) sql문(mariadb) -->
 	<update id="updateRefundState" parameterType="java.util.Map">
 		UPDATE refund
 		SET state = #{state}
@@ -48,16 +48,16 @@
 		WHERE id = #{id}
 	</update>
 	
-	<!-- 캐시충전에 의한 수납이력 기록 sql문(mariadb) -->
-	<insert id="insertCashHistoryToCharge" parameterType="com.goodee.bacademy.vo.CashHistoryVO">
+	<!--조인환: 캐시충전에 의한 수납이력 기록 sql문(mariadb) -->
+	<insert id="insertCashHistoryToCharge" parameterType="java.util.Map">
 		INSERT INTO cash_history (
 			id, cash, reason, create_date
 		) VALUE (
-			#{id}, #price}, '충전', now() 
+			#{id}, #{price}, '충전', now() 
 		)
 	</insert>
 	
-	<!-- 환불상태 변경(대기 > 승인)에 따른 수납이력 기록 sql문(mariadb) -->
+	<!-- 정건희 : 환불상태 변경(대기 > 승인)에 따른 수납이력 기록 sql문(mariadb) -->
 	<insert id="insertCashHistory" parameterType="java.util.Map">
 		INSERT INTO cash_history (
 			id, cash, reason, create_date
@@ -66,6 +66,7 @@
 		)
 	</insert>
 
+	<!-- 조인환 : 학생 개인 환불내역 조회  -->
 	<select id="getMyRefundHistory" parameterType="com.goodee.bacademy.vo.RefundVO">
 		SELECT
 			r.refund_no,

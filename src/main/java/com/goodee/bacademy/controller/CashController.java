@@ -53,8 +53,8 @@ public class CashController {
 	public String updateRefundAction(
 			@RequestParam(name = "refund_no") int refund_no, 
 			@RequestParam(name = "state") String state, 
-			@RequestParam(name="id") String id, 
-			@RequestParam(name="refund_cash") int refund_cash
+			@RequestParam(name = "id") String id, 
+			@RequestParam(name = "refund_cash") int refund_cash
 			) {
 		
 		Map<String, Object> refundMap = new HashMap<>();
@@ -75,4 +75,29 @@ public class CashController {
 			return "redirect:refundHistory";
 		}
 	}	
+	
+	
+	
+	@PostMapping("/cashCharge")
+	public String cashCharge(@RequestParam(name="id") String id,@RequestParam(name="price") String price) {
+		
+		Map<String,Object>cashMap = new HashMap<>();
+		cashMap.put("id", id);
+		cashMap.put("price", price);
+		int insertCashResult = cashMapper.insertCashHistoryToCharge(cashMap);
+		
+		if(insertCashResult==1) {
+			System.out.println("캐쉬충전성공");
+			return "redirect:myCashList";
+		} else {
+			System.out.println("캐쉬충전실패");
+			return "redirect:myCashList";
+		}
+	}
+	
+	
+	
+	
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.goodee.bacademy.controller;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberInfoMapper;
+import com.goodee.bacademy.vo.LectureVO;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -39,9 +42,12 @@ public class MemberInfoController {
 		return "memberInfo/studentMainPage"; // 학생전용 메인 페이지로 이동
 	}
 	
-	@GetMapping("/empOne/{id}")
-	public String getEmpOne(@PathVariable("id") String id) {
-		return "memberinfo/empOne";
+	@GetMapping("/empOne")//@RequestParam("id") String id
+	public String getEmpOne(Model model) {
+	
+		List<LectureVO>	lectureList = memberInfoMapper.getMyLectureList("blue"); // 임시 아이디 blue
+		model.addAttribute("list", lectureList);
+		return "memberInfo/empOne";
 	}
 	
 	@GetMapping("/empList")

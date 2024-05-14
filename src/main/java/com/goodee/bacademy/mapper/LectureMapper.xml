@@ -5,17 +5,17 @@
 	<!-- 강의 등록 -->
 	<insert id="addLecture" parameterType="com.goodee.bacademy.vo.LectureVO">
 		INSERT INTO lecture(
-			category,
+			category_no,
 			lecture_name,
 			id,
 			room_num,
 			start_date,
 			end_date,
 			lecture_time,
-			lecture_day
+			lecture_day,
 			lecture_price
 		) VALUES (
-			#{category},
+			#{categoryNo},
 			#{lectureName},
 			#{id},
 			#{roomNum},
@@ -41,12 +41,13 @@
 			lecture_price lecturePrice,
 			update_date updateDate,
 			create_date createDate
-		FROM lecture;
+		FROM lecture
 	</select>
 	
 	<!-- 강의 상세 조회 -->
 	<select id="getLectureOne" parameterType="int" resultType="com.goodee.bacademy.vo.LectureVO">
 		SELECT 
+			lecture_no lectureNo,
 			(SELECT c.category FROM lecture l LEFT JOIN category c
 			ON l.category_no = c.category_no
 			WHERE l.lecture_no = ${lectureNo}) category,
@@ -62,6 +63,25 @@
 			lecture_day lectureDay,
 			lecture_price lecturePrice
 		FROM lecture
-		WHERE lecture_no = ${lectureNo};
+		WHERE lecture_no = ${lectureNo}
 	</select>
+	
+	<!-- 강의 수정 -->
+	<update id="modifyLecture" parameterType="com.goodee.bacademy.vo.LectureVO">
+		UPDATE
+			lecture
+		SET
+			category_no = ${categoryNo},
+			lecture_name = #{lectureName},
+			id = #{id},
+			room_num = ${roomNum},
+			start_date = #{startDate},
+			end_date = #{endDate},
+			lecture_time = #{lectureTime},
+			lecture_day = #{lectureDay},
+			lecture_price = ${lecturePrice},
+			update_date = NOW()
+		WHERE
+			lecture_no = ${lectureNo}
+	</update>
 </mapper>
