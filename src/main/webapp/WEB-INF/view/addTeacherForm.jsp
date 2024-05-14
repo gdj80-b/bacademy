@@ -152,7 +152,7 @@
 							<td colspan="2"><input type="password" id="pw" name="pw" onkeyup="passwordCheck()" placeholder="비밀번호를 입력하세요."></td>
 						</tr>
 						<tr>
-							<td>비밀번호확인</td>
+							<td>비밀번호확인<div id="passMessage" style="color: red;"></div></td>
 							<td colspan="2"><input type="password" id="pwCheck" name="pwCheck" onkeyup="passwordCheck()" placeholder="비밀번호를 확인하세요."></td>
 						</tr>
 						<tr>
@@ -163,9 +163,9 @@
 							<td>성별</td>
 							<td colspan="2">
 								<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-									<input class="btn-check" type="radio" name="gender" id="male" autocomplete="off" value="남자" checked/>
+									<input class="btn-check" type="radio" name="gender" id="male" autocomplete="off" value="남" checked/>
 									<label class="btn btn-primary btn-sm" for="male">남자</label>
-									<input class="btn-check" type="radio" name="gender" id="female" autocomplete="off" value="여자"/>
+									<input class="btn-check" type="radio" name="gender" id="female" autocomplete="off" value="여"/>
 									<label class="btn btn-primary btn-sm" for="female">여자</label>
 								</div>
 							</td>
@@ -189,7 +189,6 @@
 						<tr>
 							<td colspan="3">
 								<div class="d-md-flex justify-content-md-end" style="text-align: left;">
-									<span id="passMessage" style="color: red;"></span>
 									<button type="submit" class="btn btn-primary btn-sm">등록</button>
 								</div>
 							</td>
