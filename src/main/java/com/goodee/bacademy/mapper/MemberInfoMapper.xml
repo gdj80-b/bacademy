@@ -11,6 +11,13 @@
 			ELSE '강의중' END AS 'lectureStatus'
 		FROM lecture
 		WHERE id = #{id};
+	</select>
+	
+	<select id="getEmpOne" parameterType = "String" resultType = "java.util.Map">
+		SELECT b.id, b.name, b.email, b.profile_img, a.phone_num
+		FROM member a
+			JOIN teacher b ON a.id = b.id
+		WHERE b.id = #{id}
 	</select> 
 
 </mapper>
