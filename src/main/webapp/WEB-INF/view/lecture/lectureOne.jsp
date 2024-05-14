@@ -51,7 +51,7 @@
 				</tr>
 			</table>
 			<br>
-			<a href="/addWishList?lectureNo=${vo.lectureNo}" class="btn btn-primary btn-sm">찜하기</a>
+			<a href="/addWishList?id='student'&lectureNo=${vo.lectureNo}" class="btn btn-primary btn-sm">찜하기</a>
 			<a href="/modifyLectureForm?lectureNo=${vo.lectureNo}" class="btn btn-primary btn-sm">강의수정</a>
 			<a href="/deleteLecture?lectureNo=${vo.lectureNo}" class="btn btn-primary btn-sm">강의삭제</a>
 			<a href="/lectureList" class="btn btn-primary btn-sm">목록으로</a>
