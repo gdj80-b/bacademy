@@ -20,78 +20,78 @@
     }
  </script>
 <style>
-* { padding: 0; margin: 0; }
-
-html, body {
-  height: 100%;
-  background: #ffffff;
-}
-
-#container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-#loginBox {
-  width: 300px;
-  text-align: center;
-  background-color: #ffffff;
-  transform: scale(1.2);
-}
-.input-form-box {
-  border: 0px solid #ff0000;
-  display: flex;
-  margin-bottom: 5px;
-}
-.input-form-box > span {
-  display: block;
-  text-align: left;
-  padding-top: 5px;
-  min-width: 65px;
-}
-.button-login-box {
-  margin: 10px 0;
-}
-#loginBoxTitle {
-  color:#000000;
-  font-weight: bold;
-  font-size: 32px;
-  text-transform: uppercase;
-  padding: 5px;
-  margin-bottom: 20px;
-  background: linear-gradient(to right, #270a09, #8ca6ce);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-#inputBox {
-  margin: 10px;
-}
-#inputBox button {
-  padding: 3px 5px;
-}
-.container-fluid {
-  padding-left: 0;
-}
-.col-md-2 {
-  width: 100%;
-  padding-left: 0;
-}
-.div {
-  display: flex;
-  flex-direction: row;
-}
-.div a {
-  text-align: center;
-  flex: 1;
-}
-.flex-container {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
-}
+	* { padding: 0; margin: 0; }
+	
+	html, body {
+	  height: 100%;
+	  background: #ffffff;
+	}
+	
+	#container {
+	  display: flex;
+	  flex-direction: row;
+	  justify-content: center;
+	  align-items: center;
+	  height: 100%;
+	}
+	
+	#loginBox {
+	  width: 300px;
+	  text-align: center;
+	  background-color: #ffffff;
+	  transform: scale(1.2);
+	}
+	.input-form-box {
+	  border: 0px solid #ff0000;
+	  display: flex;
+	  margin-bottom: 5px;
+	}
+	.input-form-box > span {
+	  display: block;
+	  text-align: left;
+	  padding-top: 5px;
+	  min-width: 65px;
+	}
+	.button-login-box {
+	  margin: 10px 0;
+	}
+	#loginBoxTitle {
+	  color:#000000;
+	  font-weight: bold;
+	  font-size: 32px;
+	  text-transform: uppercase;
+	  padding: 5px;
+	  margin-bottom: 20px;
+	  background: linear-gradient(to right, #270a09, #8ca6ce);
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	}
+	#inputBox {
+	  margin: 10px;
+	}
+	#inputBox button {
+	  padding: 3px 5px;
+	}
+	.container-fluid {
+	  padding-left: 0;
+	}
+	.col-md-2 {
+	  width: 100%;
+	  padding-left: 0;
+	}
+	.div {
+	  display: flex;
+	  flex-direction: row;
+	}
+	.div a {
+	  text-align: center;
+	  flex: 1;
+	}
+	.flex-container {
+	   display: flex;
+	   align-items: center;
+	   justify-content: space-between;
+	}
 </style>
 </head>
 <body>
@@ -141,8 +141,7 @@ html, body {
     	<div class="col-md-10 area1">
 			<div class="panel panel-default">
 			    <div class="panel-heading flex-container">
-			    	<span>수강중인 강의 리스트</span>
-			    	<c:if test="${empty lectureStatus}">
+			    	<span>${param.lectureStatus} 리스트</span>
 					<select  id="lectureStatusSelect" class="form-select form-select-sm" 
 							aria-label=".form-select-sm example" onchange="handleSelectChange(this.value)">
 					  <option value="1" >강의 상태</option>
@@ -151,7 +150,6 @@ html, body {
 					  <option value="수강중">수강중</option>
 					  <option value="수강완료">수강완료</option>
 					</select>
-					</c:if>
 			    </div>
 			    <div class="panel-body">
 			       <table class="table table-bordered table-hover">

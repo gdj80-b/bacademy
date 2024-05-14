@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberInfoMapper;
+import com.goodee.bacademy.mapper.StudentInfoMapper;
 import com.goodee.bacademy.vo.LectureVO;
+import com.goodee.bacademy.vo.StudentVO;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -24,6 +26,9 @@ public class StudentInfoController {
 	@Autowired
 	private MemberInfoMapper memberInfoMapper; //  mapper bean 의존성 주입
 	
+	@Autowired
+	private StudentInfoMapper studentInfoMapper; 
+	
 	@GetMapping("/studentMyPage")
 	public String studentMainPage(@RequestParam(value = "lectureStatus", required = false) String lectureStatus, HttpSession session, RedirectAttributes rattr, Model model) {
 		// 세션 로그인 여부 확인
@@ -33,12 +38,14 @@ public class StudentInfoController {
 			rattr.addFlashAttribute("msg", "로그인을 먼저 해주세요.");
 			return "redirect:/loginForm"; // 비로그인이면 로그인 url로 redirect
 		}
-		// studentMainPage 첫 방문시 setting
+		// default lectureStatus
 		if (lectureStatus == null || lectureStatus.isBlank()) {
 			lectureStatus = "수강중";
 		}
 		loginInfo.put("lectureStatus", lectureStatus);
 		List<LectureVO> lectureList = memberInfoMapper.getCurrentLectureList(loginInfo);
+		StudentVO student = studentInfoMapper.getStudentOne(loginInfo.get("id"));
+		model.addAttribute("student", student);
 		model.addAttribute("lectureList", lectureList);
 
 		return "studentInfo/studentMyPage"; // 학생전용 메인 페이지로 이동

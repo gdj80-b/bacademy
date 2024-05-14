@@ -1,5 +1,10 @@
 package com.goodee.bacademy.mapper;
 
-public interface StudentInfoMapper {
+import org.apache.ibatis.annotations.Mapper;
 
+import com.goodee.bacademy.vo.StudentVO;
+
+@Mapper
+public interface StudentInfoMapper {
+	StudentVO getStudentOne(String id);
 }
