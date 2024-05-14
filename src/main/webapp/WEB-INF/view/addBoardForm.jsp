@@ -104,35 +104,30 @@
 		<!-- 본문 -->
 		<div class="container">
 			<div class="panel panel-default">
-				<div class="panel-heading">공지사항</div>
+				<div class="panel-heading">게시판</div>
 				<!-- <div class="col-sm-9 page">  -->
 				<div class="panel-body">
-					<form action="modifyNotice" method="post">
-					  <input type="hidden" name="noticeNo" value="${noticeVO.noticeNo}">						
-						<table class="table table-bordered">
+					<form action="addBoard" method="post">
+						<table class="table">
+							<tr>
+								<select name="category">
+									<option value="과제">과제</option>
+									<option value="질문">질문</option>
+								</select>
+							</tr>
 							<tr>
 								<td>제목</td>
-								<td>
-								<input type="text" name="title" class="form-control"
-								value="${noticeVO.title}"/>
-								</td>
+								<td><input type="text" name="title" class="form-control" /></td>
 							</tr>
 							<tr>
 								<td>내용</td>
-								<td>
-								<textarea rows="7" class="form-control" name="content">${noticeVO.content}</textarea>
+								<td><textarea rows="7" class="form-control" name="content"></textarea>
 								</td>
 							</tr>
 							<tr>
-								<td>작성자</td>
-								<td><input type="text" class="form-control" value="${noticeVO.writer}" readonly="readonly"></td>
-							</tr>
-							<tr>
 								<td colspan="2" align="center">
-									<button type="submit" class="btn btn-primary btn-sm">수정</button>
+									<button type="submit" class="btn btn-success btn-sm">등록</button>
 									<button type="reset" class="btn btn-warning btn-sm">취소</button>
-									<button type="button" class="btn btn-info btn-sm"
-										onclick="location.href='/noticeList'">목록</button>
 								</td>
 							</tr>
 						</table>

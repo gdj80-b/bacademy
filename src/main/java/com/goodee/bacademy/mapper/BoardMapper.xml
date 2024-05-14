@@ -1,3 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.goodee.bacademy.mapper.BoardMapper"></mapper>
+<mapper namespace="com.goodee.bacademy.mapper.BoardMapper">
+	
+	<!-- 게시글 조회 -->
+	<select id="getBoard" resultType="com.goodee.bacademy.vo.BoardVO">
+		SELECT board_no boardNo, category, title, content, create_Date createDate 
+		FROM board
+		ORDER BY board_no DESC
+	</select>
+	
+	<insert id="addBoard" parameterType="com.goodee.bacademy.vo.BoardVO">
+		INSERT INTO board (id, lecture_no, category, title, content, update_date, create_date)
+		VALUES ('student', 1, #{category}, #{title}, #{content}, NOW(), NOW())
+	</insert>
+	
+	<select id="getBoardOne" resultType="com.goodee.bacademy.vo.BoardVO">
+		SELECT board_no boardNo, category, title, content, create_date createDate 
+		from board 
+		where board_no = #{boardNo}
+	</select>
+	
+	<update id="modifyBoard" parameterType="com.goodee.bacademy.vo.BoardVO">
+		UPDATE board
+    	SET title = #{title}, content = #{content}
+    	WHERE board_no = #{boardNo}
+	</update>
+
+	<delete id="deleteBoard" parameterType="int">
+     	delete from board where board_no = #{boardNo}
+  	</delete>
+	
+</mapper>

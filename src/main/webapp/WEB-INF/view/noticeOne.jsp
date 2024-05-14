@@ -94,6 +94,7 @@
 			</a>
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="${contextPath}/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/boardList">게시판</a></li>
 				<li><a href="#">강의목록</a></li>
 				<li><a href="#">직원목록</a></li>
 			</ul>
@@ -113,7 +114,7 @@
 						</tr>
 						<tr>
 							<td>내용</td>
-							<td>${fn:replace(noticeOne.content,newLineChar,"<br/>")}</td>
+							<td>${noticeOne.content}</td>
 						</tr>
 						<tr>
 							<td>작성자</td>
@@ -124,11 +125,10 @@
 							<td>${noticeOne.createDate}</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><a
-								href="/ModifynoticeForm/${noticeNo}"
+							<td colspan="2" align="center"><a href="/modifyNoticeForm?noticeNo=${noticeOne.noticeNo}"
 								class="btn btn-primary btn-sm">수정화면</a> 
-								<a href="/deleteNotice/${noticeNo}" class="btn btn-warning btn-sm">삭제</a>
-								<a href="/noticeList" class="btn btn-info btn-sm">목록</a></td>
+								<a href="deleteNotice?noticeNo=${noticeOne.noticeNo}" class="btn btn-warning btn-sm">삭제</a>
+								<a href="noticeList" class="btn btn-info btn-sm">목록</a></td>
 						</tr>
 					</table>
 				</div>

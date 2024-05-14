@@ -104,39 +104,26 @@
 		<!-- 본문 -->
 		<div class="container">
 			<div class="panel panel-default">
-				<div class="panel-heading">공지사항</div>
+				<div class="panel-heading">게시판</div>
 				<!-- <div class="col-sm-9 page">  -->
 				<div class="panel-body">
-					<form action="modifyNotice" method="post">
-					  <input type="hidden" name="noticeNo" value="${noticeVO.noticeNo}">						
-						<table class="table table-bordered">
+					<table class="table table-bordered table-hover">
+						<tr>
+							<th>번호</th>
+							<th>카테고리</th>
+							<th>제목</th>
+							<th>작성일</th>
+						</tr>
+						<c:forEach var="board" items="${boardList}">
 							<tr>
-								<td>제목</td>
-								<td>
-								<input type="text" name="title" class="form-control"
-								value="${noticeVO.title}"/>
-								</td>
+								<td>${board.boardNo}</td>
+								<td>${board.category}</td>
+								<td><a href="/boardOne?boardNo=${board.boardNo}">${board.title}</a></td>
+								<td>${board.createDate}</td>
 							</tr>
-							<tr>
-								<td>내용</td>
-								<td>
-								<textarea rows="7" class="form-control" name="content">${noticeVO.content}</textarea>
-								</td>
-							</tr>
-							<tr>
-								<td>작성자</td>
-								<td><input type="text" class="form-control" value="${noticeVO.writer}" readonly="readonly"></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center">
-									<button type="submit" class="btn btn-primary btn-sm">수정</button>
-									<button type="reset" class="btn btn-warning btn-sm">취소</button>
-									<button type="button" class="btn btn-info btn-sm"
-										onclick="location.href='/noticeList'">목록</button>
-								</td>
-							</tr>
-						</table>
-					</form>
+						</c:forEach>
+					</table>
+					<a href="addBoardForm" class="btn btn-primary btn-sm">글쓰기</a>
 				</div>
 			</div>
 		</div>

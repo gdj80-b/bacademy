@@ -94,6 +94,7 @@
 			</a>
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="${contextPath}/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/boardList">게시판</a></li>
 				<li><a href="#">강의목록</a></li>
 				<li><a href="#">직원목록</a></li>
 			</ul>

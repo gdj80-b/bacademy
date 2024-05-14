@@ -94,6 +94,7 @@
 			</a>
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="${contextPath}/noticeList">공지사항</a></li>
+				<li><a href="${contextPath}/boardList">게시판</a></li>
 				<li><a href="#">강의목록</a></li>
 				<li><a href="#">직원목록</a></li>
 			</ul>
@@ -117,7 +118,7 @@
 						<c:forEach var="notice" items="${noticeList}">
 							<tr>
 								<td>${notice.noticeNo}</td>
-								<td><a href="${contextPath}/noticeOne/${notice.noticeNo}">${notice.title}</a></td>
+								<td><a href="/noticeOne?noticeNo=${notice.noticeNo}">${notice.title}</a></td>
 								<td>${notice.writer}</td>
 								<td>${notice.createDate}</td>
 								<td>${notice.count}</td>

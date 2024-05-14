@@ -107,36 +107,30 @@
 				<div class="panel-heading">공지사항</div>
 				<!-- <div class="col-sm-9 page">  -->
 				<div class="panel-body">
-					<form action="modifyNotice" method="post">
-					  <input type="hidden" name="noticeNo" value="${noticeVO.noticeNo}">						
-						<table class="table table-bordered">
-							<tr>
-								<td>제목</td>
-								<td>
-								<input type="text" name="title" class="form-control"
-								value="${noticeVO.title}"/>
-								</td>
-							</tr>
-							<tr>
-								<td>내용</td>
-								<td>
-								<textarea rows="7" class="form-control" name="content">${noticeVO.content}</textarea>
-								</td>
-							</tr>
-							<tr>
-								<td>작성자</td>
-								<td><input type="text" class="form-control" value="${noticeVO.writer}" readonly="readonly"></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center">
-									<button type="submit" class="btn btn-primary btn-sm">수정</button>
-									<button type="reset" class="btn btn-warning btn-sm">취소</button>
-									<button type="button" class="btn btn-info btn-sm"
-										onclick="location.href='/noticeList'">목록</button>
-								</td>
-							</tr>
-						</table>
-					</form>
+					<table class="table">
+						<tr>
+							<td>카테고리</td>
+							<td>${boardOne.category}</td>
+						</tr>
+						<tr>
+							<td>제목</td>
+							<td>${boardOne.title}</td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td>${boardOne.content}</td>
+						</tr>
+						<tr>
+							<td>작성일</td>
+							<td>${boardOne.createDate}</td>
+						</tr>
+						<tr>
+							<td colspan="2" align="center"><a href="/modifyBoardForm?boardNo=${boardOne.boardNo}"
+								class="btn btn-primary btn-sm">수정화면</a> 
+								<a href="deleteBoard?boardNo=${boardOne.boardNo}" class="btn btn-warning btn-sm">삭제</a>
+								<a href="boardList" class="btn btn-info btn-sm">목록</a></td>
+						</tr>
+					</table>
 				</div>
 			</div>
 		</div>
