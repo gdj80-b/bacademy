@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.MemberInfoMapper;
@@ -39,8 +40,8 @@ public class MemberInfoController {
 		return "memberInfo/studentMainPage"; // 학생전용 메인 페이지로 이동
 	}
 	
-	@GetMapping("/empOne/{id}")
-	public String getEmpOne(@PathVariable("id") String id) {
+	@GetMapping("/empOne")
+	public String getEmpOne(@RequestParam("id") String id) {
 		return "memberinfo/empOne";
 	}
 	
