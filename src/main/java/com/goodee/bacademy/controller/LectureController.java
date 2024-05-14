@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.goodee.bacademy.mapper.LectureMapper;
 import com.goodee.bacademy.vo.LectureVO;
+import com.goodee.bacademy.vo.PagingVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,8 +45,14 @@ public class LectureController {
 	
 	// lectureList.jsp
 	@GetMapping("/lectureList")
-	public String lectureList(Model model) {
-		List<LectureVO> lectureList = lectureMapper.getLectureList();
+	public String lectureList(Model model, @ModelAttribute("paging")PagingVO paging) {
+		
+		int totalRow = lectureMapper.getTotalRow(paging);
+		
+		paging.setTotalRow(totalRow);
+		paging.pageSetting();
+		
+		List<LectureVO> lectureList = lectureMapper.getLectureList(paging);
 		model.addAttribute("lectureList", lectureList);
 		return "lecture/lectureList";
 	}
@@ -97,7 +105,6 @@ public class LectureController {
 			System.out.println("강의 삭제 실패");
 			return "redirect:/lectureOne?lectureNo=" + lectureNo;
 		}
-		
 	}
 	
 }

@@ -5,6 +5,7 @@ import java.util.*;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.bacademy.vo.LectureVO;
+import com.goodee.bacademy.vo.PagingVO;
 
 @Mapper
 public interface LectureMapper {
@@ -13,7 +14,7 @@ public interface LectureMapper {
 	public int addLecture(LectureVO lecture);
 	
 	// 강의 목록
-	public List<LectureVO> getLectureList();
+	public List<LectureVO> getLectureList(PagingVO paging);
 	
 	// 강의 상세
 	public List<LectureVO> getLectureOne(int lectureNo);
@@ -23,4 +24,7 @@ public interface LectureMapper {
 	
 	// 강의 삭제
 	public int deleteLecture(LectureVO lecture);
+	
+	// 총 강의 목록 개수
+	public int getTotalRow(PagingVO paging);
 }
