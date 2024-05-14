@@ -1,5 +1,15 @@
 package com.goodee.bacademy.vo;
 
-public class NoticeVO {
+import lombok.Data;
 
+@Data
+public class NoticeVO {
+	private int noticeNo;
+	private String id;
+	private String title;
+	private String content;
+	private String writer;
+	private String updateDate;
+	private String createDate;
+	private int count;
 }
