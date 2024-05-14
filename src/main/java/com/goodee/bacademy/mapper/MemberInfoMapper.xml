@@ -17,5 +17,7 @@
 		FROM lecture
 		WHERE id = #{id};
 	</select> 
+	
+
 </mapper>
 
