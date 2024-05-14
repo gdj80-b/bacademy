@@ -2,26 +2,16 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.goodee.bacademy.mapper.MemberInfoMapper">
 
-<<<<<<< HEAD
-<!-- 	<select id="getMyLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
-		SELECT lecture_no AS lectureNo, lecture_name AS lectureName
-=======
-	<select id="getMyLectureList"  parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
-		<!-- SELECT lecture_no AS lectureNo, lecture_name AS lectureName
->>>>>>> 9801787b698e3cc446a79b59d897f16464636837
-				, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
-			, CASE
-			 WHEN NOW() > end_date THEN '강의완료'
-			 WHEN NOW() < start_date THEN '강의대기'
-			ELSE '강의중' END AS 'lectureStatus'
-		FROM lecture
-<<<<<<< HEAD
-		WHERE id = #{id};
-	</select> -->
-=======
-		WHERE id = #{id}; -->
-	</select>
->>>>>>> 9801787b698e3cc446a79b59d897f16464636837
+<!-- SELECT lecture_no AS lectureNo, lecture_name AS lectureName
+	, start_date AS startDate, end_date AS endDate, lecture_day AS lectureDay, lecture_price AS lecturePrice
+	, CASE
+	WHEN NOW() > end_date THEN '강의완료'
+	WHEN NOW() < start_date THEN '강의대기'
+	ELSE '강의중' END AS 'lectureStatus'
+	FROM lecture
+
+	WHERE id = #{id};
+</select> -->
 
 </mapper>
 
