@@ -23,7 +23,7 @@
 				<tr>
 					<td>${vo.id}</td>
 					<td>${vo.name}</td>
-					<td>${vo.create_date}</td>
+					<td>${vo.createDate}</td>
 					<td>${vo.reason}</td>
 					<td>${vo.cash}</td>
 					<td>${vo.balance}</td>

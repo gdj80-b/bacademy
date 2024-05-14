@@ -4,10 +4,10 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>김형호</title>
+	<title>강의 수정 폼</title>
 </head>
 <body>
-	<h1>강의수정</h1>
+	<h1>강의 수정</h1>
 	<c:forEach var="vo" items="${lectureOneList}">
 	<form action="/lecture/modifyLecture?lectureNo=${vo.lectureNo}" method="post">
 		<div>	

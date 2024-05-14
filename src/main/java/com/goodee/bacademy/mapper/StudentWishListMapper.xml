@@ -6,7 +6,7 @@
 	<select id="getMyWishList" parameterType="com.goodee.bacademy.vo.WishListVO">
 		SELECT  b.lecture_no AS lectureNo, 
 				b.lecture_name AS lectureName, 
-				b.lecture_price AS lecture_price, 
+				b.lecture_price AS lecturePrice, 
 				b.room_num AS roomNum,
 				b.lecture_time AS lectureTime, 
 				b.lecture_day AS lectureDay, 
@@ -17,5 +17,14 @@
 		WHERE a.id = #{id}
 		ORDER BY a.create_date;
 	</select>
+	
+	<!-- 찜 추가 -->
+	<insert id = "addWishList" parameterType="java.util.Map">
+		INSERT INTO wishList (
+			id , lecture_no, create_date
+		) VALUE (
+			${id}, #{lectureNo}, now()
+		)		
+	</insert>
 </mapper>
 
