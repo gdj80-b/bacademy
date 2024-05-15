@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.goodee.bacademy.mapper.CashMapper;
 import com.goodee.bacademy.mapper.StudentWishListMapper;
 import com.goodee.bacademy.vo.WishListVO;
 
@@ -90,18 +91,22 @@ public class StudentWishListController {
 			
 		}
 	
-	// 수강 등록
+	// 수강 등록(결제)
 		@Autowired
 		private StudentWishListMapper addApplicationMapper;
-		
+		@Autowired
+		private CashMapper cashMapper;
 		@PostMapping("/addApplication")
 		public String addApplication(
 					@RequestParam(name="id") String id,
-					@RequestParam(name="lectureNo", required=false) String[] lectureNo
+					@RequestParam(name="lectureNo", required=false) String[] lectureNo,
+					@RequestParam(name="cash") String cash
 				)
 		{	
 			Map<String,Object>wishMap = new HashMap<>();
+			
 			System.out.println(id + "<-id");			
+			System.out.println(cash + "<-cash");			
 			
 			if (lectureNo != null) {
 		        for (String no : lectureNo) {
@@ -112,7 +117,12 @@ public class StudentWishListController {
 		            System.out.println(wishMap.get("lectureNo"));
 		            int deleteWishResult = deleteWishMapper.wishListDelete(wishMap);	// 찜 리스트에서 삭제
 		            int addApplicationResult = addApplicationMapper.addApplication(wishMap); // 수강신청 리스트에 추가
+		            
 		        }
+		        Map<String,Object>refundMap = new HashMap<>(); // 학생 캐쉬업데이트(차감)
+		        refundMap.put("id", id);
+		        refundMap.put("cash", cash);
+		        int updateStudentResult = cashMapper.updateStudentCash(refundMap);				
 		        System.out.println("수강신청성공");
 		        return "redirect:/myWishList";
 		        
