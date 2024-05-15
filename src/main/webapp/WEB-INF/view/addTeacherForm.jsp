@@ -108,6 +108,7 @@
 </script>
 </head>
 <body>
+	<jsp:include page="include/header.jsp"/>
 	<div class="container">
 		<div class="card">
 			<div class="card-header">강사등록</div>

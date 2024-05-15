@@ -8,6 +8,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 부트스트랩 5.3.3으로 수정  -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	<style>
     	.navbar-right.align {
         	display: flex;
@@ -15,7 +16,7 @@
        		align-items: center;
     	}
 	</style>
-	<title>사이드바</title>
+	<title>헤더</title>
 </head>
 <body>
 	<%-- 세션 스코프에 있는 "loginInfo" 속성을 가져와서 Map으로 형변환 --%>
@@ -39,17 +40,17 @@
 					</li>
 				</ul>
 			</div>
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<div class="d-flex justify-content-end">
+			<div class="d-flex justify-content-end">
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<c:choose>
 					<%-- 로그인 정보가 없을 때 --%>
 					<c:when test="${empty loginInfo or empty loginInfo['name']}">
 						<ul class="navbar-nav">
-							<li class="nav-item me-4">
-								<a href="${contextPath}/loginForm"><span class="glyphicon glyphicon-log-in"></span>&nbsp;&nbsp;로그인</a>
+							<li class="nav-item me-2">
+								<a class="nav-link active" href="${contextPath}/loginForm"><i class="bi bi-box-arrow-in-right"></i>&nbsp;&nbsp;로그인</a>
 							</li>
-							<li class="nav-item">
-								<a href="${contextPath}/memberJoinForm"><span class="glyphicon glyphicon-user"></span>&nbsp;&nbsp;회원가입</a>
+							<li class="nav-item me-2">
+								<a class="nav-link active" href="${contextPath}/memberJoinForm"><i class="bi bi-person-fill-add"></i>&nbsp;&nbsp;회원가입</a>
 							</li>            
 						</ul>
 					</c:when>
@@ -57,9 +58,9 @@
 					<c:otherwise>
 						<ul class="navbar-nav">
 							<%-- "loginInfo" Map에서 "name" 키에 해당하는 값을 가져와서 출력 --%>
-							<li class="nav-item me-4">${loginInfo['name']}님, 환영합니다</li>
-							<li class="nav-item">
-								<a href="${contextPath}/logout"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;로그아웃</a>
+							<li class="nav-item me-2">${loginInfo['name']}님, 환영합니다</li>
+							<li class="nav-item me-2">
+								<a class="nav-link active" href="${contextPath}/logout"><i class="bi bi-box-arrow-right"></i>&nbsp;&nbsp;로그아웃</a>
 							</li>
 						</ul>
 					</c:otherwise>
