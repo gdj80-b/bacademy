@@ -3,7 +3,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	session.setAttribute("loginId", "student");
-	session.setAttribute("cash", "12");
+	session.setAttribute("cash", "1000000");
+	int myCash = Integer.parseInt((String) session.getAttribute("cash"));
 %>
 <!DOCTYPE html>
 <html>
@@ -92,22 +93,23 @@
 
 	    // 액션에 따라 폼의 액션을 설정
 	    if (action === 'attend') {            
-	        var money = parseInt("${session.getAttribute("cash")}"); // 세션에서 잔액을 가져옴
+	    	var myCash = <%= myCash %>; // 세션에서 가져온 잔액
 	        var totalPriceText = document.getElementById("totalPrice").innerText;
 	        var totalPrice = parseInt(totalPriceText.replace(/[^\d]/g, ''));
 
-	        if (money < totalPrice) {
-	            alert("잔액이 부족합니다!"); // 잔액이 부족함을 알리는 알람표시
-	            return false; // 폼 제출을 막음
-	        } else {
-	            if (confirm("수강하시겠습니까?")) { // 수강을 확인하는 다이얼로그 표시
+            if (confirm("수강하시겠습니까?")) { // 수강을 확인하는 다이얼로그 표시
+            	 if (myCash < totalPrice) {
+     	            alert("잔액이 부족합니다!"); // 잔액이 부족함을 알리는 알람표시
+     	            return false; // 폼 제출을 막음
+     	        } else{            	
 	                form.action = '/addApplication'; // 수강하기 페이지로 이동
 	                form.submit();
 	                alert("수강에 성공하였습니다."); // 수강완료되었음을 알리는 알람표시
-	            } else {
-	                return false; // 취소를 클릭하면 폼 제출을 막음
-	            }
-	        }
+	        	}
+            } else {
+                return false; // 취소를 클릭하면 폼 제출을 막음
+            }
+	        
 	    } else if (action === 'delete') {
 	        if (confirm("정말로 삭제하시겠습니까?")) { // 삭제를 확인하는 다이얼로그 표시
 	            form.action = '/wishListDelete'; // 찜 삭제 페이지로 이동
