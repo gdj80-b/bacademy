@@ -80,7 +80,7 @@ public class MemberJoinController {
 	@ResponseBody
 	@GetMapping("/checkId")
 	public int memRegisterCheck(@RequestParam("id") String id) {
-
+		System.out.println("id : " + id);
 		MemberVO member = memberJoinMapper.checkId(id);
 		if (member != null || id.isBlank()) {
 			return 0; // 이미 존재하는 회원, 입력불가
