@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.session.RowBounds;
 
 import com.goodee.bacademy.vo.NoticeVO;
 import com.goodee.bacademy.vo.PagingVO;
@@ -13,7 +14,7 @@ import com.goodee.bacademy.vo.PagingVO;
 public interface NoticeMapper {
 
 	// 공지사항 조회
-	public List<NoticeVO> getNotice();
+	public List<NoticeVO> getNotice(PagingVO paging);
 	
 	// 공지사항 추가
 	int addNotice(NoticeVO vo);

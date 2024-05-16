@@ -123,8 +123,7 @@
 							</tr>
 						</c:forEach>
 					</table>
-					<a href="addNoticeForm" class="btn btn-primary btn-sm">글쓰기</a>
-					
+
 					<nav aria-label="Page navigation example">
 						<ul class="pagination justify-content-center">
 							<c:if
@@ -165,6 +164,8 @@
 							</c:if>
 						</ul>
 					</nav>
+
+					<a href="addNoticeForm" class="btn btn-primary btn-sm">글쓰기</a>
 				</div>
 			</div>
 		</div>

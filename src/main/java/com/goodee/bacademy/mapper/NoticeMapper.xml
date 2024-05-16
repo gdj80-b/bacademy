@@ -5,9 +5,21 @@
 
 	<!-- 공지사항 조회 -->
 	<select id="getNotice" resultType="com.goodee.bacademy.vo.NoticeVO">
+		SELECT
+			*
+		FROM (
+				SELECT
+				a.*,
+				@ROWNUM:=@ROWNUM+1 AS rnum
+			FROM (SELECT @ROWNUM:=0) R, (
+		
 		SELECT id, notice_no noticeNo, title, content, create_Date createDate
 		FROM notice
 		ORDER BY notice_no DESC
+			) a
+		) b
+		WHERE rnum between ${firstRow} AND ${lastRow}
+		
 	</select>
 
 	<select id="getTotalRow" parameterType="com.goodee.bacademy.vo.PagingVO" resultType="int">

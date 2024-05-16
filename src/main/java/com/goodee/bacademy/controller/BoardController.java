@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -15,6 +16,7 @@ import com.goodee.bacademy.mapper.CommentMapper;
 import com.goodee.bacademy.vo.BoardVO;
 import com.goodee.bacademy.vo.CommentVO;
 import com.goodee.bacademy.vo.NoticeVO;
+import com.goodee.bacademy.vo.PagingVO;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,8 +31,14 @@ public class BoardController {
 	private final CommentMapper commentMapper;
 
 	@GetMapping("/boardList")
-	public String boardList(Model model) {
-		List<BoardVO> boardList = boardMapper.getBoard();
+	public String boardList(Model model, @ModelAttribute("paging") PagingVO paging) {
+		
+		int totalRow = boardMapper.getTotalRow(paging);
+
+		paging.setTotalRow(totalRow);
+		paging.pageSetting();
+		
+		List<BoardVO> boardList = boardMapper.getBoard(paging);
 		model.addAttribute("boardList", boardList);
 		return "board/boardList";
 	}

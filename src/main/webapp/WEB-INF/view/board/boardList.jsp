@@ -123,6 +123,48 @@
 							</tr>
 						</c:forEach>
 					</table>
+
+					<nav aria-label="Page navigation example">
+						<ul class="pagination justify-content-center">
+							<c:if
+								test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=1">&laquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.lastPage}">&raquo;</a></li>
+							</c:if>
+
+							<c:if test="${paging.lastPage == 1}">
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+							</c:if>
+
+							<c:if test="${paging.currentPage == 1}">
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.lastPage}">&raquo;</a></li>
+							</c:if>
+
+							<c:if test="${paging.currentPage == paging.lastPage}">
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=1">&laquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+								<li class="page-item"><a class="page-link"
+									href="/boardList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+							</c:if>
+						</ul>
+					</nav>
+
 					<a href="addBoardForm" class="btn btn-primary btn-sm">글쓰기</a>
 				</div>
 			</div>

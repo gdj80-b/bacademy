@@ -1,7 +1,6 @@
 package com.goodee.bacademy.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +9,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.goodee.bacademy.mapper.NoticeMapper;
 import com.goodee.bacademy.vo.NoticeVO;
 import com.goodee.bacademy.vo.PagingVO;
 
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -29,13 +26,13 @@ public class NoticeController {
 	// 공지사항 조회
 	@GetMapping("/noticeList")
 	public String noticeList(Model model, @ModelAttribute("paging") PagingVO paging) {
-		
+
 		int totalRow = noticeMapper.getTotalRow(paging);
-		
+
 		paging.setTotalRow(totalRow);
 		paging.pageSetting();
-		
-		List<NoticeVO> noticeList = noticeMapper.getNotice();
+
+		List<NoticeVO> noticeList = noticeMapper.getNotice(paging);
 		model.addAttribute("noticeList", noticeList);
 		return "notice/noticeList";
 	}
