@@ -108,20 +108,47 @@ public class LectureController {
 		}
 	}
 	
+	/*
 	// addLectureConfirm
 	@ResponseBody // ajax에 data 전달하는 용도로 String 반환
 	@GetMapping("/lectureConfirm")
 	public int lectureConfirm(
-			@RequestParam("startDate") String startDate, @RequestParam("endDate") String endDate,
-			@RequestParam("lectureDay") String lectureDay, @RequestParam("id") String id,
-			@RequestParam("lectureTime") String lectureTime
+			@RequestParam("lectureDay") String lectureDay, @RequestParam("roomNum") int roomNum,
+			@RequestParam("id") String id
 			) {
+		System.out.println("lectureDay : " + lectureDay);
+		System.out.println("roomNum : " + roomNum);
+		System.out.println("id : " + id);
 		
-		LectureVO lecture = lectureMapper.lectureConfirm(lectureDay, id, lectureTime);
+		LectureVO lecture = lectureMapper.lectureConfirm(lectureDay, roomNum, id);
 		if(lecture != null) {
 			return 0;	// 이미 존재하는 강의 정보, 등록 불가
 		}
 		return 1;	// 등록 가능한 강의
 	}
+	*/
+	
+	// addLectureConfirm
+		@ResponseBody // ajax에 data 전달하는 용도로 String 반환
+		@GetMapping("/lectureConfirm")
+		public int lectureConfirm(
+				@RequestParam(value="startDate") String startDate,
+				@RequestParam(value="endDate") String endDate,
+				@RequestParam(value="lectureDay") String lectureDay, 
+				@RequestParam(value="roomNum") String roomNum, 
+				@RequestParam(value="id") String id) {
+			
+			System.out.println("startDate : " + startDate);
+			System.out.println("endDate : " + endDate);
+			System.out.println("id : " + id);
+			System.out.println("lectureDay : " + lectureDay);
+			System.out.println("roomNum : " + roomNum);
+			
+			List<LectureVO> lecture = lectureMapper.lectureConfirm(startDate, endDate, lectureDay, roomNum, id);
+			if(lecture.size() > 0) {
+				return 0;	// 이미 존재하는 강의 정보, 등록 불가
+			}
+			return 1;	// 등록 가능한 강의
+		}
 	
 }

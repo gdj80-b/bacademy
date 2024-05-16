@@ -8,7 +8,7 @@ public class LectureVO {
 	private int categoryNo;
 	private String lectureName;
 	private String id;
-	private int roomNum;
+	private String roomNum;
 	private String startDate;
 	private String endDate;
 	private String lectureTime;
