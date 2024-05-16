@@ -141,9 +141,34 @@ public class MemberInfoController {
 	
 	// 정건희 : 직원 전체 조회
 	@GetMapping("/empList")
-	public String getEmpList(
-		@RequestParam(name = "currentPage", value = "currentPage", defaultValue = "1") int currentPage, Model model) {
-		List<HashMap<String, Object>> empInfo = memberInfoMapper.getEmpList(currentPage);
+	public String getEmpList(Model model, @ModelAttribute("paging") PagingVO paging) {
+		
+		int totalEmpRow  = memberInfoMapper.getTotalEmpRow(paging);
+		int pages = 5;
+		int page = (paging.getCurrentPage() - 1) / pages;
+		
+		if (page == (paging.getLastPage() / pages)) {
+			pages = paging.getLastPage() % pages;
+			if (pages == 0) {
+				pages = 5;
+			}
+		}
+		
+		String prevBtn = null;
+		String nextBtn = null;
+		
+		if (page == 0) {
+			prevBtn = "disabled";
+		}
+		
+		if (page == (paging.getLastPage() - 1) / 5) {
+			nextBtn = "disabeld";
+		}
+		
+		paging.setTotalRow(totalEmpRow);
+		paging.pageSetting();
+		
+		List<HashMap<String, Object>> empInfo = memberInfoMapper.getEmpList(paging);
 		model.addAttribute("empInfo", empInfo);
 		return "empList";
 	}
