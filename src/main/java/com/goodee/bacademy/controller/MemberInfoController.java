@@ -144,26 +144,6 @@ public class MemberInfoController {
 	public String getEmpList(Model model, @ModelAttribute("paging") PagingVO paging) {
 		
 		int totalEmpRow  = memberInfoMapper.getTotalEmpRow(paging);
-		int pages = 5;
-		int page = (paging.getCurrentPage() - 1) / pages;
-		
-		if (page == (paging.getLastPage() / pages)) {
-			pages = paging.getLastPage() % pages;
-			if (pages == 0) {
-				pages = 5;
-			}
-		}
-		
-		String prevBtn = null;
-		String nextBtn = null;
-		
-		if (page == 0) {
-			prevBtn = "disabled";
-		}
-		
-		if (page == (paging.getLastPage() - 1) / 5) {
-			nextBtn = "disabeld";
-		}
 		
 		paging.setTotalRow(totalEmpRow);
 		paging.pageSetting();

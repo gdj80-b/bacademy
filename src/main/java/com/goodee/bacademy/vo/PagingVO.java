@@ -36,6 +36,5 @@ public class PagingVO implements Serializable{
 		if(lastPage > totalPage) {
 			lastPage = totalPage;
 		}
-	
 	}
 }
