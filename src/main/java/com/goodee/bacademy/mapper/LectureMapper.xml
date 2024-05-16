@@ -118,12 +118,18 @@
 	
 	<!-- 강의 등록 유효성 검사-->
 	<select id="lectureConfirm" parameterType="String" resultType="com.goodee.bacademy.vo.LectureVO">
+	
+		SELECT *
+		FROM lecture
+		WHERE (lecture_day = #{arg2} AND (#{arg0} &lt; end_date AND #{arg1} &gt; start_date)) AND (room_num = #{arg3} OR id = #{arg4})
+	
+		<!-- 
 		SELECT
 			*
 		FROM
 			lecture
 		WHERE
-			lecture_day = #{lectureDay} AND 
-		
+			lecture_day = #{arg0} AND (room_num = #{arg1} OR id = #{arg2})
+		-->
 	</select>
 </mapper>

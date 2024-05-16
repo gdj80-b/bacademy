@@ -29,5 +29,6 @@ public interface LectureMapper {
 	public int getTotalRow(PagingVO paging);
 	
 	// 강의 등록 유효성 체크
-	public LectureVO lectureConfirm(String lectureDay, String id, String lectureTime);
+	// public LectureVO lectureConfirm(String lectureDay, int roomNum, String id);
+	public List<LectureVO> lectureConfirm(String startDate, String endDate, String lectureDay, String roomNum, String id);
 }
