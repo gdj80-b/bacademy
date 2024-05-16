@@ -32,6 +32,23 @@
 }
 </style>
 
+<script>
+
+$(document).ready(function(){
+    $(".edit-comment").click(function(){
+        var row = $(this).closest("tr");
+        row.next(".edit-comment-form").toggle();
+        row.find(".comment-content").toggle();
+    });
+    
+    $(".cancel-edit").click(function(){
+        $(this).closest(".edit-comment-form").hide();
+        $(this).closest(".edit-comment-form").prev("tr").find(".comment-content").show();
+    });
+});
+
+</script>
+
 
 </head>
 <body>
@@ -104,7 +121,7 @@
 		<!-- 본문 -->
 		<div class="container">
 			<div class="panel panel-default">
-				<div class="panel-heading">공지사항</div>
+				<div class="panel-heading">게시판</div>
 				<!-- <div class="col-sm-9 page">  -->
 				<div class="panel-body">
 					<table class="table">
@@ -125,16 +142,66 @@
 							<td>${boardOne.createDate}</td>
 						</tr>
 						<tr>
-							<td colspan="2" align="center"><a href="/modifyBoardForm?boardNo=${boardOne.boardNo}"
-								class="btn btn-primary btn-sm">수정화면</a> 
-								<a href="deleteBoard?boardNo=${boardOne.boardNo}" class="btn btn-warning btn-sm">삭제</a>
-								<a href="boardList" class="btn btn-info btn-sm">목록</a></td>
+							<td colspan="2" align="center"><a
+								href="/modifyBoardForm?boardNo=${boardOne.boardNo}"
+								class="btn btn-primary btn-sm">수정화면</a> <a
+								href="deleteBoard?boardNo=${boardOne.boardNo}"
+								class="btn btn-warning btn-sm">삭제</a> <a href="boardList"
+								class="btn btn-info btn-sm">목록</a></td>
 						</tr>
 					</table>
+
+					<table class="table table-bordered">
+						<tr>
+							<th>작성자</th>
+							<th>내용</th>
+							<th>작성일</th>
+							<th>수정일</th>
+						</tr>
+						<c:forEach var="comment" items="${comments}">
+							<tr>
+								<td>${comment.id}</td>
+								<td><span class="comment-content">${comment.content}</span></td>
+								<td>${comment.createDate}</td>
+								<td>${comment.updateDate}</td>
+								<td><a href="#" class="edit-comment">수정</a></td>
+								<td><a href="/deleteComment?boardNo=${boardOne.boardNo}&commentNo=${comment.commentNo}">삭제</a></td>
+							</tr>
+							<tr class="edit-comment-form" style="display: none;">
+								<td colspan="5">
+									<form action="/modifyComment" method="post">
+										<input type="hidden" name="boardNo" value="${boardOne.boardNo}"> 
+										<input type="hidden" name="commentNo" value="${comment.commentNo}">
+										<div class="form-group">
+											<label for="editComment">댓글 수정:</label>
+											<textarea class="form-control" rows="5" id="editComment" name="content">${comment.content}</textarea>
+										</div>
+										<button type="submit" class="btn btn-primary">수정 완료</button>
+										<button type="button" class="btn btn-default cancel-edit">취소</button>
+									</form>
+								</td>
+							</tr>
+						</c:forEach>
+					</table>
+
+					<div class="panel panel-default">
+						<div class="panel-heading">댓글 작성</div>
+						<div class="panel-body">
+							<form action="addComment" method="post">
+								<input type="hidden" name="boardNo" value="${boardOne.boardNo}">
+								<input type="hidden" name="id" value="aaa">
+								<div class="form-group">
+									<label for="comment">댓글:</label>
+									<textarea class="form-control" rows="5" id="comment"
+										name="content"></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">댓글 작성</button>
+							</form>
+						</div>
+					</div>
 				</div>
 			</div>
+			<!-- 본문 끝 -->
 		</div>
-		<!-- 본문 끝 -->
-	</div>
 </body>
 </html>

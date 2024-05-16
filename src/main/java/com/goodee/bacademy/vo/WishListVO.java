@@ -12,4 +12,6 @@ public class WishListVO {
 	private String lectureDay;		// JOIN으로 강의 테이블에서 가져온 컬럼
 	private String startDate;		// JOIN으로 강의 테이블에서 가져온 컬럼
 	private String endDate;			// JOIN으로 강의 테이블에서 가져온 컬럼
+	
+	private String teacherName;   	// JOIN으로 강사 테이블에서 가져온 컬럼
 }

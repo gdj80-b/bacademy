@@ -3,20 +3,26 @@
 
 <mapper namespace="com.goodee.bacademy.mapper.CommentMapper">
 	
-	<select id="commentCount" resultType="int">
-		select count(*) 
+	<select id="getComment" resultType="com.goodee.bacademy.vo.CommentVO">
+		select comment_no commentNo, board_no boardNo, id, content, update_date updateDate, create_date createDate 
 		from comment
+		where board_no = #{boardNo}
+		order by comment_no desc;
 	</select>
 	
-	<select id="commentList" resultType="com.goodee.bacademy.vo.CommentVO">
-		select * from comment
-	</select>
-	
-	<insert id="commentInsert" parameterType="com.goodee.bacademy.vo.CommentVO">
-		insert into comment(comment_no commentNo, board_no boardNo, id, content, update_date updateDate, create_date createDate)
-		values (#{commentNo}, #{boardNo}, #{id}, #{content}, NOW(), NOW())
+	<insert id="addComment" parameterType="com.goodee.bacademy.vo.CommentVO">
+		insert into comment (board_no, id, content, update_date, create_date)
+		values (#{boardNo}, #{id}, #{content}, NOW(), NOW())
 	</insert>
 	
+	<update id="modifytCommentAction" parameterType="com.goodee.bacademy.vo.CommentVO">
+		update comment set content = #{content} 
+		where board_no = #{boardNo} and comment_no = #{commentNo}
+	</update>
 	
+	<delete id="deleteCommentAction" parameterType="int">
+		delete from comment 
+		where board_no = #{boardNo} and comment_no = #{commentNo}
+	</delete>
 	
 </mapper>

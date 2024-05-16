@@ -11,9 +11,11 @@
 				b.lecture_time AS lectureTime, 
 				b.lecture_day AS lectureDay, 
 				b.start_date AS startDate, 
-				b.end_date AS endDate
+				b.end_date AS endDate,
+				c.name AS teacherName
 		FROM wishlist a
 			JOIN lecture b ON a.lecture_no = b.lecture_no
+			JOIN teacher c ON b.id = c.id
 		WHERE a.id = #{id}
 		ORDER BY a.create_date;
 	</select>

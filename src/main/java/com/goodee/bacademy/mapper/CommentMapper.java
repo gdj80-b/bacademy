@@ -8,18 +8,16 @@ import com.goodee.bacademy.vo.CommentVO;
 
 @Mapper
 public interface CommentMapper {
-	// 댓글 개수
-	public int commentCount();
 	
-	// 댓글 목록
-	public List<CommentVO> commentList();
+	// 댓글 조회
+	public List<CommentVO> getComment (int boardNo);
 	
 	// 댓글 작성
-	public int commentInsert(CommentVO comment);
+	public int addComment(CommentVO vo);
 	
 	// 댓글 수정
-	public int commentUpdate(CommentVO comment);
+	public int modifytCommentAction(int boardNo, int commentNo, String content);
 	
 	// 댓글 삭제
-	public int commentDelete(int commentNo);
+	public int deleteCommentAction(int boardNo, int commentNo);
 }
