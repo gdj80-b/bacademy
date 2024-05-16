@@ -13,10 +13,12 @@
 </head>
 <body class="container">
 	<h2> 환불하기</h2>
-	<form action="refundRequest" method="post">
-		<input type="hidden" name="id" value="student">
-		<input type="number" name="refundCash">
-		<button type="submit"> 환불하기 </button>
+	<form action="refundRequest" id="refundForm" method="post">
+		<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
+		<input type="number" id="cashInput" name="refundCash" min="0" step="50000" placeholder="50,000원 단위로 입력해주세요" style="width:300px;">
+ 	    <button type="button" onclick="confirmRefund()"> 환불요청 </button> 
+<!-- 	    <button type="submit"> 환불요청 </button>     -->
+	    
 	 </form>
 	 <hr>
 	<h2> 내 환불 내역</h2>
@@ -34,5 +36,22 @@
 			</tr>
 		</c:forEach>
 	</table>
+	<script>
+	    function confirmRefund() {
+	        var cash = document.getElementById("cashInput").value;
+	        if (cash === "") {
+	            alert("금액을 입력해주세요.");
+	            return;
+	        }
+	        if (cash % 50000 !== 0) {
+	            alert("50000원 단위로 입력해주세요.");
+	            return;
+	        }
+	        if (confirm(cash + " 원을 환불하시겠습니까?")) {
+	            document.getElementById("refundForm").submit();
+	            alert("환불요청되었습니다."); // 환불요청이 완료되었음을 알리는 알람표시
+	        }
+	    }
+	</script>
 </body>
 </html>

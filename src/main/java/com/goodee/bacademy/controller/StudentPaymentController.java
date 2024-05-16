@@ -72,7 +72,7 @@ public class StudentPaymentController {
 	}
 		
 	
-	// 학생 
+	// 학생 환불요청
 	@PostMapping("/refundRequest")
 	public String refundRequest(
 				@RequestParam(name="id") String id,

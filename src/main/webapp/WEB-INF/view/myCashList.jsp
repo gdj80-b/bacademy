@@ -16,11 +16,11 @@
 <body class="container">
 	<h1> 내 캐쉬 내역</h1>
 	<br>
-	<form action="cashCharge" method="post">
-		<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>" >
-		<input type="number" name="cash">
-		<button type="submit"> 충전하기 </button>
-	 </form>	 
+	<form action="cashCharge" id="cashForm" method="post">
+	    <input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>" >
+	    <input type="number" id="cashInput" name="cash" min="0" step="50000" placeholder="50,000원 단위로 입력해주세요" style="width:300px;">
+	    <button type="button" onclick="confirmCharge()"> 충전하기 </button>
+	</form>	 
 	<hr>
 	<table class="table table-bordered table-hover table-striped">
 		<tr>
@@ -39,5 +39,23 @@
 		</c:forEach>
 	</table>
 	<a href="myCashRefundForm" class="btn btn-secondary">환불내역 보기</a>
+	
+	<script>
+    function confirmCharge() {
+        var cash = document.getElementById("cashInput").value;
+        if (cash === "") {
+            alert("금액을 입력해주세요.");
+            return;
+        }
+        if (cash % 50000 !== 0) {
+            alert("50000원 단위로 입력해주세요.");
+            return;
+        }
+        if (confirm(cash + " 원을 충전하시겠습니까?")) {
+            document.getElementById("cashForm").submit();
+            alert("충전되었습니다."); // 충전되었음을 알리는 알람표시
+        }
+    }
+	</script>
 </body>
 </html>

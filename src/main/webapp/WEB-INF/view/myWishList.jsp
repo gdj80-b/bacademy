@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	session.setAttribute("loginId", "student");
-	session.setAttribute("cash", "1000000");
+	session.setAttribute("cash", "800000");
 	int myCash = Integer.parseInt((String) session.getAttribute("cash"));
 %>
 <!DOCTYPE html>
@@ -12,41 +12,67 @@
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>내 관심강의</title>
+<style>
+.wishItem {
+    margin: 0 auto; /* 가운데 정렬 */
+    width: 70%; /* 테이블 너비 설정 */
+    border:1px solid;
+}
+	
+	.wishItem td, .wishItem th {
+	    padding: 10px; /* 셀 패딩 추가 */
+	}
+	
+	.wishItem td:first-child, .wishItem th:first-child {
+	    padding-left: 20px; /* 첫 번째 열 왼쪽 패딩 추가 */
+	}
+	
+	.wishItems td:last-child, .wishItema th:last-child {
+	    padding-right: 20px; /* 마지막 열 오른쪽 패딩 추가 */
+	}
+	
+	.wishItem td:nth-child(2), .wishItem th:nth-child(2) {
+	    border-right: 1px solid #dee2e6; /* 두 번째 열과 세 번째 열 사이에 세로줄 추가 */
+	}
+	/* 체크박스 크기 조정 */
+	.wishItem input[type="checkbox"] {
+	    width: 20px;
+	    height: 20px;
+	}
+</style>
 </head>
 <body>
 
 <div class="container">
 	<h1>내 관심강의</h1>
 	<form id="selectWish" action ="#" method="post">
-	<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
-	<table class="table table-bordered table-hover table-striped">
-		<tr>
-			<th>강의명</th>
-			<th>강사</th>
-			<th>가격</th>			
-			<th>강의실</th>			
-			<th>강의시간</th>			
-			<th>요일</th>			
-			<th>기간</th>
-			<th>선택</th>			
-		</tr>
+		<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
 		<c:forEach var="vo" items="${myWishList}">
+		<br>
+		<div id="lecture">
+		<table class="wishItem"> <!-- 테이블 클래스 추가 -->
 			<tr>
-				<td>${vo.lectureName}</td>
-				<td>${vo.teacherName}</td>
 				<td>
-		            <fmt:formatNumber value="${vo.lecturePrice}" pattern="#,##0"/>원
-		        </td>
-				<td>${vo.roomNum}</td>
-				<td>${vo.lectureTime}</td>
-				<td>${vo.lectureDay}</td>
-				<td>${vo.startDate} ~ ${vo.endDate}</td>
-				<td>				
-					<input type="checkbox" name="lectureNo[]" value="${vo.lectureNo}" onchange="updateTotalPrice(this)">			
+					<input type="checkbox" name="lectureNo[]" value="${vo.lectureNo}" onchange="updateTotalPrice(this)">
+				</td>
+				<td>${vo.lectureName}</td>
+				<td style="text-align: right;" rowspan="3">
+					<fmt:formatNumber value="${vo.lecturePrice}" pattern="#,##0"/>원					
 				</td>
 			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>${vo.teacherName}</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td style="text-align: right;">
+					${vo.startDate} ~ ${vo.endDate}  ${vo.lectureDay}반
+				</td>
+			</tr>			
+		</table>
+		</div>
 		</c:forEach>
-	</table>
 	<div>총 수강 금액 : <span id="totalPrice">0원</span></div>
 	<input type="hidden" name="cash">
 	<button type="button" onclick="submitForm('attend')">수강하기</button>
@@ -55,25 +81,26 @@
 	</form>
 </div>
 <script>
-	function updateTotalPrice(checkbox) {
-	    var totalPriceElement = document.getElementById("totalPrice");
-	    var totalPrice = 0; // 총 가격 초기화
+function updateTotalPrice(checkbox) {
+    var totalPriceElement = document.getElementById("totalPrice");
+    var totalPrice = 0; // 총 가격 초기화
 
-	    // 체크된 각 체크박스에 대해 가격을 합산
-	    var checkedCheckboxes = document.querySelectorAll('input[name="lectureNo[]"]:checked');
-	    for (var i = 0; i < checkedCheckboxes.length; i++) {
-	        var row = checkedCheckboxes[i].closest("tr"); // 현재 체크박스가 속한 행 가져오기
-	        var lecturePriceText = row.querySelector("td:nth-child(3)").innerText; // 세 번째 열의 가격 가져오기
-	        var lecturePrice = parseInt(lecturePriceText.replace(/[^\d]/g, '')); // 가격을 정수로 변환하고 숫자 이외의 문자 제거
-	        totalPrice += lecturePrice;
-	    }
+    // 체크된 각 체크박스에 대해 가격을 합산
+    var checkedCheckboxes = document.querySelectorAll('input[name="lectureNo[]"]:checked');
+    for (var i = 0; i < checkedCheckboxes.length; i++) {
+        var row = checkedCheckboxes[i].parentNode.parentNode; // 현재 체크박스가 속한 행 가져오기
+        var lecturePriceText = row.querySelector("td:nth-child(3)").innerText; // 세 번째 열의 가격 가져오기
+        var lecturePrice = parseInt(lecturePriceText.replace(/[^\d]/g, '')); // 가격을 정수로 변환하고 숫자 이외의 문자 제거
+        totalPrice += lecturePrice;
+    }
 
-	    totalPriceElement.innerText = totalPrice.toLocaleString() + "원"; // 총 가격 업데이트
-	    
-		 // hidden input의 값을 업데이트
-        var cashInput = document.querySelector('input[name="cash"]');
-        cashInput.value = -totalPrice; // totalPrice를 hidden input의 값으로 설정
-	}
+    totalPriceElement.innerText = totalPrice.toLocaleString() + "원"; // 총 가격 업데이트
+    
+    // hidden input의 값을 업데이트
+    var cashInput = document.querySelector('input[name="cash"]');
+    cashInput.value = -totalPrice; // totalPrice를 hidden input의 값으로 설정
+}
+
 	
 	function submitForm(action) {
 	    var form = document.getElementById("selectWish");
