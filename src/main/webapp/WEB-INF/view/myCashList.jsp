@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	session.setAttribute("loginId", "student");
 %>
@@ -33,7 +34,7 @@
 				<td>${vo.state}</td>
 				<td>${vo.date}</td>
 				<td>${vo.info}</td>
-				<td>${vo.chargeCash}¿ø</td>
+				<td style="text-align:right;"><fmt:formatNumber value="${vo.chargeCash}" pattern="#,##0"/>¿ø</td>
 			</tr>
 		</c:forEach>
 	</table>
