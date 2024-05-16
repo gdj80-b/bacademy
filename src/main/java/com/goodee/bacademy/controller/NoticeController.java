@@ -37,13 +37,13 @@ public class NoticeController {
 		
 		List<NoticeVO> noticeList = noticeMapper.getNotice();
 		model.addAttribute("noticeList", noticeList);
-		return "noticeList";
+		return "notice/noticeList";
 	}
 
 	// 공지사항 등록 페이지
 	@GetMapping("/addNoticeForm")
 	public String addNoticeForm() {
-		return "addNoticeForm";
+		return "notice/addNoticeForm";
 	}
 
 	// 공지사항 등록 액션
@@ -67,7 +67,7 @@ public class NoticeController {
 	public String noticeDetail(@RequestParam("noticeNo") Integer noticeNo, Model model) {
 		NoticeVO noticeOne = noticeMapper.getNoticeOne(noticeNo);
 		model.addAttribute("noticeOne", noticeOne);
-		return "noticeOne";
+		return "notice/noticeOne";
 	}
 
 	// 공지사항 수정 페이지
@@ -75,7 +75,7 @@ public class NoticeController {
 	public String ModifynoticeForm(@RequestParam("noticeNo") Integer noticeNo, Model model) {
 		NoticeVO noticeVO = noticeMapper.getNoticeOne(noticeNo);
 		model.addAttribute("noticeVO", noticeVO);
-		return "noticeOneModifyForm";
+		return "notice/noticeOneModifyForm";
 	}
 
 	// 공지사항 수정
