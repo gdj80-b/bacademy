@@ -7,21 +7,8 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<!-- 부트스트랩 5.3.3으로 수정  -->
-<<<<<<< HEAD
-    
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
-	<style>
-    	.navbar-right.align {
-        	display: flex;
-        	justify-content: center;
-       		align-items: center;
-    	}
-	</style>
-=======
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
->>>>>>> 0162ab7da00f756f1319eef88e34b3402b436e6b
 	<title>헤더</title>
 	<style>
 		*,
@@ -36,12 +23,9 @@
 	<c:set var="loginInfo" value="${sessionScope.loginInfo}" />
 	<header class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <nav class="container-fluid">
-			<a class="navbar-brand" href="${contextPath}/">BACADEMY</a>
+			<a class="navbar-brand" href="/">BACADEMY</a>
 			<div class="collapse navbar-collapse" id="mynavbar">
 				<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-					<li class="nav-item">
-						<a class="nav-link active" aria-current="page" href="${contextPath}/">메인페이지</a>
-					</li>
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
 							게시판
@@ -80,14 +64,8 @@
 				</c:choose>
 				</div>
 			</div>
-<<<<<<< HEAD
-		</div>
-	</nav>
-
-=======
 		</nav>
 	</header>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
->>>>>>> 0162ab7da00f756f1319eef88e34b3402b436e6b
 </body>
 </html>

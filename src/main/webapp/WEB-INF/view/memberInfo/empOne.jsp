@@ -97,10 +97,10 @@
 		<jsp:include page="../include/sideBar.jsp"/>
 		<div class="row">
 		    <section>
-		    	<div class="col-md-5 area1">   <!--추후 이미지 연동 및 교체 -->
+		    	<div class="col-md-5 area1">
 					<div style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
 						<a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-							<img src="https://github.com/mdo.png" alt="" width="180" height="180" class="rounded-circle me-2">
+							<img class="rounded-circle me-2" src="https://storage.googleapis.com/bacademy/${empOneInfo.profileImg}" alt="profile-img">
 						</a>
 						<p class="mt-2"><string>${empOneInfo.name}<string></p>
 						<input type="button" class="btn btn-primary btn-sm mt-2" value="사진 수정" />
@@ -125,6 +125,11 @@
 				</div>
 			</section>
 		</div>
+		<!--
+			ex) session.getAttribute(grade)
+			grade = 2 (강사) 강의 목록 YES
+			grade = 3 (관리자) 강의 목록 NO
+		-->
 		<div class="row">
 			<div class="col-md-2"></div>
 			<section>

@@ -55,12 +55,29 @@
 		</where>
 	</select>
 	
-	<!-- 차성호 : 직원 상세 조회 -->
+	<!-- 차성호, 정건희 : 직원 상세 조회 -->
 	<select id="getEmpOne" parameterType ="String" resultType ="java.util.Map">
-		SELECT b.id, b.name, b.email, b.profile_img AS profileImg, a.phone_num AS phoneNum
+		SELECT
+			CASE
+				WHEN a.grade = 2 THEN b.id
+				WHEN a.grade = 3 THEN c.id
+				END AS id,
+			CASE
+				WHEN a.grade = 2 THEN b.email
+				WHEN a.grade = 3 THEN c.email
+				END AS email,
+			CASE
+				WHEN a.grade = 2 THEN b.profile_img
+				WHEN a.grade = 3 THEN c.profile_img
+				END AS profileImg,
+			CASE
+				WHEN a.grade = 2 THEN a.phone_num
+				WHEN a.grade = 3 THEN a.phone_num
+				END AS phoneNum
 		FROM member a
-			JOIN teacher b ON a.id = b.id
-		WHERE b.id = #{id}
+			LEFT JOIN teacher b ON a.id = b.id AND a.grade = 2
+			LEFT JOIN manager c ON a.id = c.id AND a.grade = 3
+		WHERE a.id = #{id}
 	</select> 
 	
 	<!-- 정건희 : 직원 전체 조회 -->
