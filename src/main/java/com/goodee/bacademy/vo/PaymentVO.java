@@ -15,4 +15,6 @@ public class PaymentVO {
 	private String applicationNum;	// JOIN으로 수강테이블에서 가져온 컬럼
 	private String lectureNum;		// JOIN으로 강의테이블에서 가져온 컬럼
 	private String payNum;			// JOIN으로 수납테이블에서 가져온 컬럼
+	
+	private String balance;
 }

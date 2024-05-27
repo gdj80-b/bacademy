@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%
 	session.setAttribute("loginId", "student");
+	String color = "";
 %>
 <!-- session.invalidate(); // 세션 공간 초기화(포맷)	 -->
 <!DOCTYPE html>
@@ -28,15 +29,27 @@
 			<th>날짜</th>
 			<th>정보</th>
 			<th>금액</th>
+			<th>잔액</th>
 		</tr>
 		<c:forEach var="vo" items="${myCashList}">
-			<tr>
-				<td>${vo.state}</td>
-				<td>${vo.date}</td>
-				<td>${vo.info}</td>
-				<td style="text-align:right;"><fmt:formatNumber value="${vo.chargeCash}" pattern="#,##0"/>원</td>
-			</tr>
+		    <tr>
+		        <td>${vo.state}</td>
+		        <td>${vo.date}</td>
+		        <td>${vo.info}</td>
+				<c:choose>
+		            <c:when test="${vo.chargeCash < 0}">
+		                <c:set var="color" value="color:red"/>
+		            </c:when>
+		            <c:otherwise>
+		                <c:set var="color" value="color:blue"/>
+		            </c:otherwise>
+		        </c:choose>
+		        <td style="text-align:right; ${color};"><fmt:formatNumber value="${vo.chargeCash}" pattern="#,##0"/>원</td>
+		        <td style="text-align:right;"><fmt:formatNumber value="${vo.balance}" pattern="#,##0"/>원</td>
+		    </tr>
 		</c:forEach>
+
+
 	</table>
 	<a href="myCashRefundForm" class="btn btn-secondary">환불내역 보기</a>
 	

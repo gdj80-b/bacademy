@@ -5,30 +5,37 @@
 	<!-- 조인환 : 학생 개인 캐쉬 내역 조회 -->
 	<select id="getMyCashList" resultType="com.goodee.bacademy.vo.PaymentVO">		
 		SELECT 
-		    application.state  state,
-		    application.date AS date,  
-		    lecture.lecture_name AS info,
-		    CASE 
-		        WHEN application.state = '수강' THEN -lecture.lecture_price
-		        ELSE lecture.lecture_price
-		    END AS chargeCash,   
-		    application.application_no AS applicationNum,
-		    application.lecture_no AS lectureNum,
-		    '' AS payNum
-		FROM application
-			 JOIN lecture ON lecture.lecture_no = application.lecture_no
-		UNION
-		SELECT 
-		    reason AS state,
-		    create_date AS date,
-		    '' AS info,
-		    cash AS chargeCash,    
-		    '' AS applicationNum,
-		    '' AS lectureNum,
-		    cash_no AS payNum
-		FROM cash_history
-		WHERE id = #{id}
-		ORDER BY date DESC;
+		    *,
+		    SUM(chargeCash) OVER (ORDER BY date) AS balance
+		FROM (
+		    SELECT 
+		        application.state AS state,
+		        application.date AS date,  
+		        lecture.lecture_name AS info,
+		        CASE 
+		            WHEN application.state = '수강' THEN -lecture.lecture_price
+		            ELSE lecture.lecture_price
+		        END AS chargeCash,   
+		        application.application_no AS applicationNum,
+		        application.lecture_no AS lectureNum,
+		        NULL AS payNum
+		    FROM application
+		    	JOIN lecture ON lecture.lecture_no = application.lecture_no	
+		    		    
+			UNION ALL		    
+			
+		    SELECT 
+		        reason AS state,
+		        create_date AS date,
+		        NULL AS info,
+		        cash AS chargeCash,    
+		        NULL AS applicationNum,
+		        NULL AS lectureNum,
+		        cash_no AS payNum
+		    FROM cash_history
+		    WHERE id = #{id}
+		) AS combined_data
+		ORDER BY DATE desc;
 	</select>
 	
 	<!-- 조인환 : 학생 개인 환불내역 조회  -->

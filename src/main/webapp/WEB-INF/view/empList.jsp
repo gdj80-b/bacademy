@@ -4,7 +4,6 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 	<title>직원조회</title>
 	<style>
 		body {
@@ -48,7 +47,7 @@
 		<jsp:include page="include/sideBar.jsp"/>
 		<div class="d-flex flex-column justify-content-first p-4">
 			<nav aria-label="Page navigation">
-			 	<ul class="pagination pagination-sm justify-content-end">
+			 	<ul class="pagination pagination-sm justify-content-center">
 			 		<c:choose>
 			 			<c:when test="${paging.currentPage == 1}">
 			 				<li class="page-item disabled"><a class="page-link" href="/empList?currentPage=1">&laquo;</a></li>
@@ -59,7 +58,9 @@
 	  						<li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
 			 			</c:otherwise>
 			 		</c:choose>
-	 				<li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+			 		<c:forEach var="i" begin="1" end="${paging.totalPage}">
+		 				<li class="page-item"><a class="page-link" href="/empList?currentPage=${i}">${i}</a></li>
+			 		</c:forEach>
 			    	<c:choose>
 			 			<c:when test="${paging.currentPage == paging.lastPage}">
 			 				<li class="page-item disabled"><a class="page-link" href="/empList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
@@ -118,27 +119,5 @@
 			</div>
 		</div>
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
-	<!-- <c:if test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=1">&laquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.lastPage}">&raquo;</a></li>
- 	</c:if>
- 	<c:if test="${paging.lastPage == 1}">
-    	<li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
- 	</c:if>
- 	<c:if test="${paging.currentPage == 1}">
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.lastPage}">&raquo;</a></li>
- 	</c:if>
- 	<c:if test="${paging.currentPage == paging.lastPage}">
- 		<li class="page-item"><a class="page-link" href="/empList?currentPage=1">&laquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
-	    <li class="page-item"><a class="page-link" href="/empList?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
- 	</c:if> -->
