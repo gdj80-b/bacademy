@@ -5,18 +5,17 @@
 <head>
 <meta charset="UTF-8">
 <title>LoginForm</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-
-
-  <script type="text/javascript">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script type="text/javascript">
     $(document).ready(function(){
     	if(${!empty msgType}){
      		$("#messageType").attr("class", "modal-content panel-warning");    
     		$("#myMessage").modal("show");
     	}
     });
- </script>
+</script>
 <style>
 * { padding: 0; margin: 0; }
 
@@ -93,7 +92,7 @@ html, body {
 <div class="container-fluid container-padding">
   <div class="row">
     <div class="col-md-2">
-      <jsp:include page="../include/sideBar.jsp"/>
+       <jsp:include page="../include/sideBar.jsp"/>
     </div>
     <div class="col-md-10">
       <div id="container" class="container-position">
@@ -131,23 +130,21 @@ html, body {
   </div>
 </div>
 	<!-- 실패 메세지를 출력(modal) -->
-	<div id="myMessage" class="modal fade" role="dialog" >
-	  <div class="modal-dialog">	
-	    <!-- Modal content-->
-	    <div id="messageType" class="modal-content panel-info">
-	      <div class="modal-header panel-heading">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">${msgType}</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>${msg}</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>	
-	  </div>
-	</div>  
-
+<div id="myMessage" class="modal fade" role="dialog">
+  <div class="modal-dialog">  
+    <!-- Modal content-->
+    <div id="messageType" class="modal-content bg-primary text-white">
+      <div class="modal-header">
+        <h4 class="modal-title">${msgType}</h4>
+      </div>
+      <div class="modal-body">
+        <p>${msg}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>  
+  </div>
+</div>
 </body>
 </html>

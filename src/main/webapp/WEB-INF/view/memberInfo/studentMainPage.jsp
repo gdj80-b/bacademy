@@ -7,8 +7,8 @@
 <title>LoginForm</title>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-  <script type="text/javascript">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript">
     $(document).ready(function(){
     	if(${!empty msgType}){
      		$("#messageType").attr("class", "modal-content panel-warning");    
@@ -25,14 +25,6 @@
 html, body {
   height: 100%;
   background: #ffffff;
-}
-
-#container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
 }
 
 #loginBox {
@@ -105,108 +97,114 @@ html, body {
     <div class="col-md-2">
       <jsp:include page="../include/studentSideBar.jsp"/>
     </div>
-    <section>
-    	<div class="col-md-10 area1">
-			<div class="panel panel-default">
-			    <div class="panel-heading">공지사항</div>
-			    <div class="panel-body">
-			       <table class="table table-bordered table-hover">
-			          <tr>
-			            <td>?</td>
-			            <td>?</td>
-			          </tr>
-			           <tr>
-			          	<td></td>
-			            <td></td>			           
-			           </tr>			          
-			       </table>    
-			    </div>
-			 </div>	
-    	</div>
-    </section>
+    <div class="col-md-10">
+      <section class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">공지사항</div>
+                <div class="panel-body">
+                   <table class="table table-bordered table-hover">
+                      <tr>
+                        <td>?</td>
+                        <td>?</td>
+                      </tr>
+                       <tr>
+                          <td></td>
+                          <td></td>                      
+                       </tr>                      
+                   </table>    
+                </div>
+             </div>  
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
-    <div class="row">
+  <div class="row">
     <div class="col-md-2"></div>
-    <section>
-    	<div class="col-md-10 area1">
-			<div class="panel panel-default">
-			    <div class="panel-heading flex-container">
-			    	<span>수강 가능한 강의 리스트</span>
-			    </div>
-			    <div class="panel-body">
-			       <table class="table table-bordered table-hover">
-			          <tr>
-			            <td>강의이름</td>
-			            <td>기간</td>
-			            <td>요일</td>
-			            <td>강의료</td>
-			            <td>상태</td>
-			          </tr>
-			          <c:forEach var="lecture" items="${lectureList}">
-			           <tr>
-			            <td><a href="lectureOne?lectureNo=${lecture.lectureNo}">${lecture.lectureName}</a></td>
-			            <td>${lecture.startDate} ~ ${lecture.endDate}</td>
-			            <td>${lecture.lectureDay}</td>
-			            <td>${lecture.lecturePrice}</td>
-			            <td>${lecture.lectureStatus}</td>
-			           </tr>
-			          </c:forEach>
-			       </table>    
-			    
-			    <nav aria-label="Page navigation example">
-				  <ul class="pagination justify-content-center">
-				  	<c:if test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
-				  	</c:if>
-				  	
-				  	<c:if test="${paging.lastPage == 1}">
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-				  	</c:if>
-				  	
-				  	<c:if test="${paging.currentPage == 1}">
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
-				  	</c:if>
-				  	
-				  	<c:if test="${paging.currentPage == paging.lastPage}">
-				  		<li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
-					    <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
-				  	</c:if>
-				  </ul>
-				</nav>
-				</div>
-			 	<div class="panel-footer">Bacademy</div>
-			 </div>
-			 	
-    	</div>
-    </section>
+    <div class="col-md-10">
+      <section class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading flex-container">
+                    <span>수강 가능한 강의 리스트</span>
+                </div>
+                <div class="panel-body">
+                   <table class="table table-bordered table-hover">
+                      <tr>
+                        <td>강의이름</td>
+                        <td>기간</td>
+                        <td>요일</td>
+                        <td>강의료</td>
+                        <td>상태</td>
+                      </tr>
+                      <c:forEach var="lecture" items="${lectureList}">
+                       <tr>
+                        <td><a href="lectureOne?lectureNo=${lecture.lectureNo}">${lecture.lectureName}</a></td>
+                        <td>${lecture.startDate} ~ ${lecture.endDate}</td>
+                        <td>${lecture.lectureDay}</td>
+                        <td>${lecture.lecturePrice}</td>
+                        <td>${lecture.lectureStatus}</td>
+                       </tr>
+                      </c:forEach>
+                   </table>    
+                
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination justify-content-center">
+                    <c:if test="${paging.currentPage > 1 && paging.currentPage < paging.lastPage}">
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
+                    </c:if>
+                    
+                    <c:if test="${paging.lastPage == 1}">
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+                    </c:if>
+                    
+                    <c:if test="${paging.currentPage == 1}">
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage + 1}">&rsaquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.lastPage}">&raquo;</a></li>
+                    </c:if>
+                    
+                    <c:if test="${paging.currentPage == paging.lastPage}">
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=1">&laquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage - 1}">&lsaquo;</a></li>
+                        <li class="page-item"><a class="page-link" href="/studentMainPage?currentPage=${paging.currentPage}">${paging.currentPage}</a></li>
+                    </c:if>
+                  </ul>
+                </nav>
+                </div>
+                <div class="panel-footer">Bacademy</div>
+             </div>
+          </div>
+        </div>
+      </section>
+    </div>
   </div>
 </div>
 
-	<!-- 실패 메세지를 출력(modal) -->
-	<div id="myMessage" class="modal fade" role="dialog" >
-	  <div class="modal-dialog">	
-	    <!-- Modal content-->
-	    <div id="messageType" class="modal-content panel-info">
-	      <div class="modal-header panel-heading">
-	        <button type="button" class="close" data-dismiss="modal">&times;</button>
-	        <h4 class="modal-title">${msgType}</h4>
-	      </div>
-	      <div class="modal-body">
-	        <p>${msg}</p>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>	
-	  </div>
-	</div>  
+<!-- 실패 메세지를 출력(modal) -->
+<div id="myMessage" class="modal fade" role="dialog">
+  <div class="modal-dialog">  
+    <!-- Modal content-->
+    <div id="messageType" class="modal-content bg-primary text-white">
+      <div class="modal-header">
+        <h4 class="modal-title">${msgType}</h4>
+      </div>
+      <div class="modal-body">
+        <p>${msg}</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>  
+  </div>
+</div>
 
 </body>
 </html>

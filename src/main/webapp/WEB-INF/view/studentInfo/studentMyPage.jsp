@@ -102,9 +102,10 @@
     <div class="col-md-2">
       <jsp:include page="../include/studentSideBar.jsp"/>
     </div>
-    <section>
 
-    	<div class="col-md-10 area1">
+
+    	<div class="col-md-10">
+    	  <section class="container">
 			<div class="panel panel-default">
 			    <div class="panel-heading">내 정보</div>
 			    <div class="panel-body">
@@ -131,14 +132,15 @@
 			       </table>    
 			    </div>
 			 </div>	
-			
+			    </section>
     	</div>
-    </section>
+
   </div>
     <div class="row">
     <div class="col-md-2"></div>
-    <section>
-    	<div class="col-md-10 area1">
+
+    	<div class="col-md-10">
+    		<section class="container">
 			<div class="panel panel-default">
 			    <div class="panel-heading flex-container">
 			    	<span>${param.lectureStatus} 리스트</span>
@@ -172,9 +174,10 @@
 			       </table>    
 			    </div>
 			 	<div class="panel-footer">Bacademy</div>
-			 </div>	
+			 </div>
+			 </section>	
     	</div>
-    </section>
+  
   </div>
 </div>
 	<!-- 실패 메세지를 출력(modal) -->
