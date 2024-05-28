@@ -26,7 +26,7 @@ public class StudentPaymentController {
 	private StudentPaymentMapper StudentPaymentmapper;	
 	@GetMapping("/myCashList")
 	public String myCashList(HttpSession session,Model model) {
-		Map<String, String> id = new HashMap<String, String>(); 
+		//Map<String, String> id = new HashMap<String, String>(); 
 		String loginId = (String) session.getAttribute("loginId");
 		List<PaymentVO> list = StudentPaymentmapper.getMyCashList(loginId);
 		model.addAttribute("myCashList", list);
@@ -38,7 +38,7 @@ public class StudentPaymentController {
 	private StudentPaymentMapper studentPaymentMapper;
 	@GetMapping("/myCashRefundForm")
 	public String myCashRefundForm(HttpSession session,Model model) {
-		Map<String, String> id = new HashMap<String, String>(); 
+		//Map<String, String> id = new HashMap<String, String>(); 
 		String loginId = (String) session.getAttribute("loginId");
 		List<RefundVO> list = studentPaymentMapper.getMyRefundHistory(loginId);
 		model.addAttribute("myRefundList", list);
