@@ -30,6 +30,7 @@ public class StudentPaymentController {
 		String id = (String)(loginInfo.get("id"));
 		List<PaymentVO> list = StudentPaymentmapper.getMyCashList(id);
 		model.addAttribute("myCashList", list);
+		model.addAttribute("loginId", id);
 		return "myCashList";
 	}
 	

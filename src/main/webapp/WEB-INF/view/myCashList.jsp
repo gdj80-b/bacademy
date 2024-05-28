@@ -110,7 +110,7 @@
 					    <div class="panel-heading">내 캐쉬 내역</div>						
 						<div class="panel-body">
 							<form action="cashCharge" id="cashForm" method="post">
-							    <input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>" >
+							    <input type="hidden" name="id" value="${loginId}" >
 							    <input type="number" id="cashInput" name="cash" min="0" step="50000" placeholder="50,000원 단위로 입력해주세요" style="width:300px;">
 							    <button type="button" onclick="confirmCharge()"> 충전하기 </button>
 							</form>	 

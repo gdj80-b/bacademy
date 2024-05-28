@@ -131,7 +131,7 @@
 					<div class="panel-heading">내 관심 강의</div>
 					<div class="panel-body">
 						<form id="selectWish" action ="#" method="post">
-							<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
+							<input type="hidden" name="id" value="${loginId}">
 							<c:forEach var="vo" items="${myWishList}">
 							<br>
 							<div id="lecture">

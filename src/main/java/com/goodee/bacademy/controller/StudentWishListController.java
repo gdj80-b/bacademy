@@ -124,6 +124,8 @@ public class StudentWishListController {
 		            
 		        }
 		        Map<String,Object>refundMap = new HashMap<>(); // 학생 캐쉬업데이트(차감)
+		        
+		        
 		        refundMap.put("id", id);
 		        refundMap.put("cash", cash);
 		        int updateStudentResult = cashMapper.updateStudentCash(refundMap);				
