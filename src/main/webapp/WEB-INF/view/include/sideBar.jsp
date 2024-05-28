@@ -12,7 +12,7 @@
 		}
 		
 		.sidebar {
-			height: 100vh;
+			height: calc(100vh - 56px);
 		}
     </style>
 	<title>사이드바</title>
