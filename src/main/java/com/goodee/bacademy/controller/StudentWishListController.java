@@ -27,9 +27,13 @@ public class StudentWishListController {
 	// 내 찜 리스트 조회
 	@GetMapping("/myWishList")
 	public String myWishList(HttpSession session, Model model) {
-		String loginId = (String) session.getAttribute("loginId");
-		List<WishListVO> list = mapper.getMyWishList(loginId);
+		Map<String, Object> loginInfo =(Map<String, Object>) session.getAttribute("loginInfo");	
+		String id = (String)(loginInfo.get("id"));
+		List<WishListVO> list = mapper.getMyWishList(id);
+		int myCash = (int)(loginInfo.get("cash"));
 		model.addAttribute("myWishList", list);
+		model.addAttribute("myCash", myCash);
+		model.addAttribute("loginId", id);
 		return "myWishList";
 	}
 	

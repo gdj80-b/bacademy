@@ -26,9 +26,9 @@ public class StudentPaymentController {
 	private StudentPaymentMapper StudentPaymentmapper;	
 	@GetMapping("/myCashList")
 	public String myCashList(HttpSession session,Model model) {
-		//Map<String, String> id = new HashMap<String, String>(); 
-		String loginId = (String) session.getAttribute("loginId");
-		List<PaymentVO> list = StudentPaymentmapper.getMyCashList(loginId);
+		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");	
+		String id = (String)(loginInfo.get("id"));
+		List<PaymentVO> list = StudentPaymentmapper.getMyCashList(id);
 		model.addAttribute("myCashList", list);
 		return "myCashList";
 	}
@@ -38,9 +38,9 @@ public class StudentPaymentController {
 	private StudentPaymentMapper studentPaymentMapper;
 	@GetMapping("/myCashRefundForm")
 	public String myCashRefundForm(HttpSession session,Model model) {
-		//Map<String, String> id = new HashMap<String, String>(); 
-		String loginId = (String) session.getAttribute("loginId");
-		List<RefundVO> list = studentPaymentMapper.getMyRefundHistory(loginId);
+		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");	
+		String id = (String)(loginInfo.get("id"));
+		List<RefundVO> list = studentPaymentMapper.getMyRefundHistory(id);
 		model.addAttribute("myRefundList", list);
 		return "myCashRefundForm";
 	}

@@ -1,23 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	session.setAttribute("loginId", "student");
-	session.setAttribute("cash", "800000");
-	int myCash = Integer.parseInt((String) session.getAttribute("cash"));
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <title>내 관심강의</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	    $(document).ready(function(){
+	    	if(${!empty msgType}){
+	     		$("#messageType").attr("class", "modal-content panel-warning");    
+	    		$("#myMessage").modal("show");
+	    	}
+	    });
+	    function handleSelectChange(selectedValue) {
+	    	window.location.href = "/studentMainPage?lectureStatus="+selectedValue;
+	    }
+	 </script>
 <style>
-.wishItem {
-    margin: 0 auto; /* 가운데 정렬 */
-    width: 70%; /* 테이블 너비 설정 */
-    border:1px solid;
-}
+	.wishItem {
+	    margin: 0 auto; /* 가운데 정렬 */
+	    width: 70%; /* 테이블 너비 설정 */
+	    border:1px solid;
+	}
 	
 	.wishItem td, .wishItem th {
 	    padding: 10px; /* 셀 패딩 추가 */
@@ -39,47 +47,132 @@
 	    width: 20px;
 	    height: 20px;
 	}
+	* { padding: 0; margin: 0; }
+	
+	html, body {
+	  height: 100%;
+	  background: #ffffff;
+	}
+	
+	#loginBox {
+	  width: 300px;
+	  text-align: center;
+	  background-color: #ffffff;
+	  transform: scale(1.2);
+	}
+	.input-form-box {
+	  border: 0px solid #ff0000;
+	  display: flex;
+	  margin-bottom: 5px;
+	}
+	.input-form-box > span {
+	  display: block;
+	  text-align: left;
+	  padding-top: 5px;
+	  min-width: 65px;
+	}
+	.button-login-box {
+	  margin: 10px 0;
+	}
+	#loginBoxTitle {
+	  color:#000000;
+	  font-weight: bold;
+	  font-size: 32px;
+	  text-transform: uppercase;
+	  padding: 5px;
+	  margin-bottom: 20px;
+	  background: linear-gradient(to right, #270a09, #8ca6ce);
+	  -webkit-background-clip: text;
+	  -webkit-text-fill-color: transparent;
+	}
+	#inputBox {
+	  margin: 10px;
+	}
+	#inputBox button {
+	  padding: 3px 5px;
+	}
+	.container-fluid {
+	  padding-left: 0;
+	}
+	.col-md-2 {
+	  width: 100%;
+	  padding-left: 0;
+	}
+	.div {
+	  display: flex;
+	  flex-direction: row;
+	}
+	.div a {
+	  text-align: center;
+	  flex: 1;
+	}
+	.flex-container {
+	   display: flex;
+	   align-items: center;
+	   justify-content: space-between;
+	}
+	.panel.panel-default {
+	  text-align: center;
+	}
 </style>
 </head>
 <body>
-
-<div class="container">
-	<h1>내 관심강의</h1>
-	<form id="selectWish" action ="#" method="post">
-		<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
-		<c:forEach var="vo" items="${myWishList}">
-		<br>
-		<div id="lecture">
-		<table class="wishItem"> <!-- 테이블 클래스 추가 -->
-			<tr>
-				<td>
-					<input type="checkbox" name="lectureNo[]" value="${vo.lectureNo}" onchange="updateTotalPrice(this)">
-				</td>
-				<td>${vo.lectureName}</td>
-				<td style="text-align: right;" rowspan="3">
-					<fmt:formatNumber value="${vo.lecturePrice}" pattern="#,##0"/>원					
-				</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td>${vo.teacherName}</td>
-			</tr>
-			<tr>
-				<td>&nbsp;</td>
-				<td style="text-align: right;">
-					${vo.startDate} ~ ${vo.endDate}  ${vo.lectureDay}반
-				</td>
-			</tr>			
-		</table>
-		</div>
-		</c:forEach>
-	<div>총 수강 금액 : <span id="totalPrice">0원</span></div>
-	<input type="hidden" name="cash">
-	<button type="button" onclick="submitForm('attend')">수강하기</button>
-	
-	<button type="button" onclick="submitForm('delete')">찜 삭제</button>	
-	</form>
+<jsp:include page="./include/header.jsp"/>
+<div class="container-fluid container-padding">
+  <div class="row">
+    <div class="col-md-2">
+      <jsp:include page="./include/studentSideBar.jsp"/>
+    </div>
+    <div class="col-md-10">
+		<section class="container">
+		    <div class="row">
+		         <div class="col-md-12"> 
+					<div class="panel panel-default">
+					<div class="panel-heading">내 관심 강의</div>
+					<div class="panel-body">
+						<form id="selectWish" action ="#" method="post">
+							<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
+							<c:forEach var="vo" items="${myWishList}">
+							<br>
+							<div id="lecture">
+							<table class="wishItem"> <!-- 테이블 클래스 추가 -->
+								<tr>
+									<td>
+										<input type="checkbox" name="lectureNo[]" value="${vo.lectureNo}" onchange="updateTotalPrice(this)">
+									</td>
+									<td>${vo.lectureName}</td>
+									<td style="text-align: right;" rowspan="3">
+										<fmt:formatNumber value="${vo.lecturePrice}" pattern="#,##0"/>원					
+									</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td>${vo.teacherName}</td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+									<td style="text-align: right;">
+										${vo.startDate} ~ ${vo.endDate}  ${vo.lectureDay}반
+									</td>
+								</tr>			
+							</table>
+							</div>
+							</c:forEach>
+						<div>총 수강 금액 : <span id="totalPrice">0원</span></div>
+						<input type="hidden" name="cash">
+						<button type="button" onclick="submitForm('attend')">수강하기</button>
+						
+						<button type="button" onclick="submitForm('delete')">찜 삭제</button>	
+						</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+    </div>
+  </div>
 </div>
+
 <script>
 function updateTotalPrice(checkbox) {
     var totalPriceElement = document.getElementById("totalPrice");
@@ -120,7 +213,7 @@ function updateTotalPrice(checkbox) {
 
 	    // 액션에 따라 폼의 액션을 설정
 	    if (action === 'attend') {            
-	    	var myCash = <%= myCash %>; // 세션에서 가져온 잔액
+	    	var myCash = ${myCash}; // 세션에서 가져온 잔액
 	        var totalPriceText = document.getElementById("totalPrice").innerText;
 	        var totalPrice = parseInt(totalPriceText.replace(/[^\d]/g, ''));
 
