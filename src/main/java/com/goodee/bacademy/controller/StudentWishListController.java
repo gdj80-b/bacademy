@@ -49,7 +49,7 @@ public class StudentWishListController {
 		model.addAttribute("myWishList", list);
 		model.addAttribute("myCash", myCash);
 		model.addAttribute("loginId", id);
-		return "myWishList";
+		return "studentInfo/myWishList";
 	}
 	
 	// 내찜 추가
@@ -70,10 +70,10 @@ public class StudentWishListController {
 		
 		 if (addWishResult == 1) {
 			System.out.println("찜 추가 성공");
-			return "redirect:myWishList";
+			return "redirect:/myWishList";
 		 } else {
 			System.out.println("찜 추가 실패");
-			return "redirect:myWishList";
+			return "redirect:/myWishList";
 		}
 		
 	}

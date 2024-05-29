@@ -59,7 +59,7 @@ public class CashController {
 		refundMap.put("refundNo", refundNo);
 		refundMap.put("state", state);
 		refundMap.put("id", id);
-		refundMap.put("cash", cash);
+		refundMap.put("cash", -cash);
 		
 		int updateRefundResult = cashMapper.updateRefundState(refundMap);
 		int updateStudentResult = cashMapper.updateStudentCash(refundMap);

@@ -38,7 +38,7 @@ public class StudentPaymentController {
 		List<PaymentVO> list = StudentPaymentmapper.getMyCashList(id);
 		model.addAttribute("myCashList", list);
 		model.addAttribute("loginId", id);
-		return "myCashList";
+		return "studentInfo/myCashList";
 	}
 	
 	// 조인환 - 내 환불내역 조회
@@ -57,7 +57,7 @@ public class StudentPaymentController {
 		List<RefundVO> list = studentPaymentMapper.getMyRefundHistory(id);
 		model.addAttribute("myRefundList", list);
 		model.addAttribute("loginId", id);
-		return "myCashRefundForm";
+		return "studentInfo/myCashRefundForm";
 	}
 	
 	// 학생 캐쉬 충전	
@@ -88,10 +88,10 @@ public class StudentPaymentController {
 		
 		if(insertCashResult == 1 && updateStudentResult == 1) {
 			System.out.println("캐쉬충전성공");
-			return "redirect:myCashList";
+			return "redirect:/myCashList";
 		} else {
 			System.out.println("캐쉬충전실패");
-			return "redirect:myCashList";
+			return "redirect:/myCashList";
 		}
 	}
 		
@@ -111,10 +111,10 @@ public class StudentPaymentController {
 		
 		 if (insertRefundResult == 1) {
 			System.out.println("환불요청성공");
-			return "redirect:myCashRefundForm";
+			return "redirect:/myCashRefundForm";
 		 } else {
 			System.out.println("환불요청실패");
-			return "redirect:myCashRefundForm";
+			return "redirect:/myCashRefundForm";
 		}
 		
 	}

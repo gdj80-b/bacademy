@@ -93,11 +93,11 @@
 <body>
 <c:set var="color" value=""></c:set>
 
-<jsp:include page="./include/header.jsp"/>
+<jsp:include page="../include/header.jsp"/>
 <div class="container-fluid container-padding">
   <div class="row">
     <div class="col-md-2">
-      <jsp:include page="./include/studentSideBar.jsp"/>
+      <jsp:include page="../include/studentSideBar.jsp"/>
     </div>
     <div class="col-md-10">
 		<section class="container">
