@@ -67,6 +67,10 @@
 		)
 	</insert>
 	
-	
+	<select id="getMyCash" resultType="String">	
+		SELECT my_cash AS myCash
+		FROM student
+		WHERE id = #{id}
+	</select>
 	
 </mapper>
