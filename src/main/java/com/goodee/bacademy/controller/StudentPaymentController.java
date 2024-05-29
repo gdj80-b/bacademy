@@ -56,6 +56,7 @@ public class StudentPaymentController {
 		String id = (String)(loginInfo.get("id"));
 		List<RefundVO> list = studentPaymentMapper.getMyRefundHistory(id);
 		model.addAttribute("myRefundList", list);
+		model.addAttribute("loginId", id);
 		return "myCashRefundForm";
 	}
 	

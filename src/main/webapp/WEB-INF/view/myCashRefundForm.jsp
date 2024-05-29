@@ -95,43 +95,43 @@
 <body>
 <jsp:include page="./include/header.jsp"/>
 <div class="container-fluid container-padding">
-  <div class="row">
-    <div class="col-md-2">
-      <jsp:include page="./include/studentSideBar.jsp"/>
-    </div>
-    <div class="col-md-10">
-      <section class="container">
-      	<div class="row">
-	         <div class="col-md-12"> 
-				<div class="panel panel-default">
-				    <div class="panel-heading">내 환불내역 </div>						
-					<div class="panel-body">
-						<form action="refundRequest" id="refundForm" method="post">
-							<input type="hidden" name="id" value="<%=session.getAttribute("loginId")%>">
-							<input type="number" id="cashInput" name="refundCash" min="0" step="50000" placeholder="50,000원 단위로 입력해주세요" style="width:300px;">
-					 	    <button type="button" onclick="confirmRefund()"> 환불요청 </button>					    
-						 </form><hr>
-						<table class="table table-bordered table-hover table-striped">
-							<tr>
-								<th>상태</th>
-								<th>금액</th>
-								<th>날짜</th>
-							</tr>
-							<c:forEach var="vo" items="${myRefundList}">
-								<tr>
-									<td>${vo.state}</td>
-									<td>${vo.refundCash}</td>
-									<td>${vo.date}</td>
-								</tr>
-							</c:forEach>
-						</table>
+	<div class="row">
+	    <div class="col-md-2">
+	      <jsp:include page="./include/studentSideBar.jsp"/>
+	    </div>
+	    <div class="col-md-10">
+			<section class="container">
+				<div class="row">
+					<div class="col-md-12"> 
+						<div class="panel panel-default">
+							<div class="panel-heading">내 환불내역 </div>						
+							<div class="panel-body">
+								<form action="refundRequest" id="refundForm" method="post">
+									<input type="hidden" name="id" value="${loginId}">
+									<input type="number" id="cashInput" name="refundCash" min="0" step="50000" placeholder="50,000원 단위로 입력해주세요" style="width:300px;">
+									<button type="button" onclick="confirmRefund()"> 환불요청 </button>					    
+								 </form><hr>
+								<table class="table table-bordered table-hover table-striped">
+									<tr>
+										<th>상태</th>
+										<th>금액</th>
+										<th>날짜</th>
+									</tr>
+									<c:forEach var="vo" items="${myRefundList}">
+										<tr>
+											<td>${vo.state}</td>
+										<td>${vo.refundCash}</td>
+										<td>${vo.date}</td>
+										</tr>
+									</c:forEach>
+								</table>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-		 </div>
-	  </section>
-    </div>
-  </div>
+			</section>
+	    </div>
+	</div>
 </div>
 <script>
     function confirmRefund() {

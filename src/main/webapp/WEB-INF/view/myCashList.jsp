@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%
-	//session.setAttribute("loginId", "student");
-	String color = "";
-%>
-<!-- session.invalidate(); // 세션 공간 초기화(포맷)	 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -96,6 +91,8 @@
 	</style>
 </head>
 <body>
+<c:set var="color" value=""></c:set>
+
 <jsp:include page="./include/header.jsp"/>
 <div class="container-fluid container-padding">
   <div class="row">

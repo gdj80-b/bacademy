@@ -45,7 +45,7 @@
 	<!-- 캐쉬충전에 따른 학생 캐쉬 변경 sql문(mariadb) -->
 	<update id="updateStudentCash" parameterType="java.util.Map">
 		UPDATE student
-		SET my_cash = my_cash - #{cash}
+		SET my_cash = my_cash + #{cash}
 		WHERE id = #{id}
 	</update>
 	
