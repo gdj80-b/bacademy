@@ -49,16 +49,15 @@
 			<h5>(학생)</h5>
 			<h5>현재 캐쉬 : <fmt:formatNumber type="number" value="${loginInfo['cash']}" pattern="#,###"/> 원</h5>
 			<ul class="nav nav-pills nav-stacked">
-	          <li><a href="studentMyPage">내 정보</a></li>
-	          <li><a href="myCashList">내 캐쉬</a></li>
-	          <li><a href="myWishList">관심강의</a></li>
+	          <li><a href="/studentMyPage">내 정보</a></li>
+	          <li><a href="/myCashList">내 캐쉬</a></li>
+	          <li><a href="/myWishList">관심강의</a></li>
 	        </ul>
     	</div>
     	<div class="info">
 	        <ul class="nav nav-pills nav-stacked">
 	          <li><a href="/noticeList">공지사항</a></li>
-	          <li><a href="#">강의목록</a></li>
-	          <li><a href="#">직원목록</a></li>
+	          <li><a href="/lectureList">강의목록</a></li>
 	        </ul>
     	</div>
      </nav>
