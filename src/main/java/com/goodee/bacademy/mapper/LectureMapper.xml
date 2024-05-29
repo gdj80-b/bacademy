@@ -27,11 +27,6 @@
 		)
 	</insert>
 	
-	<!-- 강의 등록 유효성 체크 -->
-	<select id="addLectureConfirm" parameterType="com.goodee.bacademy.vo.LectureVO">
-	
-	</select>
-	
 	<!-- 강의 목록 전체 개수 출력 -->
 	<select id="getTotalRow" parameterType="com.goodee.bacademy.vo.PagingVO" resultType="int">
 		SELECT
@@ -122,14 +117,5 @@
 		SELECT *
 		FROM lecture
 		WHERE (lecture_day = #{arg2} AND (#{arg0} &lt; end_date AND #{arg1} &gt; start_date)) AND (room_num = #{arg3} OR id = #{arg4})
-	
-		<!-- 
-		SELECT
-			*
-		FROM
-			lecture
-		WHERE
-			lecture_day = #{arg0} AND (room_num = #{arg1} OR id = #{arg2})
-		-->
 	</select>
 </mapper>

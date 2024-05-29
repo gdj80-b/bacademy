@@ -21,6 +21,7 @@
 		        NULL AS payNum
 		    FROM application
 		    	JOIN lecture ON lecture.lecture_no = application.lecture_no	
+		    WHERE application.id = #{id}
 		    		    
 			UNION ALL		    
 			
@@ -35,7 +36,7 @@
 		    FROM cash_history
 		    WHERE id = #{id}
 		) AS combined_data
-		ORDER BY DATE desc;
+		ORDER BY DATE DESC;
 	</select>
 	
 	<!-- 조인환 : 학생 개인 환불내역 조회  -->
@@ -62,10 +63,14 @@
 		INSERT INTO refund (
 			id, state, refund_cash, request_date
 		) VALUE (
-			#{id}, '대기', #{refundCash}, now() 
+			#{id}, '대기', #{refundCash}, now()
 		)
 	</insert>
 	
-	
+	<select id="getMyCash" resultType="int">	
+		SELECT my_cash AS myCash
+		FROM student
+		WHERE id = #{id}
+	</select>
 	
 </mapper>

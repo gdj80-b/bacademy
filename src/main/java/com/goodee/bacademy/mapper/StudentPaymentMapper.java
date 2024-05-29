@@ -6,7 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import com.goodee.bacademy.vo.PaymentVO;
 import com.goodee.bacademy.vo.RefundVO;
-
+import com.goodee.bacademy.vo.StudentVO;
 @Mapper
 public interface StudentPaymentMapper {
 	
@@ -19,5 +19,6 @@ public interface StudentPaymentMapper {
 	// 조인환 : 학생 환불요청
 	public int insertRefundRequest(Map<String,Object> refundMap);
 	
-	
+	// 조인환 : 학생 캐쉬 조회
+	public int getMyCash(String id);
 }

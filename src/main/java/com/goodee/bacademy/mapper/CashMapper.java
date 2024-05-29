@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.goodee.bacademy.vo.CashHistoryVO;
 import com.goodee.bacademy.vo.RefundVO;
+import com.goodee.bacademy.vo.StudentVO;
 
 @Mapper
 public interface CashMapper {
@@ -28,7 +29,5 @@ public interface CashMapper {
 	
 	// 조인환 : 학생 캐쉬 충전
 	public int insertCashHistoryToCharge(Map<String,Object> cashMap);
-	
-	
-	
+			
 }

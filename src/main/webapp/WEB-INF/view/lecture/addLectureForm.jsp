@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 	$(document).ready(function(){
     	if(${!empty msgType}){
-     		$("#messageType").attr("class", "modal-content panel-warning");    
+     		$("#messageType").attr("class", "modal-content panel-warning");
     		$("#myMessage").modal("show");
     	}
     });
@@ -28,7 +28,7 @@
     		type : "get",
     		data : { "startDate" : startDate, "endDate" : endDate, "lectureDay" : lectureDay, "roomNum" : roomNum, "id" : id},
     		success : function(result){
-    		   // 중복유무 출력(result=1 : 사용할수있는 아이디, 0 : 사용할수없는 아이디)
+    		   // 중복유무 출력(result=1 : 등록 가능한 강의, 0 : 등록할 수 없는 강의)
     			if(result==1){
     				alert("등록 가능한 강의입니다.");
     				$("#checkMessage").html("등록 가능한 강의입니다.");
@@ -40,48 +40,9 @@
     			}
     			$("#myModal").modal("show");
 			},    	   
-			error : function(){ alert("error"); }
+			error : function(){ alert("작성되지 않은 항목이 있습니다."); }
     	});    	
     }  
-	
-	/*
-		$(document).ready(function(){
-	    	if(${!empty msgType}){
-	     		$("#messageType").attr("class", "modal-content panel-warning");    
-	    		$("#myMessage").modal("show");
-	    	}
-	    });
-	
-		// 강의 등록 정보 유효성 검사
-		function lectureConfirm(){
-			
-			//var lectureDay = ${"#lectureDay"}.val();
-			//var roomNum = $("#roomNum").val();
-			var id = ${"#id"}.val();
-			
-			$.ajax({
-				url : "${contextPath}/lectureConfirm",
-				type : "GET",
-				data : {
-					//"lecutureDay" : lectureDay,
-					//"roomNum" : roomNum,
-					"id" : id
-				}
-				success : function(result){
-					// result = 1 : 등록 가능한 강의, 0 : 등록할 수 없는 강의
-					if(result == 1){
-						$("#checkMessage").html("등록 가능한 강의입니다.");
-		    			$("#checkType").attr("class","modal-content panel-success");
-					}else{
-						$("#checkMessage").html("등록할 수 없는 강의입니다."); 
-		    			$("#checkType").attr("class","modal-content panel-warning");
-					}
-					$("#myModal").modal("show");
-				},
-				error : function(){ alert("error"); }
-			});
-		}
-		*/
 	</script>
 </head>
 <body>

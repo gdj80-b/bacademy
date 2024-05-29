@@ -25,10 +25,9 @@ public interface LectureMapper {
 	// 강의 삭제
 	public int deleteLecture(LectureVO lecture);
 	
-	// 총 강의 목록 개수
+	// 페이징을 위한 총 강의 목록 개수
 	public int getTotalRow(PagingVO paging);
 	
 	// 강의 등록 유효성 체크
-	// public LectureVO lectureConfirm(String lectureDay, int roomNum, String id);
 	public List<LectureVO> lectureConfirm(String startDate, String endDate, String lectureDay, String roomNum, String id);
 }
