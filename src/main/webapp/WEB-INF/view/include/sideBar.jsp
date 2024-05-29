@@ -31,13 +31,11 @@
 			<ul class="nav nav-pills flex-column mb-auto">
 		      	<li class="nav-item">
 		        	<a href="#" class="nav-link active" aria-current="page">
-		          		<svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
 		          		강의목록
 		        	</a>
 		      	</li>
 		      	<li>
-		        	<a href="#" class="nav-link link-dark">
-		          		<svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+		        	<a href="#" class="nav-link link-dark">		          
 		          		직원목록
 		        	</a>
 		      	</li>

@@ -5,9 +5,6 @@
 <head>
 <meta charset="UTF-8">
 <title>LoginForm</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
     	if(${!empty msgType}){
@@ -92,10 +89,11 @@ html, body {
 <body>
 
 <jsp:include page="../include/header.jsp"/>
+
 <div class="container-fluid container-padding">
   <div class="row">
     <div class="col-md-2">
-      <jsp:include page="../include/studentSideBar.jsp"/>
+ <jsp:include page="../include/studentSideBar.jsp"/>
     </div>
     <div class="col-md-10">
       <section class="container">
@@ -110,24 +108,13 @@ html, body {
                         <td>?</td>
                       </tr>
                        <tr>
-                          <td></td>
-                          <td></td>                      
+                          <td>??</td>
+                          <td>??</td>                      
                        </tr>                      
                    </table>    
                 </div>
-             </div>  
-          </div>
-        </div>
-      </section>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-10">
-      <section class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-default">
+             </div>
+                       <div class="panel panel-default">
                 <div class="panel-heading flex-container">
                     <span>수강 가능한 강의 리스트</span>
                 </div>
@@ -180,12 +167,13 @@ html, body {
                 </nav>
                 </div>
                 <div class="panel-footer">Bacademy</div>
-             </div>
+             </div>  
           </div>
         </div>
       </section>
     </div>
   </div>
+
 </div>
 
 <!-- 실패 메세지를 출력(modal) -->
