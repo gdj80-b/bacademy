@@ -15,7 +15,7 @@
 		FROM cash_history ch
 			JOIN student s
 			ON ch.id = s.id
-		ORDER BY createDate DESC;;
+		ORDER BY createDate DESC
 	</select>
 	
 	<!-- 정건희 : 환불이력 조회 sql문(mariadb) -->
@@ -31,7 +31,7 @@
 		FROM refund r
 			JOIN student s
 			ON r.id = s.id
-		ORDER BY acceptDate DESC;
+		ORDER BY acceptDate DESC
 	</select>
 	
 	<!-- 정건희 : 환불상태 변경(대기 > 승인) sql문(mariadb) -->

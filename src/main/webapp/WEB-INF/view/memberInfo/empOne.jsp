@@ -5,6 +5,22 @@
 <head>
 	<meta charset="UTF-8">
 	<title>직원상세보기</title>
+	<script>
+		document.getElementById('uploadImg').addEventListener('click', function() {
+	        document.getElementById('fileInput').click();
+	    });
+	
+	    document.getElementById('fileInput').addEventListener('change', function(event) {
+	        const file = event.target.files[0];
+	        if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById('uploadImg').src = e.target.result;
+                }
+                reader.readAsDataURL(file);
+            }
+	    });
+	</script>
 	<style>
 		body {
 			padding-top: 56px;
@@ -26,6 +42,10 @@
 			object-fit: cover;
 			border-radius: 50%;
 		}
+		
+		img:hover {
+			cursor: pointer;
+		}
 	</style>
 </head>
 <body>
@@ -46,7 +66,8 @@
 					<tr>
 						<td>
 							<div class="d-flex justify-content-center">
-								<img src="https://storage.googleapis.com/bacademy/${empOneInfo.profileImg}" class="profile-img" alt="profile-img">
+								<img id="uploadImg" src="https://storage.googleapis.com/bacademy/${empOneInfo.profileImg}" class="profile-img" alt="profile-img">
+								<input type="file" id="fileInput" style="display:none;" accept="image/*">
 							</div>
 						</td>
 					</tr>
@@ -103,6 +124,6 @@
 				</div>
 			</div>	
 		</div>
-	</div>  
+	</div>
 </body>
 </html>

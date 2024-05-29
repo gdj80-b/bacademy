@@ -30,7 +30,7 @@ public class CashController {
 	@Autowired
 	private CashMapper cashMapper;
 
-	// 수납이력 조회
+	// 정건희 : 수납이력 조회
 	@GetMapping("/cashHistory")
 	public String getCashHistory(Model model) {
 		List<CashHistoryVO> cashHistory = cashMapper.getCashHistory();
@@ -38,7 +38,7 @@ public class CashController {
 		return "cashHistory";
 	}
 	
-	// 환불이력 조회
+	// 정건희 : 환불이력 조회
 	@GetMapping("/refundHistory")
 	public String getRefundHistory(Model model) {
 		List<RefundVO> refundHistory = cashMapper.getRefundHistory();
@@ -46,14 +46,12 @@ public class CashController {
 		return "refundHistory";
 	}
 	
-	
-	
-	// 환불상태 승인
+	// 정건희 : 환불상태 승인
 	@PostMapping("/refundConfirm")
 	public String updateRefundAction(
-				@RequestParam(name = "refundNo") int refundNo, 
-				@RequestParam(name = "state") String state, 
-				@RequestParam(name = "id") String id, 
+				@RequestParam(name = "refundNo") int refundNo,
+				@RequestParam(name = "state") String state,
+				@RequestParam(name = "id") String id,
 				@RequestParam(name = "cash") int cash
 			) 
 	{
