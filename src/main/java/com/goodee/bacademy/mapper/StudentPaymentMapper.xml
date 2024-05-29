@@ -67,7 +67,7 @@
 		)
 	</insert>
 	
-	<select id="getMyCash" resultType="String">	
+	<select id="getMyCash" resultType="int">	
 		SELECT my_cash AS myCash
 		FROM student
 		WHERE id = #{id}

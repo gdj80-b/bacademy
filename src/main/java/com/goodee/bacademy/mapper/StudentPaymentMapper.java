@@ -20,5 +20,5 @@ public interface StudentPaymentMapper {
 	public int insertRefundRequest(Map<String,Object> refundMap);
 	
 	// 조인환 : 학생 캐쉬 조회
-	public String getMyCash(String id);
+	public int getMyCash(String id);
 }

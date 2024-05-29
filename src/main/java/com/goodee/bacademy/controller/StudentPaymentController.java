@@ -27,7 +27,7 @@ public class StudentPaymentController {
 	private StudentPaymentMapper StudentPaymentmapper;	
 	@GetMapping("/myCashList")
 	public String myCashList(HttpSession session,Model model, RedirectAttributes rattr) {
-		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");
+		Map<String, Object> loginInfo =(Map<String, Object>) session.getAttribute("loginInfo");
 		// 로그인 성공 여부에 따른 분기
 		if (loginInfo == null || loginInfo.isEmpty()) {
 			rattr.addFlashAttribute("msgType", "로그인 실패 메시지");
@@ -46,7 +46,7 @@ public class StudentPaymentController {
 	private StudentPaymentMapper studentPaymentMapper;
 	@GetMapping("/myCashRefundForm")
 	public String myCashRefundForm(HttpSession session,Model model, RedirectAttributes rattr) {
-		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");	
+		Map<String, Object> loginInfo =(Map<String, Object>) session.getAttribute("loginInfo");	
 		// 로그인 성공 여부에 따른 분기
 		if (loginInfo == null || loginInfo.isEmpty()) {
 			rattr.addFlashAttribute("msgType", "로그인 실패 메시지");
@@ -79,8 +79,9 @@ public class StudentPaymentController {
 		// 학생 개인 캐쉬 수정
 		int updateStudentResult = cashMapper.updateStudentCash(cashMap);
 		
-		String myCash = StudentPaymentMapper.getMyCash(id);				
-		Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");
+		// 세션의 cash값 업데이트
+		int myCash = StudentPaymentMapper.getMyCash(id);				
+		Map<String, Object> loginInfo =(Map<String, Object>) session.getAttribute("loginInfo");
 		loginInfo.put("cash", myCash);
 		session.setAttribute("loginInfo", loginInfo);
 		

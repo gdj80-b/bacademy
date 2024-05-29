@@ -37,8 +37,15 @@ public class StudentWishListController {
 			return "redirect:/loginForm"; // 로그인 실패 시 로그인 페이지로 이동
 		}
 		String id = (String)(loginInfo.get("id"));
+		System.out.println(id + "<-id@@@@@@@@@@");
+		//System.out.println((String)(loginInfo.get("cash")) + "<-cash@@@@@@@@@@");
 		List<WishListVO> list = mapper.getMyWishList(id);
+		
+		//int myCash = Integer.parseInt("temp");
+		
+		//String myCash = (String)(loginInfo.get("cash"));
 		int myCash = (int)(loginInfo.get("cash"));
+		
 		model.addAttribute("myWishList", list);
 		model.addAttribute("myCash", myCash);
 		model.addAttribute("loginId", id);
@@ -139,10 +146,10 @@ public class StudentWishListController {
 		        refundMap.put("cash", cash);
 		        int updateStudentResult = cashMapper.updateStudentCash(refundMap);	
 		        // 바뀐 금액 세션값에 다시저장
-//		        String myCash = studentPaymentMapper.getMyCash(id);				
-//				Map<String, String> loginInfo =(Map<String, String>) session.getAttribute("loginInfo");
-//				loginInfo.put("cash", myCash);
-//				session.setAttribute("loginInfo", loginInfo);
+		        int myCash = studentPaymentMapper.getMyCash(id);				
+				Map<String, Object> loginInfo =(Map<String, Object>) session.getAttribute("loginInfo");
+				loginInfo.put("cash", myCash);
+				session.setAttribute("loginInfo", loginInfo);
 				
 		        System.out.println("수강신청성공");
 		        return "redirect:/myWishList";
